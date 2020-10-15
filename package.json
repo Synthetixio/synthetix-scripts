@@ -1,5 +1,5 @@
 {
-  "name": "synthetix-cli",
+  "name": "cli",
   "version": "0.0.1",
   "description": "A set of cli utilities for the Synthetix protocol",
   "main": "index.js",
