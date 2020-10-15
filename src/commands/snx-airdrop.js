@@ -197,8 +197,7 @@ program
 	)
 	.option(
 		'-p, --provider-url <value>',
-		'The http provider to use for communicating with the blockchain',
-		process.env.PROVIDER_URL
+		'The http provider to use for communicating with the blockchain'
 	)
 	.option('-s, --start-index <value>', 'Start from staker at index', 0)
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
@@ -213,8 +212,4 @@ program
 		}
 	});
 
-if (require.main === module) {
-	require('pretty-error').start();
-
-	program.parse(process.argv);
-}
+program.parse(process.argv);

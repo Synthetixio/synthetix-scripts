@@ -403,8 +403,4 @@ program
 		}
 	});
 
-if (require.main === module) {
-	require('pretty-error').start();
-
-	program.parse(process.argv);
-}
+program.parse(process.argv);
