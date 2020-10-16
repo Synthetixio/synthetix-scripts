@@ -8,9 +8,9 @@ const program = require('commander');
 const { yellow, green, red, cyan, gray } = require('chalk');
 const synthetix = require('synthetix');
 
-const { setupProvider } = require('../utils/setupProvider');
-const { runTx } = require('../utils/runTx');
-const { logReceipt, logError } = require('../utils/prettyLog');
+const { setupProvider } = require('../../utils/setupProvider');
+const { runTx } = require('../../utils/runTx');
+const { logReceipt, logError } = require('../../utils/prettyLog');
 
 async function interactiveUi({
 	network,

@@ -1,9 +1,9 @@
 const program = require('commander');
 const { red } = require('chalk');
 
-const { getContract } = require('../utils/getContract');
-const { setupProvider } = require('./utils/setupProvider');
-const { getPastEvents } = require('./utils/getPastEvents');
+const { getContract } = require('../../utils/getContract');
+const { setupProvider } = require('../../utils/setupProvider');
+const { getPastEvents } = require('../../utils/getPastEvents');
 
 async function pastEvents({
 	network,

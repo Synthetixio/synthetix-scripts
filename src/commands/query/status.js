@@ -2,10 +2,10 @@ const program = require('commander');
 
 const { green, cyan, red } = require('chalk');
 const { formatEther, formatBytes32String } = require('ethers').utils;
-const { getSynths } = require('../');
+const { getSynths } = require('synthetix');
 
-const { getContract } = require('../utils/getContract');
-const { setupProvider } = require('./utils/setupProvider');
+const { getContract } = require('../../utils/getContract');
+const { setupProvider } = require('../../utils/setupProvider');
 
 async function status({ network, useOvm, providerUrl, addresses }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */

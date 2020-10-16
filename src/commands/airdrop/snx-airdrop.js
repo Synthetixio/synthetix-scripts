@@ -6,10 +6,10 @@ const { gray, cyan, yellow, red } = require('chalk');
 const { parseEther, formatEther, parseUnits } = require('ethers').utils;
 const { wrap } = require('synthetix');
 
-const { getContract } = require('../utils/getContract');
-const { setupProvider } = require('../utils/setupProvider');
-const { runTx } = require('../utils/runTx');
-const { wait } = require('../utils/wait');
+const { getContract } = require('../../utils/getContract');
+const { setupProvider } = require('../../utils/setupProvider');
+const { runTx } = require('../../utils/runTx');
+const { wait } = require('../../utils/wait');
 
 async function airdrop({
 	inFilePath,

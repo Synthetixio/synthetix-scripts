@@ -3,8 +3,8 @@ const program = require('commander');
 
 const { gray, green, cyan, yellow, red } = require('chalk');
 const { formatEther } = require('ethers').utils;
-const { getContract } = require('../utils/getContract');
-const { setupProvider } = require('../utils/setupProvider');
+const { getContract } = require('../../utils/getContract');
+const { setupProvider } = require('../../utils/setupProvider');
 
 async function airdrop({ inFilePath, network, useOvm, providerUrl, useFork }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
