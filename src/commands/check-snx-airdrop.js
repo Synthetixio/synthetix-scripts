@@ -57,7 +57,7 @@ async function airdrop({ inFilePath, network, useOvm, providerUrl, useFork }) {
 		if (delta > 0) {
 			console.log(red(`  Funds mismatch: ${delta}`));
 		} else {
-			console.log(green(`  Ok ✅`));
+			console.log(green('  Ok ✅'));
 		}
 
 		return { delta };
@@ -85,7 +85,7 @@ async function airdrop({ inFilePath, network, useOvm, providerUrl, useFork }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
 
 	console.log('\n');
-	console.log(cyan(`Results:`));
+	console.log(cyan('Results:'));
 	console.log(`Total stakers: ${dataLen}`);
 	console.log(`Stakers with expected balance: ${completed}`);
 	console.log(`Total collateral to airdrop: ${totalCollateral}`);
@@ -106,10 +106,7 @@ program
 	.option('-f, --use-fork', 'Use a local fork', false)
 	.option('-i, --in-file-path <value>', 'The path to the JSON file containing the target addresses')
 	.option('-n, --network <value>', 'The network to run off.', x => x.toLowerCase(), 'mainnet')
-	.option(
-		'-p, --provider-url <value>',
-		'The http provider to use for communicating with the blockchain'
-	)
+	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
 	.action(async (...args) => {
 		try {

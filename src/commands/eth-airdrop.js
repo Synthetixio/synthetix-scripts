@@ -83,7 +83,7 @@ async function ethdrop({
 	}
 
 	async function showBalances() {
-		console.log(yellow(`Wallet balances:`));
+		console.log(yellow('Wallet balances:'));
 		for (let i = 0; i < numWallets; i++) {
 			const wallet = wallets[i];
 			const balance = ethers.utils.formatEther(await wallet.getBalance());
@@ -104,9 +104,7 @@ async function ethdrop({
 	await showBalances();
 
 	console.log(cyan('Please review this information before continuing:'));
-	console.log(
-		gray('================================================================================')
-	);
+	console.log(gray('================================================================================'));
 	console.log(yellow('* network', network));
 	if (collectOnly) console.log(yellow('* collectOnly: true'));
 	if (skipDistribution) console.log(yellow('* skipDistribution: true'));
@@ -115,9 +113,7 @@ async function ethdrop({
 	console.log(gray('* target addresses:', data.length));
 	console.log(gray('* target balance:', targetBalance));
 	console.log(gray('* total eth to send:', targetBalance * data.length));
-	console.log(
-		gray('================================================================================')
-	);
+	console.log(gray('================================================================================'));
 
 	const { confirmation } = await inquirer.prompt([
 		{
@@ -173,18 +169,14 @@ async function ethdrop({
 			console.log(gray(`    Value to send: ${ethers.utils.formatEther(value)}`));
 
 			if (value.isZero() || value.isNegative()) {
-				console.log(gray(`    No value to send`));
+				console.log(gray('    No value to send'));
 				continue;
 			}
 
 			tx.value = value;
 
 			console.log(
-				gray(
-					`    Sending ${ethers.utils.formatEther(
-						value
-					)} Ether from ${fromAddress} to ${firstWalletAddress}`
-				)
+				gray(`    Sending ${ethers.utils.formatEther(value)} Ether from ${fromAddress} to ${firstWalletAddress}`),
 			);
 
 			try {
@@ -195,7 +187,7 @@ async function ethdrop({
 			}
 		}
 
-		console.log(cyan(`Transactions sent, waiting for completion...`));
+		console.log(cyan('Transactions sent, waiting for completion...'));
 
 		const receipts = txs.map(async tx => tx.wait());
 		await Promise.all(receipts);
@@ -216,7 +208,7 @@ async function ethdrop({
 	// ----------------------------------
 
 	async function distributeEther() {
-		console.log(yellow(`Distributing Ether between sender wallets...`));
+		console.log(yellow('Distributing Ether between sender wallets...'));
 
 		// Calculate target balance.
 		const numWalletsBN = ethers.BigNumber.from(numWallets);
@@ -245,11 +237,7 @@ async function ethdrop({
 			};
 
 			console.log(
-				gray(
-					`    Sending ${ethers.utils.formatEther(
-						target
-					)} Ether from ${firstWalletAddress} to ${walletAddress}`
-				)
+				gray(`    Sending ${ethers.utils.formatEther(target)} Ether from ${firstWalletAddress} to ${walletAddress}`),
 			);
 
 			try {
@@ -260,7 +248,7 @@ async function ethdrop({
 			}
 		}
 
-		console.log(cyan(`Transactions sent, waiting for completion...`));
+		console.log(cyan('Transactions sent, waiting for completion...'));
 
 		const receipts = txs.map(async tx => tx.wait());
 		await Promise.all(receipts);
@@ -317,11 +305,7 @@ async function ethdrop({
 					};
 
 					console.log(
-						gray(
-							`      Sending ${ethers.utils.formatEther(
-								delta
-							)} Ether from ${walletAddress} to ${target}`
-						)
+						gray(`      Sending ${ethers.utils.formatEther(delta)} Ether from ${walletAddress} to ${target}`),
 					);
 
 					try {
@@ -337,15 +321,15 @@ async function ethdrop({
 						missedTargets++;
 					}
 				} else {
-					console.log(gray(`      Address already has target balance`));
+					console.log(gray('      Address already has target balance'));
 					successTargets++;
 				}
 
 				completedTargets++;
 				console.log(
 					cyan(
-						`Completed ${completedTargets}, successful: ${successTargets}, missed: ${missedTargets}, sent: ${sentTargets}`
-					)
+						`Completed ${completedTargets}, successful: ${successTargets}, missed: ${missedTargets}, sent: ${sentTargets}`,
+					),
 				);
 			}
 		}
@@ -375,23 +359,17 @@ program
 	.option(
 		'-c, --collect-only',
 		'Collects Ether from all wallets into the first and does not resume with the airdrop',
-		false
+		false,
 	)
 	.option('-d, --data-file <value>', 'The path to the JSON file containing the target addresses')
 	.option('-g, --gas-price <value>', 'Gas price to set when performing transfers', 1)
 	.option('-l, --gas-limit <value>', 'Max gas to use when signing transactions', 8000000)
-	.option(
-		'-m, --mnemonic <value>',
-		'Mnemonic used to derive wallet addresses that will be used to send out Ether'
-	)
+	.option('-m, --mnemonic <value>', 'Mnemonic used to derive wallet addresses that will be used to send out Ether')
 	.option('-n, --network <value>', 'Network to use', 'goerli')
 	.option('-s, --skip-distribution', 'Skip distributing Ether between sender wallets', false)
 	.option('-t, --target-balance <value>', 'Balance for target addresses', 0.01)
 	.option('-w, --num-wallets <value>', 'Number of simultaneous wallets to use to send Ether', 8)
-	.option(
-		'-p, --provider-url <value>',
-		'The http provider to use for communicating with the blockchain'
-	)
+	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.action(async (...args) => {
 		try {
 			await ethdrop(...args);

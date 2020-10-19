@@ -2,10 +2,10 @@ const program = require('commander');
 
 const { green, cyan, red } = require('chalk');
 const { formatEther, formatBytes32String } = require('ethers').utils;
-const { getSynths } = require('../');
+const { getSynths } = require('synthetix');
 
 const { getContract } = require('../utils/getContract');
-const { setupProvider } = require('./utils/setupProvider');
+const { setupProvider } = require('../utils/setupProvider');
 
 async function status({ network, useOvm, providerUrl, addresses }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
@@ -82,7 +82,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 		console.log(green('  Address:'), address);
 
 		const data = await SynthetixState.issuanceData(address);
-		logItem(`SynthetixState.issuanceData(address)`, data.toString());
+		logItem('SynthetixState.issuanceData(address)', data.toString());
 	}
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -105,7 +105,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	if (useOvm) {
 		logItem(
 			'FixedSupplySchedule.inflationStartDate',
-			new Date((await SupplySchedule.inflationStartDate()).toString() * 1000)
+			new Date((await SupplySchedule.inflationStartDate()).toString() * 1000),
 		);
 
 		const lastMint = (await SupplySchedule.lastMintEvent()).toNumber();
@@ -121,7 +121,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 		logItem('FixedSupplySchedule.mintBuffer', (await SupplySchedule.mintBuffer()).toString());
 		logItem(
 			'FixedSupplySchedule.periodsSinceLastIssuance',
-			(await SupplySchedule.periodsSinceLastIssuance()).toString()
+			(await SupplySchedule.periodsSinceLastIssuance()).toString(),
 		);
 	}
 
@@ -161,20 +161,16 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 		const feesByPeriod = await FeePool.feesByPeriod(address);
 		logItem(
-			`FeePool.feesByPeriod(address)`,
+			'FeePool.feesByPeriod(address)',
 			feesByPeriod.map(period => period.map(fee => fee.toString())),
-			2
+			2,
 		);
 
 		const lastFeeWithdrawal = await FeePool.getLastFeeWithdrawal(address);
-		logItem(`FeePool.getLastFeeWithdrawal(address)`, lastFeeWithdrawal.toString(), 2);
+		logItem('FeePool.getLastFeeWithdrawal(address)', lastFeeWithdrawal.toString(), 2);
 
 		const effectiveDebtRatioForPeriod = await FeePool.effectiveDebtRatioForPeriod(address, 1);
-		logItem(
-			`FeePool.effectiveDebtRatioForPeriod(${address}, 1)`,
-			effectiveDebtRatioForPeriod.toString(),
-			2
-		);
+		logItem(`FeePool.effectiveDebtRatioForPeriod(${address}, 1)`, effectiveDebtRatioForPeriod.toString(), 2);
 	}
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~ */
@@ -195,8 +191,8 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 		const debtEntry = await FeePoolState.getAccountsDebtEntry(address, 0);
 		logItem(
-			`FeePoolState.getAccountsDebtEntry(address)`,
-			debtEntry.map(item => item.toString())
+			'FeePoolState.getAccountsDebtEntry(address)',
+			debtEntry.map(item => item.toString()),
 		);
 	}
 
@@ -214,10 +210,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	});
 
 	const getAddress = async ({ contract }) => {
-		logItem(
-			`AddressResolver.getAddress(${contract})`,
-			await AddressResolver.getAddress(formatBytes32String(contract))
-		);
+		logItem(`AddressResolver.getAddress(${contract})`, await AddressResolver.getAddress(formatBytes32String(contract)));
 	};
 
 	await getAddress({ contract: 'RewardsDistribution' });
@@ -252,10 +245,7 @@ program
 	.description('Query state of the system on any network')
 	.option('-a, --addresses <values...>', 'Addresses to perform particular checks on')
 	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
-	.option(
-		'-p, --provider-url <value>',
-		'The http provider to use for communicating with the blockchain'
-	)
+	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
 	.action(async (...args) => {
 		try {

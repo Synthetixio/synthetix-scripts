@@ -16,13 +16,7 @@ function getContract({
 	provider,
 }) {
 	const target = synthetix.getTarget({ path, fs, contract, network, useOvm, deploymentPath });
-	console.log(
-		gray(
-			`  > getContract '${contract}${contract !== source ? `(${source})` : ''}' => ${
-				target.address
-			}`
-		)
-	);
+	console.log(gray(`  > getContract '${contract}${contract !== source ? `(${source})` : ''}' => ${target.address}`));
 	const sourceData = synthetix.getSource({
 		path,
 		fs,

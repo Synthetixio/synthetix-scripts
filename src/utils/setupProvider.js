@@ -1,7 +1,7 @@
 const ethers = require('ethers');
 
 function setupProvider({ providerUrl, privateKey, publicKey }) {
-	let provider
+	let provider;
 	if (providerUrl) {
 		provider = new ethers.providers.JsonRpcProvider(providerUrl);
 	} else {

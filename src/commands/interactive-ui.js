@@ -70,9 +70,7 @@ async function interactiveUi({
 	console.clear();
 	console.log('\n');
 	console.log(cyan('Please review this information before you interact with the system:'));
-	console.log(
-		gray('================================================================================')
-	);
+	console.log(gray('================================================================================'));
 
 	console.log(gray(`> Provider: ${providerUrl || 'Ethers default provider'}`));
 	console.log(gray(`> Network: ${network}`));
@@ -86,9 +84,7 @@ async function interactiveUi({
 		console.log(gray('> Read only'));
 	}
 
-	console.log(
-		gray('================================================================================')
-	);
+	console.log(gray('================================================================================'));
 	console.log('\n');
 
 	// -----------------
@@ -254,7 +250,7 @@ async function interactiveUi({
 		// Call function
 		let result, error;
 		if (abiItem.stateMutability === 'view') {
-			console.log(gray(`  > Querying...`));
+			console.log(gray('  > Querying...'));
 
 			try {
 				result = await contract[abiItemName](...inputs);
@@ -331,10 +327,7 @@ program
 	.option('-k, --private-key <value>', 'Private key to use to sign txs')
 	.option('-l, --gas-limit <value>', 'Max gas to use when signing transactions', 8000000)
 	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
-	.option(
-		'-p, --provider-url <value>',
-		'The http provider to use for communicating with the blockchain'
-	)
+	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-y, --deployment-path <value>', 'Specify the path to the deployment data directory')
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
 	.action(async (...args) => {

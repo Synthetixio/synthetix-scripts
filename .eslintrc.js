@@ -1,17 +1,27 @@
 module.exports = {
-	extends: ['standard', 'plugin:prettier/recommended', 'plugin:node/recommended'],
-	globals: {},
 	env: {
-		mocha: true,
+		es6: true,
 		node: true,
 	},
-	plugins: ['havven'],
+
+	plugins: ['import'],
+	extends: [
+		'eslint:recommended',
+		'plugin:import/errors',
+		'plugin:prettier/recommended', // Enables eslint-plugin-prettier and eslint-config-prettier. This will display prettier errors as ESLint errors. Make sure this is always the last configuration in the extends array.
+	],
+
+	parserOptions: {
+		ecmaVersion: 2018, // Allows for the parsing of modern ECMAScript featuress
+	},
+
 	rules: {
-		'havven/no-assert-revert-without-await': 'error',
-		'havven/no-assert-invalid-opcode-without-await': 'error',
-		'prefer-arrow-callback': 'error',
-		'prefer-const': 'error',
-		'no-process-exit': 'off',
-		'standard/computed-property-even-spacing': 'off',
+		indent: [2, 'tab'],
+		quotes: ['error', 'single'],
+		'import/no-unresolved': [2, { commonjs: true }],
+		'no-undef': 2,
+		'prefer-const': 2,
+		semi: ['error', 'always'],
+		'no-console': 0,
 	},
 };

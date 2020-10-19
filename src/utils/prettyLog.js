@@ -1,7 +1,7 @@
 const { green, red, cyan, gray } = require('chalk');
 
 function logReceipt(receipt, contract) {
-	console.log(green(`  ✅ Success`));
+	console.log(green('  ✅ Success'));
 
 	if (receipt.transactionHash) console.log(gray(`    tx hash: ${receipt.transactionHash}`));
 
@@ -20,7 +20,7 @@ function logReceipt(receipt, contract) {
 }
 
 function logError(error) {
-	console.log(red(`  ❌ Error`));
+	console.log(red('  ❌ Error'));
 
 	if (error.tx && error.tx.hash) console.log(red(`    Tx hash: ${error.tx.hash}`));
 	if (error.reason) console.log(red(`    Reason: ${error.reason}`));

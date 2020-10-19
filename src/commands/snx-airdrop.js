@@ -93,9 +93,7 @@ async function airdrop({
 
 	if (walletBalance < remainingToTransfer) {
 		const delta = remainingToTransfer - walletBalance;
-		await warn(
-			`WARNING: Wallet is short by ${delta} SNX, it will run out of funds before the script completes.`
-		);
+		await warn(`WARNING: Wallet is short by ${delta} SNX, it will run out of funds before the script completes.`);
 	}
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
@@ -184,21 +182,12 @@ program
 	.option('-f, --use-fork', 'Use a local fork', false)
 	.option('-g, --gas-price <value>', 'Gas price to set when performing transfers', 1)
 	.option('-i, --in-file-path <value>', 'The path to the JSON file containing the target addresses')
-	.option(
-		'-k, --private-key <value>',
-		'The private key of the address that will be used to transfer tokens from'
-	)
+	.option('-k, --private-key <value>', 'The private key of the address that will be used to transfer tokens from')
 	.option('-l, --gas-limit <value>', 'Max gas to use when signing transactions', 8000000)
 	.option('-n, --network <value>', 'The network to run off.', x => x.toLowerCase(), 'mainnet')
 	.option('-r, --reset', 'Clear all data in output file', false)
-	.option(
-		'-o, --out-file-path <value>',
-		'The path to the JSON file containing the transfered balances'
-	)
-	.option(
-		'-p, --provider-url <value>',
-		'The http provider to use for communicating with the blockchain'
-	)
+	.option('-o, --out-file-path <value>', 'The path to the JSON file containing the transfered balances')
+	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-s, --start-index <value>', 'Start from staker at index', 0)
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
 	.action(async (...args) => {
