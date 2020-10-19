@@ -107,9 +107,9 @@ async function interactiveUi({
 
 		prioritizeTarget('Synthetix');
 
-		async function searchTargets(matches, query) {
+		async function searchTargets(matches, query = '') {
 			return new Promise(resolve => {
-				resolve(targets.filter(target => target.includes(query)));
+				resolve(targets.filter(target => target.toLowerCase().includes(query.toLowerCase())));
 			});
 		}
 
@@ -165,11 +165,11 @@ async function interactiveUi({
 			return `${inputPart}${outputPart}`;
 		}
 
-		async function searchAbi(matches, query) {
+		async function searchAbi(matches, query = '') {
 			return new Promise(resolve => {
 				const abiMatches = source.abi.filter(item => {
 					if (item.name && item.type === 'function') {
-						return item.name.includes(query);
+						return item.name.includes(query.toLowerCase());
 					}
 					return false;
 				});
