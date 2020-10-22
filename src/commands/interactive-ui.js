@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
+
 const fs = require('fs');
 const path = require('path');
 
@@ -24,9 +26,7 @@ async function interactiveUi({
 	deploymentPath,
 	privateKey,
 }) {
-	// ------------------
-	// Validation
-	// ------------------
+	console.clear();
 
 	// ------------------
 	// Setup
@@ -55,6 +55,10 @@ async function interactiveUi({
 		console.log(gray(`> Using fork - Signer address: ${publicKey}`));
 	}
 
+	if (!providerUrl && process.env.PROVIDER_URL) {
+		providerUrl = process.env.PROVIDER_URL.replace('network', network);
+	}
+
 	const { provider, wallet } = setupProvider({
 		providerUrl,
 		privateKey,
@@ -69,12 +73,10 @@ async function interactiveUi({
 	// Confirmation
 	// ------------------
 
-	console.clear();
 	console.log('\n');
 	console.log(cyan('Please review this information before you interact with the system:'));
 	console.log(gray('================================================================================'));
-
-	console.log(gray(`> Provider: ${providerUrl || 'Ethers default provider'}`));
+	console.log(gray(`> Provider: ${providerUrl ? 'Custom provider' : 'Ethers default provider'}`));
 	console.log(gray(`> Network: ${network}`));
 	console.log(gray(`> Gas price: ${gasPrice}`));
 	console.log(gray(`> OVM: ${useOvm}`));
