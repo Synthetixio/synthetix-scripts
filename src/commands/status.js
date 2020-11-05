@@ -9,7 +9,7 @@ const { getSynths } = require('synthetix');
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 
-async function status({ network, useOvm, providerUrl, addresses }) {
+async function status({ network, useOvm, providerUrl, addresses, block }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Input ~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
@@ -18,6 +18,8 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	providerUrl = providerUrl.replace('network', network);
 	if (!providerUrl) throw new Error('Cannot set up a provider.');
+
+	const blockOptions = { blockTag: block ? +block : 'latest' };
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Setup ~~~~~~ */
@@ -49,6 +51,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logItem('Network', network);
 	logItem('Optimism', useOvm);
+	logItem('Block #', blockOptions.blockTag);
 	logItem('Provider', providerUrl);
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
@@ -64,8 +67,8 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 		provider,
 	});
 
-	logItem('Synthetix.anySynthOrSNXRateIsInvalid:', await Synthetix.anySynthOrSNXRateIsInvalid());
-	logItem('Synthetix.totalSupply', (await Synthetix.totalSupply()).toString() / 1e18);
+	logItem('Synthetix.anySynthOrSNXRateIsInvalid:', await Synthetix.anySynthOrSNXRateIsInvalid(blockOptions));
+	logItem('Synthetix.totalSupply', (await Synthetix.totalSupply(blockOptions)).toString() / 1e18);
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ SynthetixState ~~~~ */
@@ -83,7 +86,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	for (const address of addresses) {
 		console.log(green('  Address:'), address);
 
-		const data = await SynthetixState.issuanceData(address);
+		const data = await SynthetixState.issuanceData(address, blockOptions);
 		logItem('SynthetixState.issuanceData(address)', data.toString());
 	}
 
@@ -101,18 +104,18 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 		provider,
 	});
 
-	const supply = formatEther(await SupplySchedule.mintableSupply());
+	const supply = formatEther(await SupplySchedule.mintableSupply(blockOptions));
 	logItem('SupplySchedule.mintableSupply', supply);
 
 	if (useOvm) {
 		logItem(
 			'FixedSupplySchedule.inflationStartDate',
-			new Date((await SupplySchedule.inflationStartDate()).toString() * 1000),
+			new Date((await SupplySchedule.inflationStartDate(blockOptions)).toString() * 1000),
 		);
 
-		const lastMint = (await SupplySchedule.lastMintEvent()).toNumber();
+		const lastMint = (await SupplySchedule.lastMintEvent(blockOptions)).toNumber();
 		logItem('FixedSupplySchedule.lastMintEvent', lastMint);
-		const mintPeriod = (await SupplySchedule.mintPeriodDuration()).toNumber();
+		const mintPeriod = (await SupplySchedule.mintPeriodDuration(blockOptions)).toNumber();
 		logItem('FixedSupplySchedule.mintPeriodDuration', mintPeriod);
 
 		const now = Math.floor(new Date().getTime() / 1000);
@@ -120,10 +123,10 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 		const remainingHours = (lastMint + mintPeriod - now) / (60 * 60);
 		logItem('Remaining hours until period ends', remainingHours);
 
-		logItem('FixedSupplySchedule.mintBuffer', (await SupplySchedule.mintBuffer()).toString());
+		logItem('FixedSupplySchedule.mintBuffer', (await SupplySchedule.mintBuffer(blockOptions)).toString());
 		logItem(
 			'FixedSupplySchedule.periodsSinceLastIssuance',
-			(await SupplySchedule.periodsSinceLastIssuance()).toString(),
+			(await SupplySchedule.periodsSinceLastIssuance(blockOptions)).toString(),
 		);
 	}
 
@@ -140,10 +143,10 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 		provider,
 	});
 
-	logItem('FeePool.feePeriodDuration', (await FeePool.feePeriodDuration()).toString());
+	logItem('FeePool.feePeriodDuration', (await FeePool.feePeriodDuration(blockOptions)).toString());
 
 	async function feePeriodInfo(idx) {
-		const feePeriod = await FeePool.recentFeePeriods(idx);
+		const feePeriod = await FeePool.recentFeePeriods(idx, blockOptions);
 		logItem(`feePeriod ${idx}:`);
 
 		Object.keys(feePeriod).map(key => {
@@ -161,17 +164,17 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	for (const address of addresses) {
 		console.log(green('  Address:'), address);
 
-		const feesByPeriod = await FeePool.feesByPeriod(address);
+		const feesByPeriod = await FeePool.feesByPeriod(address, blockOptions);
 		logItem(
 			'FeePool.feesByPeriod(address)',
 			feesByPeriod.map(period => period.map(fee => fee.toString())),
 			2,
 		);
 
-		const lastFeeWithdrawal = await FeePool.getLastFeeWithdrawal(address);
+		const lastFeeWithdrawal = await FeePool.getLastFeeWithdrawal(address, blockOptions);
 		logItem('FeePool.getLastFeeWithdrawal(address)', lastFeeWithdrawal.toString(), 2);
 
-		const effectiveDebtRatioForPeriod = await FeePool.effectiveDebtRatioForPeriod(address, 1);
+		const effectiveDebtRatioForPeriod = await FeePool.effectiveDebtRatioForPeriod(address, 1, blockOptions);
 		logItem(`FeePool.effectiveDebtRatioForPeriod(${address}, 1)`, effectiveDebtRatioForPeriod.toString(), 2);
 	}
 
@@ -191,7 +194,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	for (const address of addresses) {
 		console.log(green('  Address:'), address);
 
-		const debtEntry = await FeePoolState.getAccountsDebtEntry(address, 0);
+		const debtEntry = await FeePoolState.getAccountsDebtEntry(address, 0, blockOptions);
 		logItem(
 			'FeePoolState.getAccountsDebtEntry(address)',
 			debtEntry.map(item => item.toString()),
@@ -212,7 +215,10 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	});
 
 	const getAddress = async ({ contract }) => {
-		logItem(`AddressResolver.getAddress(${contract})`, await AddressResolver.getAddress(formatBytes32String(contract)));
+		logItem(
+			`AddressResolver.getAddress(${contract})`,
+			await AddressResolver.getAddress(formatBytes32String(contract), blockOptions),
+		);
 	};
 
 	await getAddress({ contract: 'RewardsDistribution' });
@@ -231,8 +237,8 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 	});
 
 	const logRate = async currency => {
-		const rate = await ExchangeRates.rateForCurrency(formatBytes32String(currency));
-		const updated = (await ExchangeRates.lastRateUpdateTimes(formatBytes32String(currency))) * 1000;
+		const rate = await ExchangeRates.rateForCurrency(formatBytes32String(currency), blockOptions);
+		const updated = await ExchangeRates.lastRateUpdateTimes(formatBytes32String(currency), blockOptions);
 		logItem(`${currency} rate:`, `${formatEther(rate)} (${new Date(updated.toString() * 1000)})`);
 	};
 
@@ -246,6 +252,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 program
 	.description('Query state of the system on any network')
 	.option('-a, --addresses <values...>', 'Addresses to perform particular checks on')
+	.option('-b, --block <value>', 'Block number to check again')
 	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
 	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
