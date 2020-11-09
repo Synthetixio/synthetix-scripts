@@ -4,25 +4,21 @@ require('dotenv').config();
 
 const program = require('commander');
 
-const { green, cyan, red, bgRed } = require('chalk');
+const { green, cyan, red } = require('chalk');
 const { formatEther, formatBytes32String } = require('ethers').utils;
 const { getSynths } = require('synthetix');
 
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 
-async function status({ network, useOvm, providerUrl, addresses, block }) {
+async function rates({ network, useOvm, providerUrl }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Input ~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
 
-	addresses = addresses ? addresses.split(',') : [];
-
 	if (!providerUrl && process.env.PROVIDER_URL) {
 		providerUrl = process.env.PROVIDER_URL.replace('network', network);
 	}
-
-	const blockOptions = { blockTag: block ? +block : 'latest' };
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Setup ~~~~~~ */
@@ -31,35 +27,11 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 	const { provider } = setupProvider({ providerUrl });
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
-	/* ~~~~ Log utils ~~~~ */
-	/* ~~~~~~~~~~~~~~~~~~~ */
-
-	const logSection = sectionName => {
-		console.log(green(`\n=== ${sectionName}: ===`));
-	};
-
-	const logItem = (itemName, itemValue, indent = 1, color = undefined) => {
-		const hasValue = itemValue !== undefined;
-		const spaces = '  '.repeat(indent);
-		const name = cyan(`* ${itemName}${hasValue ? ':' : ''}`);
-		const value = hasValue ? itemValue : '';
-
-		if (color) {
-			console.log(color(spaces, name, value));
-		} else {
-			console.log(spaces, name, value);
-		}
-	};
-
-	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~ General ~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
 
-	logSection('Info');
-
 	logItem('Network', network);
 	logItem('Optimism', useOvm);
-	logItem('Block #', blockOptions.blockTag);
 	logItem('Provider', providerUrl);
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
@@ -75,14 +47,7 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 		provider,
 	});
 
-	const anySynthOrSNXRateIsInvalid = await Synthetix.anySynthOrSNXRateIsInvalid(blockOptions);
-	logItem(
-		'Synthetix.anySynthOrSNXRateIsInvalid',
-		anySynthOrSNXRateIsInvalid,
-		1,
-		anySynthOrSNXRateIsInvalid ? bgRed : undefined,
-	);
-
+	logItem('Synthetix.anySynthOrSNXRateIsInvalid', await Synthetix.anySynthOrSNXRateIsInvalid(blockOptions));
 	logItem('Synthetix.totalSupply', (await Synthetix.totalSupply(blockOptions)).toString() / 1e18);
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -252,18 +217,9 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 	});
 
 	const logRate = async currency => {
-		const currencyKey = formatBytes32String(currency);
-
-		const rate = await ExchangeRates.rateForCurrency(currencyKey, blockOptions);
-		const updated = await ExchangeRates.lastRateUpdateTimes(currencyKey, blockOptions);
-		const isInvalid = await ExchangeRates.rateIsInvalid(currencyKey);
-
-		logItem(
-			`${currency} rate:`,
-			`${formatEther(rate)} (${new Date(updated.toString() * 1000)})`,
-			1,
-			isInvalid ? bgRed : undefined,
-		);
+		const rate = await ExchangeRates.rateForCurrency(formatBytes32String(currency), blockOptions);
+		const updated = await ExchangeRates.lastRateUpdateTimes(formatBytes32String(currency), blockOptions);
+		logItem(`${currency} rate:`, `${formatEther(rate)} (${new Date(updated.toString() * 1000)})`);
 	};
 
 	await logRate('SNX');
