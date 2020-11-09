@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
+
 const program = require('commander');
 
 const { green, cyan, red } = require('chalk');
@@ -16,14 +18,16 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	addresses = addresses ? addresses.split(',') : [];
 
-	providerUrl = providerUrl.replace('network', network);
-	if (!providerUrl) throw new Error('Cannot set up a provider.');
+	if (!providerUrl && process.env.PROVIDER_URL) {
+		providerUrl = process.env.PROVIDER_URL.replace('network', network);
+	}
+	console.log('providerUrl', providerUrl);
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Setup ~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
 
-	const { provider } = await setupProvider({ providerUrl });
+	const { provider } = setupProvider({ providerUrl });
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ Log utils ~~~~ */
@@ -57,14 +61,14 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logSection('Synthetix');
 
-	const Synthetix = await getContract({
+	const Synthetix = getContract({
 		contract: 'Synthetix',
 		network,
 		useOvm,
 		provider,
 	});
 
-	logItem('Synthetix.anySynthOrSNXRateIsInvalid:', await Synthetix.anySynthOrSNXRateIsInvalid());
+	logItem('Synthetix.anySynthOrSNXRateIsInvalid', await Synthetix.anySynthOrSNXRateIsInvalid());
 	logItem('Synthetix.totalSupply', (await Synthetix.totalSupply()).toString() / 1e18);
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
@@ -73,7 +77,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logSection('SynthetixState');
 
-	const SynthetixState = await getContract({
+	const SynthetixState = getContract({
 		contract: 'SynthetixState',
 		network,
 		useOvm,
@@ -93,7 +97,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logSection('SupplySchedule');
 
-	const SupplySchedule = await getContract({
+	const SupplySchedule = getContract({
 		contract: 'SupplySchedule',
 		source: useOvm ? 'FixedSupplySchedule' : 'SupplySchedule',
 		network,
@@ -181,7 +185,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logSection('FeePoolState');
 
-	const FeePoolState = await getContract({
+	const FeePoolState = getContract({
 		contract: 'FeePoolState',
 		network,
 		useOvm,
@@ -204,7 +208,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logSection('AddressResolver');
 
-	const AddressResolver = await getContract({
+	const AddressResolver = getContract({
 		contract: 'AddressResolver',
 		network,
 		useOvm,
@@ -223,7 +227,7 @@ async function status({ network, useOvm, providerUrl, addresses }) {
 
 	logSection('ExchangeRates');
 
-	const ExchangeRates = await getContract({
+	const ExchangeRates = getContract({
 		contract: 'ExchangeRates',
 		network,
 		useOvm,
