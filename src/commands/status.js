@@ -5,9 +5,7 @@ require('dotenv').config();
 const program = require('commander');
 
 const { green, cyan, red, bgRed } = require('chalk');
-const { formatEther, formatBytes32String } = require('ethers').utils;
-const { getSynths } = require('synthetix');
-
+const { formatEther, formatBytes32String, toUtf8String } = require('ethers').utils;
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 
@@ -239,6 +237,26 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 	await getAddress({ contract: 'RewardsDistribution' });
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~ */
+	/* ~~~~ SystemSettings ~~~~ */
+	/* ~~~~~~~~~~~~~~~~~~~~~~~ */
+
+	logSection('SystemSettings');
+
+	const SystemSettings = getContract({
+		contract: 'SystemSettings',
+		network,
+		useOvm,
+		provider,
+	});
+
+	const rateStalePeriod = await SystemSettings.rateStalePeriod();
+
+	logItem(
+		`rateStalePeriod`,
+		rateStalePeriod.toString()
+	);
+
+	/* ~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ ExchangeRates ~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~~~~~ */
 
@@ -251,26 +269,33 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 		provider,
 	});
 
-	const logRate = async currency => {
-		const currencyKey = formatBytes32String(currency);
+	const Issuer = getContract({
+		contract: 'Issuer',
+		network,
+		useOvm,
+		provider,
+	});
 
+	const currencyKeys = await Issuer.availableCurrencyKeys();
+	const now = Math.floor(new Date().getTime() / 60000);
+
+	const logRate = async currencyKey => {
+		const currency = toUtf8String(currencyKey);
 		const rate = await ExchangeRates.rateForCurrency(currencyKey, blockOptions);
-		const updated = await ExchangeRates.lastRateUpdateTimes(currencyKey, blockOptions);
 		const isInvalid = await ExchangeRates.rateIsInvalid(currencyKey);
+		const updated = await ExchangeRates.lastRateUpdateTimes(currencyKey, blockOptions);
+		const sinceUpdate = Math.floor(now - updated.toString() / 60);
 
 		logItem(
 			`${currency} rate:`,
-			`${formatEther(rate)} (${new Date(updated.toString() * 1000)})`,
+			`${formatEther(rate)} (Updated ${sinceUpdate} minutes ago)`,
 			1,
 			isInvalid ? bgRed : undefined,
 		);
 	};
 
-	await logRate('SNX');
-
-	const synths = getSynths();
-	for (const synth of synths) {
-		await logRate(synth.name);
+	for (const currencyKey of currencyKeys) {
+		await logRate(currencyKey);
 	}
 }
 program
