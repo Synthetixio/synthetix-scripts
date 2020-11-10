@@ -173,7 +173,7 @@ async function interactiveUi({
 			return new Promise(resolve => {
 				const abiMatches = source.abi.filter(item => {
 					if (item.name && item.type === 'function') {
-						return item.name.includes(query.toLowerCase());
+						return item.name.toLowerCase().includes(query.toLowerCase());
 					}
 					return false;
 				});
