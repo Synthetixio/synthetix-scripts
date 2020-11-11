@@ -75,6 +75,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	const anySynthOrSNXRateIsInvalid = await Synthetix.anySynthOrSNXRateIsInvalid(blockOptions);
@@ -98,6 +99,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	for (const address of addresses) {
@@ -119,6 +121,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	const supply = formatEther(await SupplySchedule.mintableSupply(blockOptions));
@@ -158,6 +161,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	logItem('FeePool.feePeriodDuration', (await FeePool.feePeriodDuration(blockOptions)).toString());
@@ -206,6 +210,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	for (const address of addresses) {
@@ -229,6 +234,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	const getAddress = async ({ contract }) => {
@@ -251,6 +257,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	const rateStalePeriod = await SystemSettings.rateStalePeriod();
@@ -268,6 +275,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	const Issuer = getContract({
@@ -275,6 +283,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
+		deploymentPath,
 	});
 
 	const currencyKeys = await Issuer.availableCurrencyKeys();
