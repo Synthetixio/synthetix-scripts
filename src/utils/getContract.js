@@ -15,11 +15,12 @@ function getContract({
 	wallet,
 	provider,
 }) {
-	const target = synthetix.getTarget({ path, fs, contract, network, useOvm, deploymentPath });
+	const { getSource, getTarget } = synthetix.wrap({ network, deploymentPath, fs, path });
+
+	const target = getTarget({  contract, network, useOvm, deploymentPath });
 	console.log(gray(`  > getContract '${contract}${contract !== source ? `(${source})` : ''}' => ${target.address}`));
-	const sourceData = synthetix.getSource({
-		path,
-		fs,
+
+	const sourceData = getSource({
 		contract: source,
 		network,
 		useOvm,

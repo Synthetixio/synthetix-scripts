@@ -9,7 +9,7 @@ const { formatEther, formatBytes32String, toUtf8String } = require('ethers').uti
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 
-async function status({ network, useOvm, providerUrl, addresses, block }) {
+async function status({ network, useOvm, providerUrl, addresses, block, useFork, deploymentPath }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Input ~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
@@ -25,6 +25,10 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 	/* ~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~~~ Setup ~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
+
+	if (useFork) {
+		providerUrl = 'http://localhost:8545';
+	}
 
 	const { provider } = setupProvider({ providerUrl });
 
@@ -251,10 +255,7 @@ async function status({ network, useOvm, providerUrl, addresses, block }) {
 
 	const rateStalePeriod = await SystemSettings.rateStalePeriod();
 
-	logItem(
-		`rateStalePeriod`,
-		rateStalePeriod.toString()
-	);
+	logItem(`rateStalePeriod`, rateStalePeriod.toString());
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ ExchangeRates ~~~~ */
@@ -302,8 +303,10 @@ program
 	.description('Query state of the system on any network')
 	.option('-a, --addresses <values...>', 'Addresses to perform particular checks on')
 	.option('-b, --block <value>', 'Block number to check again')
+	.option('-f, --use-fork', 'Use a local fork', false)
 	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
 	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
+	.option('-y, --deployment-path <value>', 'Specify the path to the deployment data directory')
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
 	.action(async (...args) => {
 		try {
