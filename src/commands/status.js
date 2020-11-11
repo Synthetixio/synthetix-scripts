@@ -60,6 +60,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 	logSection('Info');
 
 	logItem('Network', network);
+	logItem('Deployment', deploymentPath);
 	logItem('Optimism', useOvm);
 	logItem('Block #', blockOptions.blockTag);
 	logItem('Provider', providerUrl);
@@ -156,7 +157,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	logSection('FeePool');
 
-	const FeePool = await getContract({
+	const FeePool = getContract({
 		contract: 'FeePool',
 		network,
 		useOvm,
@@ -294,7 +295,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		const rate = await ExchangeRates.rateForCurrency(currencyKey, blockOptions);
 		const isInvalid = await ExchangeRates.rateIsInvalid(currencyKey);
 		const updated = await ExchangeRates.lastRateUpdateTimes(currencyKey, blockOptions);
-		const sinceUpdate = Math.floor(now - updated.toString() / 60);
+		const sinceUpdate = Math.floor(now - +updated.toString() / 60);
 
 		logItem(
 			`${currency} rate:`,

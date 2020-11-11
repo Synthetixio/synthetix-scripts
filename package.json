@@ -4,7 +4,7 @@
 	"description": "A set of cli utilities for the Synthetix protocol",
 	"main": "src/commands/interactive-ui.js",
 	"bin": {
-		"synthetix": "src/commands/interactive-ui.js"
+		"spartan": "src/commands/interactive-ui.js"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
