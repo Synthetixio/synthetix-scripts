@@ -33,11 +33,11 @@
 	"dependencies": {
 		"chalk": "^4.1.0",
 		"commander": "^6.1.0",
+		"dotenv": "^6.1.0",
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"dotenv": "^6.1.0",
-		"synthetix": "2.30.2-ovm"
+		"synthetix": "^2.31.1-beta"
 	},
 	"devDependencies": {
 		"eslint": "7.1.0",
