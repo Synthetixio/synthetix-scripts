@@ -98,7 +98,7 @@ async function interactiveUi({
 	// -----------------
 
 	async function interact() {
-		console.log(green('()==[:::::::::::::> What is your query?'));
+		console.log(green('WHAT IS YOUR QUERY SPARTAN? ()==[:::::::::::::>'));
 
 		// -----------------
 		// Pick a contract
