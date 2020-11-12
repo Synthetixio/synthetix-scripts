@@ -51,7 +51,9 @@ async function interactiveUi({
 	let publicKey;
 	if (useFork) {
 		providerUrl = 'http://localhost:8545';
-		publicKey = getUsers({ user: 'owner' }).address;
+		if (!privateKey) {
+			publicKey = getUsers({ user: 'owner' }).address;
+		}
 		console.log(gray(`> Using fork - Signer address: ${publicKey}`));
 	}
 
