@@ -49,12 +49,17 @@ async function interactiveUi({
 	}
 
 	let publicKey;
+
 	if (useFork) {
 		providerUrl = 'http://localhost:8545';
+
 		if (!privateKey) {
 			publicKey = getUsers({ user: 'owner' }).address;
 		}
-		console.log(gray(`> Using fork - Signer address: ${publicKey}`));
+	}
+
+	if (!privateKey && process.env.PRIVATE_KEY) {
+		privateKey = process.env.PRIVATE_KEY;
 	}
 
 	if (!providerUrl && process.env.PROVIDER_URL) {
