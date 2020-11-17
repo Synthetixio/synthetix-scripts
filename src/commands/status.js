@@ -89,6 +89,36 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	logItem('Synthetix.totalSupply', (await Synthetix.totalSupply(blockOptions)).toString() / 1e18);
 
+	/* ~~~~~~~~~~~~~~~~~~~~~~ */
+	/* ~~~~ DebtCache ~~~~ */
+	/* ~~~~~~~~~~~~~~~~~~~~~~ */
+
+	logSection('DebtCache');
+
+	const DebtCache = getContract({
+		contract: 'DebtCache',
+		network,
+		useOvm,
+		provider,
+		deploymentPath
+	});
+
+	const info = await DebtCache.cacheInfo();
+
+	logItem(
+		'DebgCache.info.isInvalid',
+		info.isInvalid,
+		1,
+		info.isInvalid ? bgRed : undefined,
+	);
+
+	logItem(
+		'DebgCache.info.isStale',
+		info.isStale,
+		1,
+		info.isStale ? bgRed : undefined,
+	);
+
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ SynthetixState ~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
