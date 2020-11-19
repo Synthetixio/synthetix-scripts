@@ -148,6 +148,12 @@ async function interactiveUi({
 		console.log(gray(`  > ${contractName} => ${target.address}`));
 
 		const contract = new ethers.Contract(target.address, source.abi, wallet || provider);
+		const code = await provider.getCode(target.address);
+		if (code.length === 2) {
+			console.log(red(`  > No code at ${target.address}`));
+		} else {
+			console.log(gray(`  > Contract code: ${code.substring(0, 64)}...`));
+		}
 
 		// -----------------
 		// Pick a function
