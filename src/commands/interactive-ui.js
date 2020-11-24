@@ -180,6 +180,8 @@ async function interactiveUi({
 			return `${inputPart}${outputPart}`;
 		}
 
+		const escItem =  '↩ BACK';
+
 		async function searchAbi(matches, query = '') {
 			return new Promise(resolve => {
 				const abiMatches = source.abi.filter(item => {
@@ -190,7 +192,9 @@ async function interactiveUi({
 				});
 
 				const signatures = abiMatches.map(match => reduceSignature(match));
-				signatures.splice(0, 0, 'none');
+				if (query === '') {
+					signatures.splice(0, 0, escItem);
+				}
 
 				resolve(signatures);
 			});
@@ -207,7 +211,7 @@ async function interactiveUi({
 		]);
 		const { abiItemSignature } = await prompt;
 
-		if (abiItemSignature === 'none') {
+		if (abiItemSignature === escItem) {
 			prompt.ui.close();
 
 			await interact();
