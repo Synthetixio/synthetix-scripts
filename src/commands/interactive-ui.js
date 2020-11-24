@@ -148,11 +148,9 @@ async function interactiveUi({
 		console.log(gray(`  > ${contractName} => ${target.address}`));
 
 		const contract = new ethers.Contract(target.address, source.abi, wallet || provider);
-		const code = await provider.getCode(target.address);
-		if (code.length === 2) {
-			console.log(red(`  > No code at ${target.address}`));
-		} else {
-			console.log(gray(`  > Contract code: ${code.substring(0, 64)}...`));
+		if (source.bytecode === '') {
+			const code = await provider.getCode(target.address);
+			console.log(red(`  > No code at ${target.address}, code: ${code}`));
 		}
 
 		// -----------------
@@ -191,12 +189,15 @@ async function interactiveUi({
 					return false;
 				});
 
-				resolve(abiMatches.map(match => reduceSignature(match)));
+				const signatures = abiMatches.map(match => reduceSignature(match));
+				signatures.splice(0, 0, 'none');
+
+				resolve(signatures);
 			});
 		}
 
 		// Prompt function to call
-		const { abiItemSignature } = await inquirer.prompt([
+		const prompt = inquirer.prompt([
 			{
 				type: 'autocomplete',
 				name: 'abiItemSignature',
@@ -204,6 +205,13 @@ async function interactiveUi({
 				source: (matches, query) => searchAbi(matches, query),
 			},
 		]);
+		const { abiItemSignature } = await prompt;
+
+		if (abiItemSignature === 'none') {
+			prompt.ui.close();
+
+			await interact();
+		}
 
 		const abiItemName = abiItemSignature.split('(')[0];
 		const abiItem = source.abi.find(item => item.name === abiItemName);
