@@ -1,29 +1,22 @@
 const ethers = require('ethers');
 
-async function runTx({ txPromise, provider }) {
-	let tx;
-
-	/*
-	 	* This rather bizarre piece of code attempts to run txs
-	 	* and catch any kind of failures that may occur,
-	 	* trying to parse any errors and get revert reasons.
-	 	*
-	 	* If errors can't be parsed, they are just printed out.
-	 	* */
-
-	// Method interaction => TransactionRequest
+async function stageTx({ txPromise }) {
 	try {
-		tx = await txPromise;
-	} catch (error) {
-		error.tx = tx;
+		const tx = await txPromise;
 
+		return {
+			success: true,
+			tx,
+		};
+	} catch (error) {
 		return {
 			success: false,
 			error,
 		};
 	}
+}
 
-	// TransactionResponse => TransactionReceipt
+async function runTx({ tx, provider }) {
 	try {
 		const receipt = await tx.wait();
 
@@ -32,8 +25,6 @@ async function runTx({ txPromise, provider }) {
 			receipt,
 		};
 	} catch (error) {
-		error.tx = tx;
-
 		// Try to get the revert reason when none is provided
 		try {
 			let code = await provider.call(tx);
@@ -57,8 +48,8 @@ async function runTx({ txPromise, provider }) {
 				success: false,
 				error,
 			};
-		} catch (error) {
-			error.tx = tx;
+		} catch (suberror) {
+			error.error = suberror;
 
 			return {
 				success: false,
@@ -69,5 +60,6 @@ async function runTx({ txPromise, provider }) {
 }
 
 module.exports = {
+	stageTx,
 	runTx,
 };

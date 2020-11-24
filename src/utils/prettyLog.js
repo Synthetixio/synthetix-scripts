@@ -22,8 +22,6 @@ function logReceipt(receipt, contract) {
 function logError(error) {
 	console.log(red('  ❌ Error'));
 
-	if (error.tx && error.tx.hash) console.log(red(`    Tx hash: ${error.tx.hash}`));
-
 	function findReason(error) {
 		if (typeof error === 'string') {
 			return error;
@@ -39,7 +37,7 @@ function logError(error) {
 	const reason = findReason(error);
 	if (reason) console.log(red(`    Reason: ${reason}`));
 
-	console.log(gray(error));
+	console.log(gray(JSON.stringify(error, null, 2)));
 }
 
 module.exports = {

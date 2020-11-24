@@ -13,7 +13,7 @@ const { yellow, green, red, cyan, gray } = require('chalk');
 const synthetix = require('synthetix');
 
 const { setupProvider } = require('../utils/setupProvider');
-const { runTx } = require('../utils/runTx');
+const { stageTx, runTx } = require('../utils/runTx');
 const { logReceipt, logError } = require('../utils/prettyLog');
 
 async function interactiveUi({
@@ -103,7 +103,7 @@ async function interactiveUi({
 	// -----------------
 
 	async function interact() {
-		console.log(green('WHAT IS YOUR QUERY SPARTAN? ()==[:::::::::::::>'));
+		console.log(green('\n* WHAT IS YOUR QUERY SPARTAN? ()==[:::::::::::::>'));
 
 		// -----------------
 		// Pick a contract
@@ -294,18 +294,32 @@ async function interactiveUi({
 					message: 'Send transaction?',
 				},
 			]);
-			if (!confirmation) await interact();
+			if (!confirmation) {
+				await interact();
+				return;
+			}
 
-			console.log(gray(`  > Sending transaction... ${new Date()}`));
+			console.log(gray(`  > Staging transaction... ${new Date()}`));
 			const txPromise = contract[abiItemName](...inputs, overrides);
 
-			result = await runTx({
+			result = await stageTx({
 				txPromise,
 				provider,
 			});
 
 			if (result.success) {
-				result = result.receipt;
+				console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
+
+				result = await runTx({
+					tx: result.tx,
+					provider,
+				})
+
+				if (result.success) {
+					result = result.receipt;
+				} else {
+					error = result.error;
+				}
 			} else {
 				error = result.error;
 			}
