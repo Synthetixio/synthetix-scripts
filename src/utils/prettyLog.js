@@ -23,8 +23,21 @@ function logError(error) {
 	console.log(red('  ❌ Error'));
 
 	if (error.tx && error.tx.hash) console.log(red(`    Tx hash: ${error.tx.hash}`));
-	if (error.reason) console.log(red(`    Reason: ${error.reason}`));
-	if (error.extraInfo) console.log(red(`    Extra info: ${error.extraInfo}`));
+
+	function findReason(error) {
+		if (typeof error === 'string') {
+			return error;
+		} else {
+			if (error.hasOwnProperty('reason')) {
+				return error.reason;
+			} else if (error.hasOwnProperty('error')) {
+				return findReason(error.error);
+			}
+		}
+	}
+
+	const reason = findReason(error);
+	if (reason) console.log(red(`    Reason: ${reason}`));
 
 	console.log(gray(error));
 }
