@@ -2,9 +2,17 @@ const { green, red, cyan, gray } = require('chalk');
 
 function logReceipt(receipt, contract) {
 	console.log(green('  ✅ Success'));
+	// console.log('receipt', JSON.stringify(receipt, null, 2));
 
+	// Print tx hash
 	if (receipt.transactionHash) console.log(gray(`    tx hash: ${receipt.transactionHash}`));
 
+	// Print gas used
+	if (receipt.gasUsed) {
+		console.log(gray(`    gas used: ${receipt.gasUsed.toString()}`));
+	}
+
+	// Print emitted events
 	if (contract && receipt.logs && receipt.logs.length > 0) {
 		for (let i = 0; i < receipt.logs.length; i++) {
 			const log = receipt.logs[i];
