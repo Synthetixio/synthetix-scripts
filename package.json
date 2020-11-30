@@ -1,6 +1,6 @@
 {
 	"name": "@synthetixio/cli",
-	"version": "2.33.1",
+	"version": "2.33.2",
 	"description": "A set of cli utilities for the Synthetix protocol",
 	"main": "src/commands/interactive-ui.js",
 	"bin": {
@@ -37,7 +37,7 @@
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"synthetix": "2.33.1"
+		"synthetix": "2.33.2"
 	},
 	"devDependencies": {
 		"eslint": "7.1.0",
