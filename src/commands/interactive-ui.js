@@ -5,6 +5,8 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
+const package = require('../../package.json');
+const figlet = require('figlet');
 const levenshtein = require('js-levenshtein');
 const ethers = require('ethers');
 const inquirer = require('inquirer');
@@ -77,6 +79,20 @@ async function interactiveUi({
 
 	const deploymentData = JSON.parse(fs.readFileSync(deploymentFilePath));
 
+	async function figprint(msg, font) {
+		return new Promise((resolve, reject) => {
+			figlet.text(msg, { font }, function(err, res) {
+				if (err) {
+					reject(err);
+				}
+				resolve(res);
+			});
+		});
+	}
+	const msg = await figprint('SYNTHETIX-CLI', 'Slant')
+	console.log(green(msg));
+	console.log(red(`v${package.version}`));
+
 	// ------------------
 	// Confirmation
 	// ------------------
@@ -103,9 +119,7 @@ async function interactiveUi({
 	// Interaction
 	// -----------------
 
-	async function interact() {
-		console.log(green('\n* WHAT IS YOUR QUERY SPARTAN? ()==[:::::::::::::>'));
-
+	async function pickContract() {
 		// -----------------
 		// Pick a contract
 		// -----------------
@@ -120,6 +134,8 @@ async function interactiveUi({
 		prioritizeTarget('Synthetix');
 
 		async function searchTargets(matches, query = '') {
+			matches;
+
 			return new Promise(resolve => {
 				resolve(targets.filter(target => target.toLowerCase().includes(query.toLowerCase())));
 			});
@@ -129,7 +145,7 @@ async function interactiveUi({
 			{
 				type: 'autocomplete',
 				name: 'contractName',
-				message: 'Pick a contract:',
+				message: 'Pick a CONTRACT:',
 				source: (matches, query) => searchTargets(matches, query),
 			},
 		]);
@@ -158,217 +174,226 @@ async function interactiveUi({
 		// Pick a function
 		// -----------------
 
-		function combineNameAndType(items) {
-			const combined = [];
-			if (items && items.length > 0) {
-				items.map(item => {
-					if (item.name) combined.push(`${item.type} ${item.name}`);
-					else combined.push(item.type);
-				});
+		async function pickFunction() {
+
+			function combineNameAndType(items) {
+				const combined = [];
+				if (items && items.length > 0) {
+					items.map(item => {
+						if (item.name) combined.push(`${item.type} ${item.name}`);
+						else combined.push(item.type);
+					});
+				}
+
+				return combined;
 			}
 
-			return combined;
-		}
+			function reduceSignature(item) {
+				const inputs = combineNameAndType(item.inputs);
+				const inputPart = `${item.name}(${inputs.join(', ')})`;
 
-		function reduceSignature(item) {
-			const inputs = combineNameAndType(item.inputs);
-			const inputPart = `${item.name}(${inputs.join(', ')})`;
+				const outputs = combineNameAndType(item.outputs);
+				let outputPart = outputs.length > 0 ? ` returns(${outputs.join(', ')})` : '';
+				outputPart = item.stateMutability === 'view' ? ` view${outputPart}` : outputPart;
 
-			const outputs = combineNameAndType(item.outputs);
-			let outputPart = outputs.length > 0 ? ` returns(${outputs.join(', ')})` : '';
-			outputPart = item.stateMutability === 'view' ? ` view${outputPart}` : outputPart;
+				return `${inputPart}${outputPart}`;
+			}
 
-			return `${inputPart}${outputPart}`;
-		}
+			const escItem =  '↩ BACK';
 
-		const escItem =  '↩ BACK';
+			async function searchAbi(matches, query = '') {
+				matches;
 
-		async function searchAbi(matches, query = '') {
-			return new Promise(resolve => {
-				let abiMatches = source.abi.filter(item => {
-					if (item.name && item.type === 'function') {
-						return item.name.toLowerCase().includes(query.toLowerCase());
+				return new Promise(resolve => {
+					let abiMatches = source.abi.filter(item => {
+						if (item.name && item.type === 'function') {
+							return item.name.toLowerCase().includes(query.toLowerCase());
+						}
+						return false;
+					});
+
+					// Sort matches by proximity to query
+					abiMatches = abiMatches.sort((a, b) => {
+						const aProximity = levenshtein(a.name, query);
+						const bProximity = levenshtein(b.name, query);
+						return aProximity - bProximity;
+					});
+
+					const signatures = abiMatches.map(match => reduceSignature(match));
+					if (query === '') {
+						signatures.splice(0, 0, escItem);
 					}
-					return false;
+
+					resolve(signatures);
 				});
-
-				// Sort matches by proximity to query
-				abiMatches = abiMatches.sort((a, b) => {
-					const aProximity = levenshtein(a.name, query);
-					const bProximity = levenshtein(b.name, query);
-					return aProximity - bProximity;
-				});
-
-				const signatures = abiMatches.map(match => reduceSignature(match));
-				if (query === '') {
-					signatures.splice(0, 0, escItem);
-				}
-
-				resolve(signatures);
-			});
-		}
-
-		// Prompt function to call
-		const prompt = inquirer.prompt([
-			{
-				type: 'autocomplete',
-				name: 'abiItemSignature',
-				message: 'Pick a function:',
-				source: (matches, query) => searchAbi(matches, query),
-			},
-		]);
-		const { abiItemSignature } = await prompt;
-
-		if (abiItemSignature === escItem) {
-			prompt.ui.close();
-
-			await interact();
-		}
-
-		const abiItemName = abiItemSignature.split('(')[0];
-		const abiItem = source.abi.find(item => item.name === abiItemName);
-
-		// -----------------
-		// Process inputs
-		// -----------------
-
-		// Prompt inputs for function
-		const inputs = [];
-		if (abiItem.inputs.length > 0) {
-			for (const input of abiItem.inputs) {
-				const name = input.name || input.type;
-
-				let message = name;
-
-				const requiresBytes32Util = input.type.includes('bytes32');
-				const isArray = input.type.includes('[]');
-
-				if (requiresBytes32Util) {
-					message = `${message} (uses toBytes32${isArray ? ' - if array, use a,b,c syntax' : ''})`;
-				}
-
-				const answer = await inquirer.prompt([
-					{
-						type: 'input',
-						message,
-						name,
-					},
-				]);
-
-				let processed = answer[name];
-				console.log(gray('  > raw inputs:', processed));
-
-				if (isArray) {
-					processed = processed.split(',');
-				}
-
-				if (requiresBytes32Util) {
-					if (isArray) {
-						processed = processed.map(item => synthetix.toBytes32(item));
-					} else {
-						processed = synthetix.toBytes32(processed);
-					}
-				}
-				console.log(gray(`  > processed inputs (${isArray ? processed.length : '1'}):`, processed));
-
-				inputs.push(processed);
 			}
-		}
 
-		// -----------------
-		// Call function
-		// -----------------
-
-		const overrides = {
-			gasPrice: ethers.utils.parseUnits(`${gasPrice}`, 'gwei'),
-			gasLimit,
-		};
-
-		// Call function
-		let result, error;
-		if (abiItem.stateMutability === 'view') {
-			console.log(gray('  > Querying...'));
-
-			try {
-				result = await contract[abiItemName](...inputs);
-			} catch (err) {
-				error = err;
-			}
-		} else {
-			const { confirmation } = await inquirer.prompt([
+			// Prompt function to call
+			const prompt = inquirer.prompt([
 				{
-					type: 'confirm',
-					name: 'confirmation',
-					message: 'Send transaction?',
+					type: 'autocomplete',
+					name: 'abiItemSignature',
+					message: '>>> Pick a FUNCTION:',
+					source: (matches, query) => searchAbi(matches, query),
 				},
 			]);
-			if (!confirmation) {
-				await interact();
-				return;
+			const { abiItemSignature } = await prompt;
+
+			if (abiItemSignature === escItem) {
+				prompt.ui.close();
+
+				await pickContract();
 			}
 
-			console.log(gray(`  > Staging transaction... ${new Date()}`));
-			const txPromise = contract[abiItemName](...inputs, overrides);
+			const abiItemName = abiItemSignature.split('(')[0];
+			const abiItem = source.abi.find(item => item.name === abiItemName);
 
-			result = await stageTx({
-				txPromise,
-				provider,
-			});
+			// -----------------
+			// Process inputs
+			// -----------------
 
-			if (result.success) {
-				console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
+			// Prompt inputs for function
+			const inputs = [];
+			if (abiItem.inputs.length > 0) {
+				for (const input of abiItem.inputs) {
+					const name = input.name || input.type;
 
-				result = await runTx({
-					tx: result.tx,
+					let message = name;
+
+					const requiresBytes32Util = input.type.includes('bytes32');
+					const isArray = input.type.includes('[]');
+
+					if (requiresBytes32Util) {
+						message = `${message} (uses toBytes32${isArray ? ' - if array, use a,b,c syntax' : ''})`;
+					}
+
+					const answer = await inquirer.prompt([
+						{
+							type: 'input',
+							message,
+							name,
+						},
+					]);
+
+					let processed = answer[name];
+					console.log(gray('  > raw inputs:', processed));
+
+					if (isArray) {
+						processed = processed.split(',');
+					}
+
+					if (requiresBytes32Util) {
+						if (isArray) {
+							processed = processed.map(item => synthetix.toBytes32(item));
+						} else {
+							processed = synthetix.toBytes32(processed);
+						}
+					}
+					console.log(gray(`  > processed inputs (${isArray ? processed.length : '1'}):`, processed));
+
+					inputs.push(processed);
+				}
+			}
+
+			// -----------------
+			// Call function
+			// -----------------
+
+			const overrides = {
+				gasPrice: ethers.utils.parseUnits(`${gasPrice}`, 'gwei'),
+				gasLimit,
+			};
+
+			// Call function
+			let result, error;
+			if (abiItem.stateMutability === 'view') {
+				console.log(gray('  > Querying...'));
+
+				try {
+					result = await contract[abiItemName](...inputs);
+				} catch (err) {
+					error = err;
+				}
+			} else {
+				const { confirmation } = await inquirer.prompt([
+					{
+						type: 'confirm',
+						name: 'confirmation',
+						message: 'Send transaction?',
+					},
+				]);
+				if (!confirmation) {
+					await pickFunction();
+
+					return;
+				}
+
+				console.log(gray(`  > Staging transaction... ${new Date()}`));
+				const txPromise = contract[abiItemName](...inputs, overrides);
+
+				result = await stageTx({
+					txPromise,
 					provider,
-				})
+				});
 
 				if (result.success) {
-					result = result.receipt;
+					console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
+
+					result = await runTx({
+						tx: result.tx,
+						provider,
+					})
+
+					if (result.success) {
+						result = result.receipt;
+					} else {
+						error = result.error;
+					}
 				} else {
 					error = result.error;
 				}
-			} else {
-				error = result.error;
 			}
-		}
 
-		function printReturnedValue(value) {
-			if (ethers.BigNumber.isBigNumber(value)) {
-				return `${value.toString()} (${ethers.utils.formatEther(value)})`;
-			} else if (Array.isArray(value)) {
-				return value.map(item => `${item}`);
-			} else {
-				return value;
-			}
-		}
-
-		console.log(gray(`  > Transaction sent... ${new Date()}`));
-
-		if (error) {
-			logError(error);
-		} else {
-			logReceipt(result, contract);
-
-			if (abiItem.stateMutability === 'view' && result !== undefined) {
-				if (abiItem.outputs.length > 1) {
-					for (let i = 0; i < abiItem.outputs.length; i++) {
-						const output = abiItem.outputs[i];
-						console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result[i]));
-					}
+			function printReturnedValue(value) {
+				if (ethers.BigNumber.isBigNumber(value)) {
+					return `${value.toString()} (${ethers.utils.formatEther(value)})`;
+				} else if (Array.isArray(value)) {
+					return value.map(item => `${item}`);
 				} else {
-					const output = abiItem.outputs[0];
-					console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result));
+					return value;
 				}
 			}
+
+			console.log(gray(`  > Transaction sent... ${new Date()}`));
+
+			if (error) {
+				logError(error);
+			} else {
+				logReceipt(result, contract);
+
+				if (abiItem.stateMutability === 'view' && result !== undefined) {
+					if (abiItem.outputs.length > 1) {
+						for (let i = 0; i < abiItem.outputs.length; i++) {
+							const output = abiItem.outputs[i];
+							console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result[i]));
+						}
+					} else {
+						const output = abiItem.outputs[0];
+						console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result));
+					}
+				}
+			}
+
+			// Call indefinitely
+			await pickFunction();
 		}
 
-		// Call indefinitely
-		await interact();
+		// First function pick
+		await pickFunction();
 	}
 
-	// First call
-	await interact();
+	// First contract pick
+	await pickContract();
 }
 
 program
