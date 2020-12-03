@@ -5,6 +5,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
+const levenshtein = require('js-levenshtein');
 const ethers = require('ethers');
 const inquirer = require('inquirer');
 const autocomplete = require('inquirer-list-search-prompt');
@@ -184,11 +185,18 @@ async function interactiveUi({
 
 		async function searchAbi(matches, query = '') {
 			return new Promise(resolve => {
-				const abiMatches = source.abi.filter(item => {
+				let abiMatches = source.abi.filter(item => {
 					if (item.name && item.type === 'function') {
 						return item.name.toLowerCase().includes(query.toLowerCase());
 					}
 					return false;
+				});
+
+				// Sort matches by proximity to query
+				abiMatches = abiMatches.sort((a, b) => {
+					const aProximity = levenshtein(a.name, query);
+					const bProximity = levenshtein(b.name, query);
+					return aProximity - bProximity;
 				});
 
 				const signatures = abiMatches.map(match => reduceSignature(match));
