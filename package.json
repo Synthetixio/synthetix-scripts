@@ -37,7 +37,7 @@
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"synthetix": "2.34.1-ovm"
+		"synthetix": "2.34.2"
 	},
 	"devDependencies": {
 		"eslint": "7.1.0",
