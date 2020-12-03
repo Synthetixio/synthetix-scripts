@@ -5,7 +5,9 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 
+const branchName = require('current-git-branch');
 const package = require('../../package.json');
+const synthetixPackage = require('synthetix/package.json');
 const figlet = require('figlet');
 const levenshtein = require('js-levenshtein');
 const ethers = require('ethers');
@@ -79,6 +81,10 @@ async function interactiveUi({
 
 	const deploymentData = JSON.parse(fs.readFileSync(deploymentFilePath));
 
+	// ------------------
+	// Header
+	// ------------------
+
 	async function figprint(msg, font) {
 		return new Promise((resolve, reject) => {
 			figlet.text(msg, { font }, function(err, res) {
@@ -90,15 +96,27 @@ async function interactiveUi({
 		});
 	}
 	const msg = await figprint('SYNTHETIX-CLI', 'Slant')
+	const synthetixPath = './node_modules/synthetix';
+	const stats = fs.lstatSync(synthetixPath);
 	console.log(green(msg));
-	console.log(red(`v${package.version}`));
+	console.log(
+		green(`v${package.version}`),
+		green(`(Synthetix v${synthetixPackage.version})`),
+	);
+	if (stats.isSymbolicLink()) {
+		const realPath = fs.realpathSync(synthetixPath);
+		const branch = branchName({ altPath: realPath });
+		console.log(cyan(`LINKED to ${realPath}${branch ? ` on  ${branch}` : ''}`));
+	} else {
+		console.log(gray('not linked to a local synthetix project'));
+	}
 
 	// ------------------
 	// Confirmation
 	// ------------------
 
 	console.log('\n');
-	console.log(cyan('Please review this information before you interact with the system:'));
+	console.log(gray('Please review this information before you interact with the system:'));
 	console.log(gray('================================================================================'));
 	console.log(gray(`> Provider: ${providerUrl ? 'Custom provider' : 'Ethers default provider'}`));
 	console.log(gray(`> Network: ${network}`));
