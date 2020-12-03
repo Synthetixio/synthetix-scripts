@@ -106,7 +106,7 @@ async function interactiveUi({
 	if (stats.isSymbolicLink()) {
 		const realPath = fs.realpathSync(synthetixPath);
 		const branch = branchName({ altPath: realPath });
-		console.log(cyan(`LINKED to ${realPath}${branch ? ` on  ${branch}` : ''}`));
+		console.log(cyan(`LINKED to ${realPath}${branch ? ` on ${branch}` : ''}`));
 	} else {
 		console.log(gray('not linked to a local synthetix project'));
 	}
