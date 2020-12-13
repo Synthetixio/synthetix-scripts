@@ -73,6 +73,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	const Synthetix = getContract({
 		contract: 'Synthetix',
+		source: useOvm ? 'MintableSynthetix' : 'Synthetix',
 		network,
 		useOvm,
 		provider,
@@ -97,6 +98,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	const DebtCache = getContract({
 		contract: 'DebtCache',
+		source: useOvm ? 'RealtimeDebtCache' : 'DebtCache',
 		network,
 		useOvm,
 		provider,
