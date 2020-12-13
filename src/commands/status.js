@@ -340,6 +340,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 	for (const currencyKey of currencyKeys) {
 		await logRate(currencyKey);
 	}
+	await logRate(formatBytes32String('SNX'));
 }
 program
 	.description('Query state of the system on any network')
