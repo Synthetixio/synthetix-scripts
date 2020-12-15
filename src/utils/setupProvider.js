@@ -12,13 +12,13 @@ function setupProvider({ providerUrl, privateKey, publicKey }) {
 	if (publicKey) {
 		wallet = provider.getSigner(publicKey);
 		wallet.address = publicKey;
-	} else {
-		wallet = new ethers.Wallet(privateKey || ethers.Wallet.createRandom().privateKey, provider);
+	} else if (privateKey) {
+		wallet = new ethers.Wallet(privateKey, provider);
 	}
 
 	return {
 		provider,
-		wallet,
+		wallet: wallet || undefined,
 	};
 }
 
