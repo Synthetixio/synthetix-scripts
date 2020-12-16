@@ -68,7 +68,12 @@ async function interactiveUi({
 	}
 
 	if (!providerUrl && process.env.PROVIDER_URL) {
-		providerUrl = process.env.PROVIDER_URL.replace('network', network);
+		const envProviderUrl = process.env.PROVIDER_URL;
+		if (envProviderUrl.includes('infura')) {
+			providerUrl = process.env.PROVIDER_URL.replace('network', network);
+		} else {
+			providerUrl = envProviderUrl;
+		}
 	}
 
 	const { provider, wallet } = setupProvider({
@@ -118,7 +123,7 @@ async function interactiveUi({
 	console.log('\n');
 	console.log(gray('Please review this information before you interact with the system:'));
 	console.log(gray('================================================================================'));
-	console.log(gray(`> Provider: ${providerUrl ? 'Custom provider' : 'Ethers default provider'}`));
+	console.log(gray(`> Provider: ${providerUrl ? `${providerUrl.slice(0, 25)}...` : 'Ethers default provider'}`));
 	console.log(gray(`> Network: ${network}`));
 	console.log(gray(`> Gas price: ${gasPrice}`));
 	console.log(gray(`> OVM: ${useOvm}`));
