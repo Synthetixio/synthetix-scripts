@@ -102,24 +102,14 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		network,
 		useOvm,
 		provider,
-		deploymentPath
+		deploymentPath,
 	});
 
 	const info = await DebtCache.cacheInfo();
 
-	logItem(
-		'DebgCache.info.isInvalid',
-		info.isInvalid,
-		1,
-		info.isInvalid ? bgRed : undefined,
-	);
+	logItem('DebgCache.info.isInvalid', info.isInvalid, 1, info.isInvalid ? bgRed : undefined);
 
-	logItem(
-		'DebgCache.info.isStale',
-		info.isStale,
-		1,
-		info.isStale ? bgRed : undefined,
-	);
+	logItem('DebgCache.info.isStale', info.isStale, 1, info.isStale ? bgRed : undefined);
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ SynthetixState ~~~~ */
@@ -295,7 +285,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	const rateStalePeriod = await SystemSettings.rateStalePeriod();
 
-	logItem(`rateStalePeriod`, rateStalePeriod.toString());
+	logItem('rateStalePeriod', rateStalePeriod.toString());
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ ExchangeRates ~~~~ */

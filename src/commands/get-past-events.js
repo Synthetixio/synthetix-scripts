@@ -44,7 +44,13 @@ async function pastEvents({
 	/* ~~~~~~~~~~~~~~~~~~~ */
 
 	const events = await getPastEvents({ contract, eventName, provider, fromBlock, toBlock });
-	console.log('events', events);
+
+	console.log(
+		'events',
+		await Promise.all(
+			events.map(evt => provider.getTransaction(evt.transactionHash).then(receipt => Object.assign(evt, { receipt }))),
+		),
+	);
 
 	let count = events.length;
 	if (dedup) {

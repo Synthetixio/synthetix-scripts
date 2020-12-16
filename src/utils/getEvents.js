@@ -8,13 +8,16 @@ async function getPastEvents({ contract, eventName, provider, fromBlock, toBlock
 		if (!filter) throw new Error(`Event ${eventName} not found in contract abi.`);
 	}
 
-	filter.fromBlock = fromBlock || (await provider.getBlockNumber()) - 10000;
-	filter.toBlock = toBlock || 'latest';
+	filter.fromBlock = +fromBlock || 'earliest';
+	filter.toBlock = +toBlock || 'latest';
 
 	console.log(gray(`  > Querying events ${eventName || '*'}, from: ${filter.fromBlock} to ${filter.toBlock}`));
 
 	let logs = await provider.getLogs(filter);
-	logs = logs.map(log => contract.interface.parseLog(log));
+
+	logs = logs.map(log =>
+		Object.assign({ transactionHash: log.transactionHash, logIndex: log.logIndex }, contract.interface.parseLog(log)),
+	);
 
 	return logs;
 }
