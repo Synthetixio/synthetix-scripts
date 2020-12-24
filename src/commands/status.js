@@ -315,12 +315,12 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 	const logRate = async currencyKey => {
 		const currency = toUtf8String(currencyKey);
 		const rate = await ExchangeRates.rateForCurrency(currencyKey, blockOptions);
-		const isInvalid = await ExchangeRates.rateIsInvalid(currencyKey);
+		const isInvalid = await ExchangeRates.rateIsInvalid(currencyKey, blockOptions);
 		const updated = await ExchangeRates.lastRateUpdateTimes(currencyKey, blockOptions);
 		const sinceUpdate = Math.floor(now - +updated.toString() / 60);
 
 		logItem(
-			`${currency} rate:`,
+			`${currency} rate`,
 			`${formatEther(rate)} (Updated ${sinceUpdate} minutes ago)`,
 			1,
 			isInvalid ? bgRed : undefined,
