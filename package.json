@@ -1,6 +1,6 @@
 {
 	"name": "@synthetixio/cli",
-	"version": "2.35.0-ovm",
+	"version": "2.35.3",
 	"description": "A set of cli utilities for the Synthetix protocol",
 	"main": "src/commands/interactive-ui.js",
 	"bin": {
