@@ -302,7 +302,7 @@ async function interactiveUi({
 					console.log(gray('  > raw inputs:', processed));
 
 					if (isArray) {
-						processed = processed.split(',');
+						processed = JSON.parse(processed.split(','));
 					}
 
 					if (requiresBytes32Util) {
