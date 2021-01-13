@@ -100,7 +100,7 @@ async function interactiveUi({
 			});
 		});
 	}
-	const msg = await figprint(`${useOvm ? '- * =* ' : ''}SYNTHETIX-CLI`, 'Slant')
+	const msg = await figprint(`${useOvm ? '-=* ' : ''}SYNTHETIX-CLI`, 'Slant')
 	const synthetixPath = './node_modules/synthetix';
 	const stats = fs.lstatSync(synthetixPath);
 	console.log(useOvm ? red(msg) : green(msg));
