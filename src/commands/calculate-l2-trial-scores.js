@@ -25,8 +25,11 @@ async function calculateScores({
 		data = JSON.parse(fs.readFileSync(outputFile));
 	} else {
 		data = {
-			totalEscrowedSNX: '0',
-			numWithdrawers: '0',
+			totals: {
+				escrowedSNX: '0',
+				numWithdrawers: '0',
+				numEscrowsChecked: '0',
+			},
 			accounts: {}
 		};
 	}
@@ -93,21 +96,22 @@ async function calculateScores({
 
 	// Read escrowed SNX amount for each account, and store it in the data file
 	console.log(gray(`2) Checking escrowed SNX for each account that withdrew...`));
+	data.numEscrowsChecked = 0;
 	for (let i = 0; i < numWithdrawers; i++) {
 		const account = withdrawers[i];
+		console.log(gray(`  > ${i + 1}/${numWithdrawers} - ${account}`));
+		data.numEscrowsChecked++;
 
-		// Skip if an entry has already been written
-		if (data.accounts[account]) {
-			continue;
+		// Read escrowed amount if there is no entry
+		if (!data.accounts[account]) {
+			const escrowed = await RewardEscrow.balanceOf(account);
+			console.log(`    > Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`);
+
+			data.accounts[account] = escrowed.toString();
+			data.totals.escrowedSNX = ethers.BigNumber.from(data.totals.escrowedSNX).add(escrowed).toString();
 		}
 
-		// Read escrowed amount
-		const escrowed = await RewardEscrow.balanceOf(account);
-		console.log(gray(`  > ${i}/${numWithdrawers} - ${account}: ${ethers.utils.formatEther(escrowed)} SNX`));
-
 		// Store it immediately
-		data.accounts[account] = escrowed.toString();
-		data.totalEscrowedSNX = ethers.BigNumber.from(data.totalEscrowedSNX).add(escrowed).toString();
 		fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
 	}
 }
