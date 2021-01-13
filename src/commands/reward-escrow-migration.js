@@ -14,7 +14,7 @@ const { setupProvider } = require('../utils/setupProvider');
 async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson, useFork, privateKey }) {
 	console.log(gray(`Running in network: ${network}`));
 
-	const accounts = JSON.parse(fs.readFileSync(accountJson));
+	const accounts = JSON.parse(fs.readFileSync(accountJson)); //.slice(0, 15);
 
 	console.log(gray('Found'), yellow(accounts.length), gray('accounts'));
 
@@ -60,8 +60,6 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 		network,
 		wallet,
 	});
-
-	const x = 0;
 
 	const accountsWithDetail = [];
 	for (const { address } of accounts) {
@@ -109,9 +107,6 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 			hasEscrowBalance: alreadyEscrowed,
 			numVestingEntries,
 		});
-
-		// x++;
-		// if (x > 10) break;
 	}
 
 	const migrationPageSize = 500;
@@ -134,16 +129,12 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 	// Now take all the vesting entries and flatten them
 	let accountsToImportVestingEntries = [];
 
-	for (const { address, schedule, numVestingEntries } of accountsWithDetail) {
-		if (numVestingEntries !== schedule.length) {
-			console.log(
-				red('Warning: address '),
-				yellow(address),
-				red('already has'),
-				yellow(numVestingEntries),
-				red('instead of'),
-				yellow(schedule.length),
-			);
+	for (const { address, schedule, numVestingEntries, pending } of accountsWithDetail) {
+		// if (numVestingEntries > 0 && numVestingEntries !== schedule.length) {
+		// TODO determine which ones are missing
+		// } else
+		if (!pending) {
+			console.log(gray('Skipping entries for'), yellow(address), gray('as no longer pending'));
 			continue;
 		}
 		accountsToImportVestingEntries = accountsToImportVestingEntries.concat(
@@ -163,6 +154,34 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 				entries.map(({ address }) => address),
 				entries.map(({ timestamp }) => timestamp),
 				entries.map(({ entry }) => entry),
+			);
+		}
+	}
+
+	// now run through and make sure everything is kosher
+	for (const { address, schedule } of accountsWithDetail) {
+		const totalBalancePendingMigration = +(await newRewardEscrow.totalBalancePendingMigration(address));
+		// const alreadyEscrowed = +(await newRewardEscrow.totalEscrowedAccountBalance(address)) > 0;
+		const numVestingEntries = +(await newRewardEscrow.numVestingEntries(address));
+
+		if (totalBalancePendingMigration !== 0) {
+			console.log(
+				red('Error: address'),
+				yellow(address),
+				red('still has'),
+				yellow(totalBalancePendingMigration),
+				red('migration left'),
+			);
+		}
+
+		if (numVestingEntries !== schedule.length) {
+			console.log(
+				red('Error: address '),
+				yellow(address),
+				red('only has'),
+				yellow(numVestingEntries),
+				red('instead of'),
+				yellow(schedule.length),
 			);
 		}
 	}
