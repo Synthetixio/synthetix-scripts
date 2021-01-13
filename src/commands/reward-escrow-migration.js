@@ -11,20 +11,7 @@ const synthetix = require('synthetix');
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 
-async function rewardEscrowMigration({
-	network,
-	providerUrl,
-	dryRun,
-	accountJson,
-	useFork,
-	privateKey,
-	// contractName,
-	// sourceName,
-	// eventName,
-	// fromBlock,
-	// toBlock,
-	// dedup,
-}) {
+async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson, useFork, privateKey }) {
 	console.log(gray(`Running in network: ${network}`));
 
 	const accounts = JSON.parse(fs.readFileSync(accountJson));
@@ -33,7 +20,6 @@ async function rewardEscrowMigration({
 
 	const { getUsers } = synthetix.wrap({
 		network,
-		// useOvm,
 		fs,
 		path,
 	});
@@ -75,7 +61,7 @@ async function rewardEscrowMigration({
 		wallet,
 	});
 
-	let x = 0;
+	const x = 0;
 
 	const accountsWithDetail = [];
 	for (const { address } of accounts) {
@@ -124,8 +110,8 @@ async function rewardEscrowMigration({
 			numVestingEntries,
 		});
 
-		x++;
-		if (x > 10) break;
+		// x++;
+		// if (x > 10) break;
 	}
 
 	const migrationPageSize = 500;
