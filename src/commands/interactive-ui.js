@@ -14,7 +14,7 @@ const ethers = require('ethers');
 const inquirer = require('inquirer');
 const autocomplete = require('inquirer-list-search-prompt');
 const program = require('commander');
-const { yellow, green, red, cyan, gray, magenta } = require('chalk');
+const { yellow, green, red, cyan, gray } = require('chalk');
 const synthetix = require('synthetix');
 
 const { setupProvider } = require('../utils/setupProvider');
@@ -100,10 +100,10 @@ async function interactiveUi({
 			});
 		});
 	}
-	const msg = await figprint('SYNTHETIX-CLI', 'Slant')
+	const msg = await figprint(`${useOvm ? '- * =* ' : ''}SYNTHETIX-CLI`, 'Slant')
 	const synthetixPath = './node_modules/synthetix';
 	const stats = fs.lstatSync(synthetixPath);
-	console.log(useOvm ? magenta(msg) : green(msg));
+	console.log(useOvm ? red(msg) : green(msg));
 	console.log(
 		green(`v${package.version}`),
 		green(`(Synthetix v${synthetixPackage.version})`),
