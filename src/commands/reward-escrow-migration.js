@@ -10,13 +10,10 @@ const synthetix = require('synthetix');
 
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
+const { getPastEvents } = require('../utils/getEvents');
 
 async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson, useFork, privateKey }) {
 	console.log(gray(`Running in network: ${network}`));
-
-	const accounts = JSON.parse(fs.readFileSync(accountJson)); //.slice(0, 15);
-
-	console.log(gray('Found'), yellow(accounts.length), gray('accounts'));
 
 	const { getUsers } = synthetix.wrap({
 		network,
@@ -55,6 +52,17 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 		provider,
 	});
 
+	const vestingEntryEvents = await getPastEvents({
+		contract: oldRewardEscrow,
+		eventName: 'VestingEntryCreated',
+		network,
+		provider,
+	});
+
+	const accounts = Array.from(new Set(vestingEntryEvents.map(({ args: [address] }) => address)));
+
+	console.log(gray('Found'), yellow(accounts.length), gray('accounts'));
+
 	const newRewardEscrow = await getContract({
 		contract: 'RewardEscrowV2',
 		network,
@@ -62,7 +70,7 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 	});
 
 	const accountsWithDetail = [];
-	for (const { address } of accounts) {
+	for (const address of accounts) {
 		const alreadyMigratedPendingVestedImport = +(await newRewardEscrow.totalBalancePendingMigration(address)) > 0;
 		const alreadyEscrowed = +(await newRewardEscrow.totalEscrowedAccountBalance(address)) > 0;
 		const numVestingEntries = +(await newRewardEscrow.numVestingEntries(address));
@@ -189,10 +197,9 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 
 program
 	.description('Reward Escrow Migration')
-	.requiredOption('-a, --account-json <value>', 'The accounts that hold')
+	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
 	.option('-f, --use-fork', 'Use a local fork', false)
 	.option('-k, --private-key <value>', 'Private key to use to sign txs')
-	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
 	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-r, --dry-run', 'Run as a dry-run', false)
 	.action(async (...args) => {
