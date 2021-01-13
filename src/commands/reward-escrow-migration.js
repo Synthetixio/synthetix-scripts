@@ -1,18 +1,5 @@
 #!/usr/bin/env node
 
-//  fetch all reward escrow holdres
-
-//  for each
-
-//    if RewardEscrowV2.totalBalancePendingMigration(account) > 0 || totalEscrowedAccountBalance > 0 then already imported
-
-//    else add to list
-
-//  in batches of 500
-
-//      invoke RewardEscrowV2.migrateAccountEscrowBalances(accounts, escrowBalances, vestedBalances)
-
-//  now for
 require('dotenv').config();
 
 const fs = require('fs');
