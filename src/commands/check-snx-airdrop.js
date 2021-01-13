@@ -104,7 +104,7 @@ async function airdrop({ inFilePath, network, useOvm, providerUrl, useFork }) {
 }
 
 program
-	.description('Transfer SNX to a set of addresses specified in a JSON file')
+	.description('Checks pending SNX transfers against a set of addresses specified in a JSON file')
 	.option('-f, --use-fork', 'Use a local fork', false)
 	.option('-i, --in-file-path <value>', 'The path to the JSON file containing the target addresses')
 	.option('-n, --network <value>', 'The network to run off.', x => x.toLowerCase(), 'mainnet')
