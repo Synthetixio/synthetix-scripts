@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+require('dotenv').config();
 
 const program = require('commander');
 const { red } = require('chalk');
@@ -22,7 +23,14 @@ async function pastEvents({
 	/* ~~~~~~ Input ~~~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~ */
 
-	providerUrl = providerUrl.replace('network', network);
+	if (!providerUrl && process.env.PROVIDER_URL) {
+		const envProviderUrl = process.env.PROVIDER_URL;
+		if (envProviderUrl.includes('infura')) {
+			providerUrl = process.env.PROVIDER_URL.replace('network', network);
+		} else {
+			providerUrl = envProviderUrl;
+		}
+	}
 	if (!providerUrl) throw new Error('Cannot set up a provider.');
 
 	/* ~~~~~~~~~~~~~~~~~~~ */
