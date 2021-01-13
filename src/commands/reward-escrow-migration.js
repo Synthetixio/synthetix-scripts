@@ -5,6 +5,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const program = require('commander');
+const ethers = require('ethers');
 const { red, gray, yellow } = require('chalk');
 const synthetix = require('synthetix');
 
@@ -12,7 +13,7 @@ const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 const { getPastEvents } = require('../utils/getEvents');
 
-async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson, useFork, privateKey }) {
+async function rewardEscrowMigration({ network, providerUrl, dryRun, useFork, privateKey }) {
 	console.log(gray(`Running in network: ${network}`));
 
 	const { getUsers } = synthetix.wrap({
@@ -56,7 +57,7 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 		contract: oldRewardEscrow,
 		eventName: 'VestingEntryCreated',
 		network,
-		provider,
+		provider: new ethers.providers.JsonRpcProvider(process.env.PROVIDER_URL.replace('network', network)), // can't use a fork to load events for some reason
 	});
 
 	const accounts = Array.from(new Set(vestingEntryEvents.map(({ args: [address] }) => address)));
@@ -71,14 +72,14 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 
 	const accountsWithDetail = [];
 	for (const address of accounts) {
-		const alreadyMigratedPendingVestedImport = +(await newRewardEscrow.totalBalancePendingMigration(address)) > 0;
 		const alreadyEscrowed = +(await newRewardEscrow.totalEscrowedAccountBalance(address)) > 0;
-		const numVestingEntries = +(await newRewardEscrow.numVestingEntries(address));
 
-		if (alreadyMigratedPendingVestedImport) {
-			console.log(gray('Note:'), yellow(address), gray('already migrated pending entry import'));
-		} else if (alreadyEscrowed) {
-			console.log(gray('Note:'), yellow(address), gray('escrow amounts already exist'));
+		if (alreadyEscrowed) {
+			console.log(
+				gray('Note:'),
+				yellow(address),
+				gray('escrow amounts already exist. It will NOT be added to the migrate call.'),
+			);
 		}
 
 		const [balance, vested, flatSchedule] = await Promise.all([
@@ -111,42 +112,58 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 			balance: balance.toString(),
 			vested: vested.toString(),
 			schedule,
-			pending: alreadyMigratedPendingVestedImport,
 			hasEscrowBalance: alreadyEscrowed,
-			numVestingEntries,
 		});
 	}
 
 	const migrationPageSize = 500;
-	const accountsToMigrate = accountsWithDetail.filter(({ pending, hasEscrowBalance }) => !pending && !hasEscrowBalance);
+	const accountsToMigrate = accountsWithDetail.filter(({ hasEscrowBalance }) => !hasEscrowBalance);
+
+	const dryRunOutput = { migratedAccounts: [], importedEntries: [] };
 
 	// Do the migrateAccountEscrowBalances() in large batches
 	for (let i = 0; i < accountsToMigrate.length; i += migrationPageSize) {
 		const accounts = accountsToMigrate.slice(i, i + migrationPageSize);
-		console.log(gray('Migrating'), yellow(accounts.length), 'accounts');
+		console.log(gray('Migrating'), yellow(accounts.length), gray('accounts'));
 		if (dryRun) {
-			console.log(gray('[DRY-RUN] Migrating', require('util').inspect(accounts, false, null, true)));
+			dryRunOutput.migratedAccounts = dryRunOutput.migratedAccounts.concat(accounts);
+		} else {
+			await newRewardEscrow.migrateAccountEscrowBalances(
+				accounts.map(({ address }) => address),
+				accounts.map(({ balance }) => balance),
+				accounts.map(({ vested }) => vested),
+			);
 		}
-		await newRewardEscrow.migrateAccountEscrowBalances(
-			accounts.map(({ address }) => address),
-			accounts.map(({ balance }) => balance),
-			accounts.map(({ vested }) => vested),
-		);
 	}
 
-	// Now take all the vesting entries and flatten them
+	// Now take all the vesting entries, check they aren't already in and flatten them
 	let accountsToImportVestingEntries = [];
 
-	for (const { address, schedule, numVestingEntries, pending } of accountsWithDetail) {
-		// if (numVestingEntries > 0 && numVestingEntries !== schedule.length) {
-		// TODO determine which ones are missing
-		// } else
-		if (!pending) {
-			console.log(gray('Skipping entries for'), yellow(address), gray('as no longer pending'));
+	for (const { address, schedule } of accountsWithDetail) {
+		const alreadyMigratedPendingVestedImport = +(await newRewardEscrow.totalBalancePendingMigration(address)) > 0;
+
+		if (!dryRun && !alreadyMigratedPendingVestedImport) {
+			console.log(gray('Skipping entries for'), yellow(address), gray('as no longer pending.'));
 			continue;
 		}
+
+		// now fetch all new vesting entries that have been imported
+		const entryIDsForAccount = await newRewardEscrow.getVestingSchedules(
+			address,
+			'0',
+			(schedule.length + 1).toString(),
+		);
+
+		// now only add those entries that cannot already be found
 		accountsToImportVestingEntries = accountsToImportVestingEntries.concat(
-			schedule.map(_ => Object.assign({ address }, _)),
+			schedule
+				.filter(
+					({ timestamp, entry }) =>
+						!entryIDsForAccount.find(
+							({ endTime, escrowAmount }) => endTime.toString() === timestamp && escrowAmount === entry,
+						),
+				)
+				.map(_ => Object.assign({ address }, _)),
 		);
 	}
 
@@ -156,7 +173,7 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 		const entries = accountsToImportVestingEntries.slice(i, i + entryBatchSize);
 		console.log(gray('Importing vesting entries'), yellow(entries.length));
 		if (dryRun) {
-			console.log(gray('[DRY-RUN] Importing', require('util').inspect(entries, false, null, true)));
+			dryRunOutput.importedEntries = dryRunOutput.importedEntries.concat(entries);
 		} else {
 			await newRewardEscrow.importVestingSchedule(
 				entries.map(({ address }) => address),
@@ -166,11 +183,20 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 		}
 	}
 
+	if (dryRun) {
+		fs.writeFileSync(`rewards-out-dry-run-${network}.json`, JSON.stringify(dryRunOutput, null, 2));
+		process.exit();
+	}
+
 	// now run through and make sure everything is kosher
-	for (const { address, schedule } of accountsWithDetail) {
+
+	console.log(gray('Now performing final checks.'));
+
+	for (const { address, balance, vested, schedule } of accountsWithDetail) {
 		const totalBalancePendingMigration = +(await newRewardEscrow.totalBalancePendingMigration(address));
-		// const alreadyEscrowed = +(await newRewardEscrow.totalEscrowedAccountBalance(address)) > 0;
 		const numVestingEntries = +(await newRewardEscrow.numVestingEntries(address));
+		const totalEscrowedAccountBalance = (await newRewardEscrow.totalEscrowedAccountBalance(address)).toString();
+		const totalVestedAccountBalance = (await newRewardEscrow.totalVestedAccountBalance(address)).toString();
 
 		if (totalBalancePendingMigration !== 0) {
 			console.log(
@@ -186,13 +212,45 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, accountJson
 			console.log(
 				red('Error: address '),
 				yellow(address),
-				red('only has'),
+				red('has vesting entries length'),
 				yellow(numVestingEntries),
 				red('instead of'),
 				yellow(schedule.length),
 			);
 		}
+
+		if (totalEscrowedAccountBalance !== balance) {
+			console.log(
+				red('Error: address '),
+				yellow(address),
+				red('has mismatched total escrowed balance'),
+				yellow(totalEscrowedAccountBalance),
+				red('instead of'),
+				yellow(balance),
+			);
+		}
+
+		if (totalVestedAccountBalance !== vested) {
+			console.log(
+				red('Error: address '),
+				yellow(address),
+				red('has mismatched total vested'),
+				yellow(totalVestedAccountBalance),
+				red('instead of'),
+				yellow(vested),
+			);
+		}
 	}
+
+	// now check total
+	const newTotalBalance = +(await newRewardEscrow.totalEscrowedBalance());
+	const oldTotalBalance = +(await oldRewardEscrow.totalEscrowedBalance());
+
+	if (newTotalBalance !== oldTotalBalance) {
+		console.log(red('Error: total mismatch'), yellow(newTotalBalance), red('versus older'), yellow(oldTotalBalance));
+	}
+
+	console.log(gray('Final checks complete.'));
 }
 
 program
