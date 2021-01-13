@@ -19,7 +19,7 @@ async function calculateScores({
 	if (!outputFile) throw new Error('Please specify a JSON output file');
 
 	// Retrieve the output data file
-	// Create output file if it doesn't exit
+	// Create the file if it doesn't exist
 	let data;
 	if (fs.existsSync(outputFile)) {
 		data = JSON.parse(fs.readFileSync(outputFile));
@@ -111,7 +111,7 @@ async function calculateScores({
 			data.totals.escrowedSNX = ethers.BigNumber.from(data.totals.escrowedSNX).add(escrowed).toString();
 		}
 
-		// Store it immediately
+		// Store the data immediately
 		fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
 	}
 }
