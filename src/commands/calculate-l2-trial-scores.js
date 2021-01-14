@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const fs = require('fs');
-const { wrap } = require('synthetix');
 const path = require('path');
+const { wrap } = require('synthetix');
 const program = require('commander');
 const ethers = require('ethers');
 const { gray, red } = require('chalk');
