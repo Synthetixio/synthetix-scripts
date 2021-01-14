@@ -27,7 +27,8 @@ async function calculateScores({
 			totals: {
 				totalEscrowedSNX: '0',
 				accountsThatWithdrew: '0',
-				escrowedBalancedChecked: '0',
+				withdrawals: '0',
+				escrowedBalancesChecked: '0',
 			},
 			accounts: {}
 		};
@@ -80,8 +81,8 @@ async function calculateScores({
 	}
 
 	// Retrieve all addresses that initiated a withdrawal
-	const withdrawers = allEvents.map(event => event.args.account);
-	data.totals.accountsThatWithdrew = withdrawers.length;
+	const withdrawals = allEvents.map(event => event.args.account);
+	data.totals.withdrawals = withdrawals.length;
 	fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
 
 	// Connect to the RewardEscrow contract
@@ -94,25 +95,27 @@ async function calculateScores({
 
 	// Read escrowed SNX amount for each account, and store it in the data file
 	console.log(gray(`2) Checking escrowed SNX for each account that withdrew...`));
-	for (let i = 0; i < data.totals.accountsThatWithdrew; i++) {
-		const account = withdrawers[i];
-		console.log(gray(`  > ${i + 1}/${data.totals.accountsThatWithdrew} - ${account}`));
+	for (let i = 0; i < data.totals.withdrawals; i++) {
+		const account = withdrawals[i];
+		console.log(gray(`  > ${i + 1}/${data.totals.withdrawals} - ${account}`));
 
 		// Read escrowed amount if there is no entry
-		if (!data.accounts[account]) {
-			const accountData = {
-				distributedSNX: '0'
-			};
+		let accountData;
+		if (data.accounts[account]) accountData = data.accounts[account];
+		else accountData = {
+			escrowedSNX: '0',
+			distributedSNX: '0',
+		};
 
-			const escrowed = await RewardEscrow.balanceOf(account);
-			console.log(gray(`    ⮑  Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`));
-			data.totals.escrowedBalancedChecked++;
+		const escrowed = await RewardEscrow.balanceOf(account);
+		console.log(gray(`    ⮑  Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`));
+		data.totals.escrowedBalancesChecked++;
 
-			accountData.escrowedSNX = escrowed.toString();
-			data.accounts[account] = accountData;
+		accountData.escrowedSNX = escrowed.toString();
+		data.accounts[account] = accountData;
 
-			data.totals.totalEscrowedSNX = ethers.BigNumber.from(data.totals.totalEscrowedSNX).add(escrowed).toString();
-		}
+		data.totals.totalEscrowedSNX = ethers.BigNumber.from(data.totals.totalEscrowedSNX).add(escrowed).toString();
+		data.totals.accountsThatWithdrew = Object.keys(data.accounts).length;
 
 		// Store the data immediately
 		fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
