@@ -81,7 +81,12 @@ async function calculateScores({
 	}
 
 	// Retrieve all addresses that initiated a withdrawal
-	const withdrawals = allEvents.map(event => event.args.account);
+	const withdrawals = allEvents.map(event => {
+		return {
+			account: event.args.account,
+			amount: event.args.amount,
+		}
+	});
 	data.totals.withdrawals = withdrawals.length;
 	fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
 
@@ -94,12 +99,12 @@ async function calculateScores({
 	});
 
 	// Read escrowed SNX amount for each account, and store it in the data file
-	console.log(gray(`2) Checking escrowed SNX for each account that withdrew...`));
+	console.log(gray(`2) Checking escrowed SNX for each withdrawal event...`));
 	for (let i = 0; i < data.totals.withdrawals; i++) {
-		const account = withdrawals[i];
-		console.log(gray(`  > ${i + 1}/${data.totals.withdrawals} - ${account}`));
+		const account = withdrawals[i].account;
+		console.log(gray(`  > Withdrawal ${i + 1}/${data.totals.withdrawals} - ${account}`));
 
-		// Read escrowed amount if there is no entry
+		// Create entry for account
 		let accountData;
 		if (data.accounts[account]) accountData = data.accounts[account];
 		else accountData = {
@@ -107,11 +112,14 @@ async function calculateScores({
 			distributedSNX: '0',
 		};
 
-		const escrowed = await RewardEscrow.balanceOf(account);
-		console.log(gray(`    ⮑  Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`));
-		data.totals.escrowedBalancesChecked++;
+		// Only read escrow balance if there is no entry for this account
+		if (!data.accounts[accont]) {
+			const escrowed = await RewardEscrow.balanceOf(account);
+			console.log(gray(`    ⮑  Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`));
+			data.totals.escrowedBalancesChecked++;
+			accountData.escrowedSNX = escrowed.toString();
+		}
 
-		accountData.escrowedSNX = escrowed.toString();
 		data.accounts[account] = accountData;
 
 		data.totals.totalEscrowedSNX = ethers.BigNumber.from(data.totals.totalEscrowedSNX).add(escrowed).toString();
