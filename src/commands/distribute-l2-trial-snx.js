@@ -133,7 +133,7 @@ async function distributeSNX({
 			console.log(yellow(`    ⮑  Sending ${ethers.utils.formatEther(rewardAmount)} SNX...`));
 
 			let result = await stageTx({
-				txPromise: Synthetix.transfer(account, ethers.utils.parseEther(`${rewardAmount}`), overrides),
+				txPromise: Synthetix.transfer(account, rewardAmount, overrides),
 				provider,
 			});
 			result = await runTx({
