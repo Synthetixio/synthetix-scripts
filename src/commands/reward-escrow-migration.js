@@ -6,14 +6,16 @@ const fs = require('fs');
 const path = require('path');
 const program = require('commander');
 const ethers = require('ethers');
-const { red, gray, yellow } = require('chalk');
+const { formatEther, parseUnits } = ethers.utils;
+const { red, gray, yellow, green } = require('chalk');
 const synthetix = require('synthetix');
+const { stageTx, runTx } = require('../utils/runTx');
 
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 const { getPastEvents } = require('../utils/getEvents');
 
-async function rewardEscrowMigration({ network, providerUrl, dryRun, useFork, privateKey }) {
+async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun, useFork, privateKey, gasPrice }) {
 	console.log(gray(`Running in network: ${network}`));
 
 	const { getUsers } = synthetix.wrap({
@@ -47,28 +49,69 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, useFork, pr
 	const { wallet, provider } = await setupProvider({ providerUrl, privateKey, publicKey });
 
 	console.log(gray('Using wallet with address'), yellow(wallet.address));
+
 	const oldRewardEscrow = await getContract({
 		contract: 'RewardEscrow',
 		network,
 		provider,
 	});
 
-	const vestingEntryEvents = await getPastEvents({
-		contract: oldRewardEscrow,
-		eventName: 'VestingEntryCreated',
-		network,
-		provider: new ethers.providers.JsonRpcProvider(process.env.PROVIDER_URL.replace('network', network)), // can't use a fork to load events for some reason
-	});
+	let accounts;
 
-	const accounts = Array.from(new Set(vestingEntryEvents.map(({ args: [address] }) => address)));
+	if (network === 'mainnet') {
+		if (!accountJson) {
+			throw new Error('AccountJSON is required when on mainnet');
+		}
 
-	console.log(gray('Found'), yellow(accounts.length), gray('accounts'));
+		accounts = JSON.parse(fs.readFileSync(accountJson));
+		console.log(gray('Loaded'), yellow(accounts.length), gray('accounts'));
+	} else {
+		const vestingEntryEvents = await getPastEvents({
+			contract: oldRewardEscrow,
+			eventName: 'VestingEntryCreated',
+			network,
+			provider: new ethers.providers.JsonRpcProvider(process.env.PROVIDER_URL.replace('network', network)), // can't use a fork to load events for some reason
+		});
+
+		accounts = Array.from(new Set(vestingEntryEvents.map(({ args: [address] }) => address)));
+		console.log(gray('Found'), yellow(accounts.length), gray('accounts'));
+	}
+
+	const executeTxn = async ({ txPromise }) => {
+		console.log(gray(`  > Staging transaction... ${new Date()}`));
+		let result = await stageTx({
+			txPromise,
+			provider,
+		});
+
+		if (result.success) {
+			console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
+
+			result = await runTx({
+				tx: result.tx,
+				provider,
+			});
+
+			if (result.success) {
+				console.log(green('Success. Gas used', result.success.receipt.gasUsed));
+			} else {
+				throw new Error(`Cannot transact. Reason: "${result.error.reason}"`);
+			}
+		} else {
+			throw new Error(`Cannot stage: ${result.error}`);
+		}
+	};
 
 	const newRewardEscrow = await getContract({
 		contract: 'RewardEscrowV2',
 		network,
 		wallet,
 	});
+
+	const overrides = {
+		gasPrice: parseUnits(gasPrice, 'gwei'),
+		gasLimit: 9.5e6,
+	};
 
 	const accountsWithDetail = [];
 	for (const address of accounts) {
@@ -82,36 +125,15 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, useFork, pr
 			);
 		}
 
-		const [balance, vested, flatSchedule] = await Promise.all([
+		const [balance, vested] = await Promise.all([
 			oldRewardEscrow.totalEscrowedAccountBalance(address),
 			oldRewardEscrow.totalVestedAccountBalance(address),
-			oldRewardEscrow.checkAccountSchedule(address),
 		]);
 
-		const schedule = [];
-		for (let i = 0; i < flatSchedule.length; i += 2) {
-			const [timestamp, entry] = flatSchedule.slice(i).map(_ => _.toString());
-			if (timestamp === '0' && entry === '0') {
-				continue;
-			} else if (timestamp === '0' || entry === '0') {
-				console.log(
-					red('Warning: address'),
-					yellow(address),
-					red('has'),
-					yellow(flatSchedule),
-					red('entries! One is 0'),
-				);
-			}
-			schedule.push({
-				timestamp,
-				entry,
-			});
-		}
 		accountsWithDetail.push({
 			address,
 			balance: balance.toString(),
 			vested: vested.toString(),
-			schedule,
 			hasEscrowBalance: alreadyEscrowed,
 		});
 	}
@@ -119,145 +141,135 @@ async function rewardEscrowMigration({ network, providerUrl, dryRun, useFork, pr
 	const migrationPageSize = 500;
 	const accountsToMigrate = accountsWithDetail.filter(({ hasEscrowBalance }) => !hasEscrowBalance);
 
-	const dryRunOutput = { migratedAccounts: [], importedEntries: [] };
+	const output = { migratedAccounts: [], importedVestedEntries: [] };
 
 	// Do the migrateAccountEscrowBalances() in large batches
 	for (let i = 0; i < accountsToMigrate.length; i += migrationPageSize) {
 		const accounts = accountsToMigrate.slice(i, i + migrationPageSize);
 		console.log(gray('Migrating'), yellow(accounts.length), gray('accounts'));
-		if (dryRun) {
-			dryRunOutput.migratedAccounts = dryRunOutput.migratedAccounts.concat(accounts);
-		} else {
-			await newRewardEscrow.migrateAccountEscrowBalances(
-				accounts.map(({ address }) => address),
-				accounts.map(({ balance }) => balance),
-				accounts.map(({ vested }) => vested),
-			);
+		output.migratedAccounts = output.migratedAccounts.concat(accounts);
+		if (!dryRun) {
+			await executeTxn({
+				txPromise: newRewardEscrow.migrateAccountEscrowBalances(
+					accounts.map(({ address }) => address),
+					accounts.map(({ balance }) => balance),
+					accounts.map(({ vested }) => vested),
+					overrides,
+				),
+			});
 		}
 	}
 
-	// Now take all the vesting entries, check they aren't already in and flatten them
-	let accountsToImportVestingEntries = [];
+	const migrationThreshold = formatEther(await newRewardEscrow.migrateEntriesThresholdAmount());
 
-	for (const { address, schedule } of accountsWithDetail) {
-		const alreadyMigratedPendingVestedImport = +(await newRewardEscrow.totalBalancePendingMigration(address)) > 0;
+	console.log(
+		gray('Now flattening entries of expired vesting entries for all accounts over'),
+		yellow(migrationThreshold),
+		gray('in escrowed SNX'),
+	);
 
-		if (!dryRun && !alreadyMigratedPendingVestedImport) {
-			console.log(gray('Skipping entries for'), yellow(address), gray('as no longer pending.'));
+	const { number: latestBlock, timestamp: latestBlockTimestamp } = await provider.getBlock(
+		await provider.getBlockNumber(),
+	);
+
+	console.log(gray('Latest block'), yellow(latestBlock), gray('with timestamp of'), yellow(latestBlockTimestamp));
+
+	// now get all accounts with > migrationThreshold
+	const accountsWithOverMigrationThreshold = accountsWithDetail.filter(
+		({ balance }) => formatEther(balance) > migrationThreshold,
+	);
+
+	// and prepare a list of accounts with entries past vesting date
+	const accountsWithFlattenedEntriesPastVestingDate = [];
+
+	// for all accouts over the threshold
+	for (const { address } of accountsWithOverMigrationThreshold) {
+		const numVestingEntriesAlreadyImported = +(await newRewardEscrow.numVestingEntries(address));
+
+		// make sure not yet run
+		if (numVestingEntriesAlreadyImported > 0) {
+			console.log(
+				gray('Address'),
+				yellow(address),
+				gray('already has'),
+				yellow(numVestingEntriesAlreadyImported),
+				gray('entries imported. SKipping'),
+			);
 			continue;
 		}
 
-		// now fetch all new vesting entries that have been imported
-		const entryIDsForAccount = await newRewardEscrow.getVestingSchedules(
-			address,
-			'0',
-			(schedule.length + 1).toString(),
-		);
+		// begin a tally
+		let entrySumThatArePastVestingDate = ethers.BigNumber.from(0);
 
-		// now only add those entries that cannot already be found
-		accountsToImportVestingEntries = accountsToImportVestingEntries.concat(
-			schedule
-				.filter(
-					({ timestamp, entry }) =>
-						!entryIDsForAccount.find(
-							({ endTime, escrowAmount }) => endTime.toString() === timestamp && escrowAmount === entry,
-						),
-				)
-				.map(_ => Object.assign({ address }, _)),
-		);
-	}
+		// load their old schedules
+		const flatSchedule = await oldRewardEscrow.checkAccountSchedule(address);
 
-	// and do batch inserts of these entries
-	const entryBatchSize = 200;
-	for (let i = 0; i < accountsToImportVestingEntries.length; i += entryBatchSize) {
-		const entries = accountsToImportVestingEntries.slice(i, i + entryBatchSize);
-		console.log(gray('Importing vesting entries'), yellow(entries.length));
-		if (dryRun) {
-			dryRunOutput.importedEntries = dryRunOutput.importedEntries.concat(entries);
-		} else {
-			await newRewardEscrow.importVestingSchedule(
-				entries.map(({ address }) => address),
-				entries.map(({ timestamp }) => timestamp),
-				entries.map(({ entry }) => entry),
-			);
+		// and loop over them
+		for (let i = 0; i < flatSchedule.length; i += 2) {
+			const [timestamp, entry] = flatSchedule.slice(i).map(_ => _.toString());
+			if (timestamp === '0' && entry === '0') {
+				// skip 0 entries
+				continue;
+			} else if (+timestamp > +latestBlockTimestamp) {
+				// skip entries that haven't hit their vesting date
+				continue;
+			} else if (timestamp === '0' || entry === '0') {
+				// warn on bad data and skip
+				console.log(
+					red('Warning: address'),
+					yellow(address),
+					red('has'),
+					yellow(timestamp, entry),
+					red('One is 0. Skipping'),
+				);
+				continue;
+			}
+			// otherwise add to the sum
+			entrySumThatArePastVestingDate = entrySumThatArePastVestingDate.add(flatSchedule[i + 1]);
+		}
+
+		if (entrySumThatArePastVestingDate.gt(0)) {
+			accountsWithFlattenedEntriesPastVestingDate.push({
+				address,
+				amount: entrySumThatArePastVestingDate.toString(),
+			});
 		}
 	}
 
-	if (dryRun) {
-		fs.writeFileSync(`rewards-out-dry-run-${network}.json`, JSON.stringify(dryRunOutput, null, 2));
-		process.exit();
-	}
+	console.log(
+		gray('There are'),
+		yellow(accountsWithFlattenedEntriesPastVestingDate.length),
+		gray('accounts with vested entries flattened to import'),
+	);
 
-	// now run through and make sure everything is kosher
+	const importPageSize = 500;
 
-	console.log(gray('Now performing final checks.'));
-
-	for (const { address, balance, vested, schedule } of accountsWithDetail) {
-		const totalBalancePendingMigration = +(await newRewardEscrow.totalBalancePendingMigration(address));
-		const numVestingEntries = +(await newRewardEscrow.numVestingEntries(address));
-		const totalEscrowedAccountBalance = (await newRewardEscrow.totalEscrowedAccountBalance(address)).toString();
-		const totalVestedAccountBalance = (await newRewardEscrow.totalVestedAccountBalance(address)).toString();
-
-		if (totalBalancePendingMigration !== 0) {
-			console.log(
-				red('Error: address'),
-				yellow(address),
-				red('still has'),
-				yellow(totalBalancePendingMigration),
-				red('migration left'),
-			);
-		}
-
-		if (numVestingEntries !== schedule.length) {
-			console.log(
-				red('Error: address '),
-				yellow(address),
-				red('has vesting entries length'),
-				yellow(numVestingEntries),
-				red('instead of'),
-				yellow(schedule.length),
-			);
-		}
-
-		if (totalEscrowedAccountBalance !== balance) {
-			console.log(
-				red('Error: address '),
-				yellow(address),
-				red('has mismatched total escrowed balance'),
-				yellow(totalEscrowedAccountBalance),
-				red('instead of'),
-				yellow(balance),
-			);
-		}
-
-		if (totalVestedAccountBalance !== vested) {
-			console.log(
-				red('Error: address '),
-				yellow(address),
-				red('has mismatched total vested'),
-				yellow(totalVestedAccountBalance),
-				red('instead of'),
-				yellow(vested),
-			);
+	// Do the importVestingSchedule() in large batches
+	for (let i = 0; i < accountsWithFlattenedEntriesPastVestingDate.length; i += importPageSize) {
+		const accounts = accountsWithFlattenedEntriesPastVestingDate.slice(i, i + importPageSize);
+		console.log(gray('Importing'), yellow(accounts.length), gray('accounts'));
+		output.importedVestedEntries = output.importedVestedEntries.concat(accounts);
+		if (!dryRun) {
+			await executeTxn({
+				txPromise: newRewardEscrow.importVestingSchedule(
+					accounts.map(({ address }) => address),
+					accounts.map(({ amount }) => amount),
+					overrides,
+				),
+			});
 		}
 	}
 
-	// now check total
-	const newTotalBalance = +(await newRewardEscrow.totalEscrowedBalance());
-	const oldTotalBalance = +(await oldRewardEscrow.totalEscrowedBalance());
-
-	if (newTotalBalance !== oldTotalBalance) {
-		console.log(red('Error: total mismatch'), yellow(newTotalBalance), red('versus older'), yellow(oldTotalBalance));
-	}
-
-	console.log(gray('Final checks complete.'));
+	fs.writeFileSync(`rewards-out-${network}-${latestBlockTimestamp}.json`, JSON.stringify(output, null, 2));
 }
 
 program
 	.description('Reward Escrow Migration')
-	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
+	.option('-a, --account-json <value>', 'The account json file')
 	.option('-f, --use-fork', 'Use a local fork', false)
+	.option('-g, --gas-price <value>', 'Gas price to set when performing actions', 1)
 	.option('-k, --private-key <value>', 'Private key to use to sign txs')
+	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
 	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('-r, --dry-run', 'Run as a dry-run', false)
 	.action(async (...args) => {
