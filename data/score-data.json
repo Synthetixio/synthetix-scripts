@@ -1,9 +1,9 @@
 {
   "totals": {
-    "totalEscrowedSNX": "232255266176774396244674",
+    "totalEscrowedSNX": "215609491262205498200714",
     "accountsThatWithdrew": 1247,
     "withdrawals": 1328,
-    "escrowedBalancesChecked": 1328
+    "escrowedBalancesChecked": 1247
   },
   "accounts": {
     "0xAA3802438A2546CeE38207A14E6aFc789a9102d4": {
