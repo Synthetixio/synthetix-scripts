@@ -97,6 +97,7 @@ async function distributeSNX({
 	console.log(yellow('* reward multiplier:', ethers.utils.formatUnits(rewardMultiplier, 'mwei')));
 	console.log(yellow('* Signer:', wallet.address));
 	console.log(yellow('* Signer balance:', ethers.utils.formatEther(signerBalance)));
+	console.log(yellow('* DRY RUN:', dryRun));
 	console.log(gray('================================================================================'));
 	console.log('\n');
 	async function confirm() {
