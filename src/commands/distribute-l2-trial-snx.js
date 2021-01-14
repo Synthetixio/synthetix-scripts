@@ -141,8 +141,15 @@ async function distributeSNX({
 				provider,
 			});
 
+			const newBalance = (await Synthetix.balanceOf(account)).toString();
+			console.log(gray(`    > new balance: ${balance}`));
+
 			if (!result.success) {
 				console.log(red(`    > Error while sending SNX! ${result.error}`));
+				continue;
+			}
+			if (newBalance !== rewardAmount) {
+				console.log(yellow(`    > New account balance is unexpected`));
 				continue;
 			}
 			console.log(green(`    > Succesfully sent SNX`));
