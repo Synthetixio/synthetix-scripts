@@ -124,17 +124,17 @@ async function distributeSNX({
 
 		const distributed = data.accounts[account].distributedSNX;
 		const escrowed = data.accounts[account].escrowedSNX;
-		const balance = (await Synthetix.balanceOf(account)).toString();
+		const balance = await Synthetix.balanceOf(account);
 		console.log(gray(`    > distributed: ${distributed}`));
 		console.log(gray(`    > escrowed: ${escrowed}`));
 		console.log(gray(`    > balance: ${balance}`));
 
-		if (balance !== '0' && distributed === '0') {
+		if (balance.toString() !== '0' && distributed === '0') {
 			console.log(yellow(`WARNING: account has a positive balance and has not been distributed to yet!`));
 			await confirm();
 		}
 
-		if (distributed === '0' && escrowed !== '0' && balance === '0') {
+		if (distributed === '0' && escrowed !== '0' && balance.toString() === '0') {
 			const rewardAmount = ethers.BigNumber.from(data.accounts[account].escrowedSNX).mul(rewardMultiplier).div(k);
 			console.log(yellow(`    ⮑  Sending ${ethers.utils.formatEther(rewardAmount)} SNX...`));
 
@@ -148,8 +148,8 @@ async function distributeSNX({
 				continue;
 			}
 
-			const newBalance = (await Synthetix.balanceOf(account)).toString();
-			console.log(gray(`    > new balance: ${newBalance}`));
+			const newBalance = await Synthetix.balanceOf(account);
+			console.log(gray(`    > new balance: ${newBalance.toString()}`));
 
 			console.log(green(`    > Succesfully sent SNX`));
 
