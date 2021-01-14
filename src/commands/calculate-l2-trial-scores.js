@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-require('dotenv').config();
 
 const fs = require('fs');
+const { wrap } = require('synthetix');
 const path = require('path');
 const program = require('commander');
 const ethers = require('ethers');
 const { gray, red } = require('chalk');
-const { wrap } = require('synthetix');
 const { getPastEvents } = require('../utils/getEvents');
 const { getContract } = require('../utils/getContract');
 
@@ -49,7 +48,7 @@ async function calculateScores({
 	}
 
 	// Get a list of SynthetixBridgeToBase versions that emit WithdrawalInitiated events
-	const { getVersions, getSource, getTarget } = wrap({ network, useOvm, fs, path });
+	const { getVersions, getSource } = wrap({ network, useOvm, fs, path });
 	const versions = getVersions({ network, useOvm, byContract: true, fs, path })[contract];
 
 	// Look for WithdrawalInitiated events on all SynthetixBridgeToBase versions
@@ -83,7 +82,7 @@ async function calculateScores({
 	// Retrieve all addresses that initiated a withdrawal
 	const withdrawers = allEvents.map(event => event.args.account);
 	const numWithdrawers = withdrawers.length;
-	data.numWithdrawers = `${numWithdrawers}`;
+	data.totals.numWithdrawers = numWithdrawers;
 	fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
 
 	// Connect to the RewardEscrow contract
@@ -96,11 +95,11 @@ async function calculateScores({
 
 	// Read escrowed SNX amount for each account, and store it in the data file
 	console.log(gray(`2) Checking escrowed SNX for each account that withdrew...`));
-	data.numEscrowsChecked = 0;
+	data.totals.numEscrowsChecked = 0;
 	for (let i = 0; i < numWithdrawers; i++) {
 		const account = withdrawers[i];
 		console.log(gray(`  > ${i + 1}/${numWithdrawers} - ${account}`));
-		data.numEscrowsChecked++;
+		data.totals.numEscrowsChecked++;
 
 		// Read escrowed amount if there is no entry
 		if (!data.accounts[account]) {

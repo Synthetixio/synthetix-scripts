@@ -1,8 +1,10 @@
 {
   "totals": {
-    "numEscrowsChecked": 1325,
+    "numEscrowsChecked": "1325",
     "escrowedSNX": "217230260457811946582253",
-    "numWithdrawers": "1325"
+    "numWithdrawers": "1325",
+    "distributedSNX": "0",
+    "processedAccounts": "0"
   },
   "accounts": {
     "0xEe34E8298e388FaBaA0deb85B54F0F64e7aEA88C": "518851407457778412525",
@@ -1250,6 +1252,5 @@
     "0x4839c3d305516B6c56647B27B6B70254f0E89CB8": "2341554358568607960",
     "0x99eb33756a2eAa32f5964A747722c4b59e6aF351": "44684584514205574922"
   },
-  "numWithdrawers": "1325",
-  "numEscrowsChecked": 1325
+  "processedAccounts": {}
 }
