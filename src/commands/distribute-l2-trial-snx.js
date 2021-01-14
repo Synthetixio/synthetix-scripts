@@ -159,7 +159,7 @@ async function distributeSNX({
 
 			fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
 
-			if (newBalance.eq(rewardAmount)) {
+			if (!newBalance.eq(rewardAmount)) {
 				console.log(yellow(`WARNING: New account balance is unexpected!`));
 				await confirm();
 
