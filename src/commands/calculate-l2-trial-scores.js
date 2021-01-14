@@ -113,16 +113,15 @@ async function calculateScores({
 		};
 
 		// Only read escrow balance if there is no entry for this account
-		if (!data.accounts[accont]) {
+		if (!data.accounts[account]) {
 			const escrowed = await RewardEscrow.balanceOf(account);
 			console.log(gray(`    ⮑  Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`));
 			data.totals.escrowedBalancesChecked++;
 			accountData.escrowedSNX = escrowed.toString();
+			data.totals.totalEscrowedSNX = ethers.BigNumber.from(data.totals.totalEscrowedSNX).add(escrowed).toString();
 		}
 
 		data.accounts[account] = accountData;
-
-		data.totals.totalEscrowedSNX = ethers.BigNumber.from(data.totals.totalEscrowedSNX).add(escrowed).toString();
 		data.totals.accountsThatWithdrew = Object.keys(data.accounts).length;
 
 		// Store the data immediately
