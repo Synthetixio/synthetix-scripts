@@ -25,9 +25,9 @@ async function calculateScores({
 	} else {
 		data = {
 			totals: {
-				escrowedSNX: '0',
-				numWithdrawers: '0',
-				numEscrowsChecked: '0',
+				totalEscrowedSNX: '0',
+				accountsThatWithdrew: '0',
+				escrowedBalancedChecked: '0',
 			},
 			accounts: {}
 		};
@@ -81,8 +81,7 @@ async function calculateScores({
 
 	// Retrieve all addresses that initiated a withdrawal
 	const withdrawers = allEvents.map(event => event.args.account);
-	const numWithdrawers = withdrawers.length;
-	data.totals.numWithdrawers = numWithdrawers;
+	data.totals.accountsThatWithdrew = withdrawers.length;
 	fs.writeFileSync(outputFile, JSON.stringify(data, null, 2));
 
 	// Connect to the RewardEscrow contract
@@ -95,19 +94,24 @@ async function calculateScores({
 
 	// Read escrowed SNX amount for each account, and store it in the data file
 	console.log(gray(`2) Checking escrowed SNX for each account that withdrew...`));
-	data.totals.numEscrowsChecked = 0;
-	for (let i = 0; i < numWithdrawers; i++) {
+	for (let i = 0; i < data.totals.accountsThatWithdrew; i++) {
 		const account = withdrawers[i];
-		console.log(gray(`  > ${i + 1}/${numWithdrawers} - ${account}`));
-		data.totals.numEscrowsChecked++;
+		console.log(gray(`  > ${i + 1}/${data.totals.accountsThatWithdrew} - ${account}`));
 
 		// Read escrowed amount if there is no entry
 		if (!data.accounts[account]) {
-			const escrowed = await RewardEscrow.balanceOf(account);
-			console.log(`    > Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`);
+			const accountData = {
+				distributedSNX: '0'
+			};
 
-			data.accounts[account] = escrowed.toString();
-			data.totals.escrowedSNX = ethers.BigNumber.from(data.totals.escrowedSNX).add(escrowed).toString();
+			const escrowed = await RewardEscrow.balanceOf(account);
+			console.log(gray(`    ⮑  Escrowed: ${ethers.utils.formatEther(escrowed)} SNX`));
+			data.totals.escrowedBalancedChecked++;
+
+			accountData.escrowedSNX = escrowed.toString();
+			data.accounts[account] = accountData;
+
+			data.totals.totalEscrowedSNX = ethers.BigNumber.from(data.totals.totalEscrowedSNX).add(escrowed).toString();
 		}
 
 		// Store the data immediately
