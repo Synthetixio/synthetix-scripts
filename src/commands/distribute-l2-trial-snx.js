@@ -19,6 +19,7 @@ async function distributeSNX({
 	deploymentPath,
 	gasPrice,
 	yes,
+	dryRun,
 }) {
 	// Validate input parameters
 	if (!network) throw new Error('Please specify a network');
@@ -138,6 +139,8 @@ async function distributeSNX({
 			const rewardAmount = ethers.BigNumber.from(data.accounts[account].escrowedSNX).mul(rewardMultiplier).div(k);
 			console.log(yellow(`    ⮑  Sending ${ethers.utils.formatEther(rewardAmount)} SNX...`));
 
+			if (dryRun) continue;
+
 			const tx = await Synthetix.transfer(account, rewardAmount, overrides);
 			const receipt = await tx.wait();
 
@@ -178,6 +181,7 @@ program
 	.option('--total-rewards <value>', 'The total amount of SNX to be distributed', '200000')
 	.option('--gas-price <value>', 'Gas price to set when performing transfers', '0')
 	.option('--yes', 'Skip all confirmations', false)
+	.option('--dry-run', 'Avoids sending any transaction', false)
 	.action(async (...args) => {
 		try {
 			await distributeSNX(...args);
