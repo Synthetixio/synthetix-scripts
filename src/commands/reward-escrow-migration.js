@@ -73,7 +73,9 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 			provider: new ethers.providers.JsonRpcProvider(process.env.PROVIDER_URL.replace('network', network)), // can't use a fork to load events for some reason
 		});
 
-		accounts = Array.from(new Set(vestingEntryEvents.map(({ args: [address] }) => address)));
+		accounts = Array.from(new Set(vestingEntryEvents.map(({ args: [address] }) => address))).map(address => ({
+			address,
+		}));
 		console.log(gray('Found'), yellow(accounts.length), gray('accounts'));
 	}
 
@@ -93,7 +95,7 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 			});
 
 			if (result.success) {
-				console.log(green('Success. Gas used', result.success.receipt.gasUsed));
+				console.log(green('Success. Gas used', result.success.receipt));
 			} else {
 				throw new Error(`Cannot transact. Reason: "${result.error.reason}"`);
 			}
@@ -110,11 +112,11 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 
 	const overrides = {
 		gasPrice: parseUnits(gasPrice, 'gwei'),
-		gasLimit: 9.5e6,
+		gasLimit: 10e6,
 	};
 
 	const accountsWithDetail = [];
-	for (const address of accounts) {
+	for (let { address, balanceOf, vestedBalanceOf } of accounts) {
 		const alreadyEscrowed = +(await newRewardEscrow.totalEscrowedAccountBalance(address)) > 0;
 
 		if (alreadyEscrowed) {
@@ -125,20 +127,22 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 			);
 		}
 
-		const [balance, vested] = await Promise.all([
-			oldRewardEscrow.totalEscrowedAccountBalance(address),
-			oldRewardEscrow.totalVestedAccountBalance(address),
-		]);
+		if (network !== 'mainnet') {
+			[balanceOf, vestedBalanceOf] = await Promise.all([
+				oldRewardEscrow.totalEscrowedAccountBalance(address),
+				oldRewardEscrow.totalVestedAccountBalance(address),
+			]);
+		}
 
 		accountsWithDetail.push({
 			address,
-			balance: balance.toString(),
-			vested: vested.toString(),
+			balance: balanceOf.toString(),
+			vested: vestedBalanceOf.toString(),
 			hasEscrowBalance: alreadyEscrowed,
 		});
 	}
 
-	const migrationPageSize = 500;
+	const migrationPageSize = 450;
 	const accountsToMigrate = accountsWithDetail.filter(({ hasEscrowBalance }) => !hasEscrowBalance);
 
 	const output = { migratedAccounts: [], importedVestedEntries: [] };
@@ -242,7 +246,7 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 		gray('accounts with vested entries flattened to import'),
 	);
 
-	const importPageSize = 500;
+	const importPageSize = 350;
 
 	// Do the importVestingSchedule() in large batches
 	for (let i = 0; i < accountsWithFlattenedEntriesPastVestingDate.length; i += importPageSize) {
@@ -261,6 +265,15 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 	}
 
 	fs.writeFileSync(`rewards-out-${network}-${latestBlockTimestamp}.json`, JSON.stringify(output, null, 2));
+
+	const newTotalBalance = +(await newRewardEscrow.totalEscrowedBalance());
+	const oldTotalBalance = +(await oldRewardEscrow.totalEscrowedBalance());
+
+	if (newTotalBalance !== oldTotalBalance) {
+		console.log(red('Error: total mismatch'), yellow(newTotalBalance), red('versus older'), yellow(oldTotalBalance));
+	} else {
+		console.log(gray('Totals match'), yellow(formatEther(newTotalBalance)), yellow(formatEther(oldTotalBalance)));
+	}
 }
 
 program
