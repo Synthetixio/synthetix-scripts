@@ -142,8 +142,7 @@ async function distributeSNX({
 
 			if (dryRun) continue;
 
-			const tx = await Synthetix.transfer(account, rewardAmount, overrides);
-			const receipt = await tx.wait();
+			const tx = await Synthetix.transfer(account, rewardAmount, overrides); const receipt = await tx.wait();
 
 			if (!receipt) {
 				console.log(red(`    > Error while sending SNX!`));
