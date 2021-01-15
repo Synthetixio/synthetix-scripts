@@ -77,8 +77,10 @@ async function distributeSNX({
 		ethers.BigNumber.from(data.totals.distributedSNX)
 	);
 	const signerBalance = await Synthetix.balanceOf(wallet.address);
-	if (signerBalance.lt(pendingToDistribute)) {
-		throw new Error(red(`${pendingToDistribute} SNX need to be distributed and the signer only has ${signerBalance}`));
+	if (!dryRun) {
+		if (signerBalance.lt(pendingToDistribute)) {
+			throw new Error(red(`${pendingToDistribute} SNX need to be distributed and the signer only has ${signerBalance}`));
+		}
 	}
 
 	// Print data and confirm before continuing
