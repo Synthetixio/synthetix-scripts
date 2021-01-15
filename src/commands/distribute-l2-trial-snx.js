@@ -120,6 +120,7 @@ async function distributeSNX({
 	await confirm();
 
 	// Sweep all accounts
+	const mismatchers = [];
 	const accounts = Object.keys(data.accounts);
 	const numAccounts = accounts.length;
 	for (let i = 0; i < numAccounts; i++) {
@@ -170,8 +171,18 @@ async function distributeSNX({
 
 				continue;
 			}
+		} else if(escrowed !== '0') {
+			if (balance.toString() === distributed) {
+				console.log(gray(`    > balance checks`));
+			} else {
+				mismatchers.push(account);
+				console.log(red(`    > Balance mismatch!`));
+			}
 		}
 	}
+
+	console.log(green(`> DONE!`));
+	console.log(gray(`mismatchers: ${mismatchers.length}`, mismatchers));
 }
 
 program
