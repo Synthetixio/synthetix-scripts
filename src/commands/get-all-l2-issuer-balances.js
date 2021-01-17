@@ -34,6 +34,11 @@ async function getIssuerBalances({
 		provider = new ethers.getDefaultProvider();
 	}
 
+	const currentBlock = await provider.getBlock();
+	console.log('Current block:', currentBlock.number);
+	data.blockNumebr = currentBlock.number;
+	fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+
 	// Get SynthsUSD contract
 	const SynthsUSD = getContract({
 		contract: 'ProxyERC20sUSD',
