@@ -47,7 +47,7 @@ async function importIssuerData({
 	const { wallet, provider } = setupProvider({ providerUrl, privateKey });
 	const SynthetixState = getContract({
 		contract: 'SynthetixState',
-		// source: 'SynthetixStateWithLimitedSetup',
+		source: 'SynthetixStateWithLimitedSetup',
 		wallet,
 		network,
 		useOvm: true,
@@ -105,10 +105,10 @@ async function importIssuerData({
 
 		if (!dryRun) {
 			const tx = await SynthetixState.importIssuerData(accounts, sUSDAmounts);
-			console.log(gray('  > tx', tx));
+			console.log(gray('  > tx', JSON.stringify(tx, null, 2)));
 
 			const receipt = await tx.wait();
-			console.log(gray('  > receipt', receipt));
+			console.log(gray('  > receipt', JSON.stringify(receipt, null, 2)));
 		}
 	}
 
