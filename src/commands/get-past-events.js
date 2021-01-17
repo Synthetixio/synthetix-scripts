@@ -53,10 +53,26 @@ async function pastEvents({
 
 	const events = await getPastEvents({ contract, eventName, provider, fromBlock, toBlock });
 
+	// console.log(
+	// 	'events',
+	// 	await Promise.all(
+	// 		events
+	// 			.slice(-3)
+	// 			.map(evt => provider.getTransaction(evt.transactionHash).then(receipt => Object.assign(evt, { receipt }))),
+	// 	),
+	// );
+
 	console.log(
-		'events',
-		await Promise.all(
-			events.map(evt => provider.getTransaction(evt.transactionHash).then(receipt => Object.assign(evt, { receipt }))),
+		require('util').inspect(
+			await Promise.all(
+				events
+					.reverse()
+					.slice(-5)
+					.map(evt => provider.getTransaction(evt.transactionHash).then(receipt => Object.assign(evt, { receipt }))),
+			),
+			false,
+			null,
+			true,
 		),
 	);
 

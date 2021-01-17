@@ -1,0 +1,182 @@
+[
+	{
+		"address": "0x49be88f0fcc3a8393a59d3688480d7d253c37d2a",
+		"amount": "634827434799558479449639",
+		"pendingOnV2": "634827434799558479449639",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x8a2f5d6d822611bdab08d306aa8f3e3942177417",
+		"amount": "25684392972091182374930",
+		"pendingOnV2": "25684392972091182374930",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xa90ff30acc0d7c43b36e6f7871f55d552d06b6ca",
+		"amount": "18115942028985500000000",
+		"pendingOnV2": "18115942028985500000000",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xb3a64875bbda3e61284c996ac2631213e0141bb3",
+		"amount": "14285759202900067320720",
+		"pendingOnV2": "14285759202900067320720",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x4a654ec9c24567ccad3a807f3f08d72e9956b143",
+		"amount": "8415094961940605667905",
+		"pendingOnV2": "8415094961940605667905",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xa97bc5dd7b32003398645edeb2178c91087f86d8",
+		"amount": "10615138573336798644369",
+		"pendingOnV2": "10615138573336798644369",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x5d396a2106694308a40608ef14a1c0892b6b7faa",
+		"amount": "1811594202898550000000",
+		"pendingOnV2": "1811594202898550000000",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x4e60be84870fe6ae350b563a121042396abe1eaf",
+		"amount": "1462694356017678964946",
+		"pendingOnV2": "1462694356017678964946",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xbb00900b914c71d7cc0d6c8865359499b9d0b3b6",
+		"amount": "1645240387303225955026",
+		"pendingOnV2": "1645240387303225955026",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xbc280becab2bf6ddc0c126e9179d27bb0ebe52a3",
+		"amount": "2421230918238629065416",
+		"pendingOnV2": "2421230918238629065416",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x9eb4559588f15f34c60270e52da0a534eaafacd6",
+		"amount": "1839734485222821173961",
+		"pendingOnV2": "1839734485222821173961",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xf182ea75ce927013459f7a6fc2002b519cc35426",
+		"amount": "5364913046741631525085",
+		"pendingOnV2": "5364913046741631525085",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xd4ed4b64a437b56ecaafb92a04330a9682edfff7",
+		"amount": "416946607847484066096",
+		"pendingOnV2": "416946607847484066096",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xd63679187d23c94fcb2a81278499fea8e34e8777",
+		"amount": "420933142986525130109",
+		"pendingOnV2": "420933142986525130109",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xd3aa1fe5d12c62eea28b768ae27c1f53b0b79181",
+		"amount": "1640441436132069565936",
+		"pendingOnV2": "1640441436132069565936",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x75d7d7972a62b00ff7ef071741c929f59d185ee6",
+		"amount": "394778891544823308126",
+		"pendingOnV2": "394778891544823308126",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x5e4774b93d012e0fe86655ddda16916b1988b274",
+		"amount": "1169952121968712050342",
+		"pendingOnV2": "1169952121968712050342",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x3a2cff7596d3eeb1fe33d41051e935769ceae392",
+		"amount": "2088001526345654226232",
+		"pendingOnV2": "2088001526345654226232",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x3db4dcbd65e3879fc3ece583d0bd216062ff33e5",
+		"amount": "1811594202898550000000",
+		"pendingOnV2": "1811594202898550000000",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xdbc605b9edd0b5fd3b58e75e975cba62385a7e4a",
+		"amount": "1449275362318840000000",
+		"pendingOnV2": "1449275362318840000000",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xfd9e6fd73a0694057b632d8d3d4925d99c374306",
+		"amount": "242397355076633524296",
+		"pendingOnV2": "242397355076633524296",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xbaa3ec8dae3e4605e0e13e26a3f4bbbbdc642abe",
+		"amount": "350133159277308375277",
+		"pendingOnV2": "350133159277308375277",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x67c188ef26fac4a50cf64c2b0dffe6f332704568",
+		"amount": "53366850952452287665",
+		"pendingOnV2": "53366850952452287665",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xe188c3778880193ce670828db4fdacc98c117338",
+		"amount": "244910253640795882884",
+		"pendingOnV2": "244910253640795882884",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xbec7b649ff1b72ce87acd470da0036a0bec6453b",
+		"amount": "84638788213551772965",
+		"pendingOnV2": "84638788213551772965",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xe5a8654631b3729f73ca3503ba09a5d3e11b46da",
+		"amount": "289538046983517190234",
+		"pendingOnV2": "289538046983517190234",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x49255170f06742dfe9b24e4fdecdd9dd93c6abd1",
+		"amount": "104761611321286556096",
+		"pendingOnV2": "104761611321286556096",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x74e8b9e13087ccce27013c2ebb5b5093df134262",
+		"amount": "86293314365358075242",
+		"pendingOnV2": "86293314365358075242",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0xa0c9ab7cb590c01d9f36d0f1eb960a544c31467e",
+		"amount": "118623917925325948187",
+		"pendingOnV2": "118623917925325948187",
+		"amountMatchesPending": true
+	},
+	{
+		"address": "0x8e7c83d8a6577bbfa48493c94e7784b5b164caf0",
+		"amount": "85959430734797075633",
+		"pendingOnV2": "85959430734797075633",
+		"amountMatchesPending": true
+	}
+]

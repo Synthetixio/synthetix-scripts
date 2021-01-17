@@ -115,54 +115,61 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 		gasLimit: 10e6,
 	};
 
+	const blockAfterFirstImport = 11657440;
+
 	const accountsWithDetail = [];
-	for (let { address, balanceOf, vestedBalanceOf } of accounts) {
-		const alreadyEscrowed = +(await newRewardEscrow.totalEscrowedAccountBalance(address)) > 0;
-
-		if (alreadyEscrowed) {
-			console.log(
-				gray('Note:'),
-				yellow(address),
-				gray('escrow amounts already exist. It will NOT be added to the migrate call.'),
-			);
-		}
-
-		if (network !== 'mainnet') {
-			[balanceOf, vestedBalanceOf] = await Promise.all([
-				oldRewardEscrow.totalEscrowedAccountBalance(address),
-				oldRewardEscrow.totalVestedAccountBalance(address),
-			]);
-		}
-
+	for (const { address, balanceOf, vestedBalanceOf } of accounts) {
+		// console.log(gray('Processing', address));
+		// const oldBalance = +(await oldRewardEscrow.totalEscrowedAccountBalance(address, { blockTag: 11657440 }));
+		// const newBalance = +(await newRewardEscrow.totalEscrowedAccountBalance(address, { blockTag: 11657440 }));
+		// if (oldBalance.toString() !== newBalance.toString()) {
+		// 	console.log(red('Mismatch.'), gray('expected'), yellow(oldBalance), gray('got'), yellow(newBalance));
+		// }
+		// if (alreadyEscrowed) {
+		// 	console.log(
+		// 		gray('Note:'),
+		// 		yellow(address),
+		// 		gray('escrow amounts already exist. It will NOT be added to the migrate call.'),
+		// 	);
+		// }
+		// if (network !== 'mainnet') {
+		// 	[balanceOf, vestedBalanceOf] = await Promise.all([
+		// 		oldRewardEscrow.totalEscrowedAccountBalance(address),
+		// 		oldRewardEscrow.totalVestedAccountBalance(address),
+		// 	]);
+		// }
 		accountsWithDetail.push({
 			address,
 			balance: balanceOf.toString(),
 			vested: vestedBalanceOf.toString(),
-			hasEscrowBalance: alreadyEscrowed,
+			// hasEscrowBalance: alreadyEscrowed,
 		});
 	}
 
-	const migrationPageSize = 450;
-	const accountsToMigrate = accountsWithDetail.filter(({ hasEscrowBalance }) => !hasEscrowBalance);
+	// console.log('done.');
+	// process.exit();
 
-	const output = { migratedAccounts: [], importedVestedEntries: [] };
+	// const migrationPageSize = 50;
+	// const accountsToMigrate = accountsWithDetail.filter(({ hasEscrowBalance }) => !hasEscrowBalance);
 
-	// Do the migrateAccountEscrowBalances() in large batches
-	for (let i = 0; i < accountsToMigrate.length; i += migrationPageSize) {
-		const accounts = accountsToMigrate.slice(i, i + migrationPageSize);
-		console.log(gray('Migrating'), yellow(accounts.length), gray('accounts'));
-		output.migratedAccounts = output.migratedAccounts.concat(accounts);
-		if (!dryRun) {
-			await executeTxn({
-				txPromise: newRewardEscrow.migrateAccountEscrowBalances(
-					accounts.map(({ address }) => address),
-					accounts.map(({ balance }) => balance),
-					accounts.map(({ vested }) => vested),
-					overrides,
-				),
-			});
-		}
-	}
+	// const output = { migratedAccounts: [], importedVestedEntries: [] };
+
+	// // Do the migrateAccountEscrowBalances() in large batches
+	// for (let i = 0; i < accountsToMigrate.length; i += migrationPageSize) {
+	// 	const accounts = accountsToMigrate.slice(i, i + migrationPageSize);
+	// 	// console.log(gray('Migrating'), yellow(accounts.length), gray('accounts'));
+	// 	output.migratedAccounts = output.migratedAccounts.concat(accounts);
+	// 	if (!dryRun) {
+	// 		// await executeTxn({
+	// 		// 	txPromise: newRewardEscrow.migrateAccountEscrowBalances(
+	// 		// 		accounts.map(({ address }) => address),
+	// 		// 		accounts.map(({ balance }) => balance),
+	// 		// 		accounts.map(({ vested }) => vested),
+	// 		// 		overrides,
+	// 		// 	),
+	// 		// });
+	// 	}
+	// }
 
 	const migrationThreshold = formatEther(await newRewardEscrow.migrateEntriesThresholdAmount());
 
@@ -184,69 +191,142 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 	);
 
 	// and prepare a list of accounts with entries past vesting date
-	const accountsWithFlattenedEntriesPastVestingDate = [];
+	let accountsWithFlattenedEntriesPastVestingDate = [];
 
-	// for all accouts over the threshold
-	for (const { address } of accountsWithOverMigrationThreshold) {
-		const numVestingEntriesAlreadyImported = +(await newRewardEscrow.numVestingEntries(address));
+	const importedFilename = `imported-entries-pending-left-${network}.json`;
 
-		// make sure not yet run
-		if (numVestingEntriesAlreadyImported > 0) {
-			console.log(
-				gray('Address'),
-				yellow(address),
-				gray('already has'),
-				yellow(numVestingEntriesAlreadyImported),
-				gray('entries imported. SKipping'),
-			);
-			continue;
-		}
+	if (fs.existsSync(importedFilename)) {
+		accountsWithFlattenedEntriesPastVestingDate = JSON.parse(fs.readFileSync(importedFilename));
+	} else {
+		// open imported list
+		const alreadyImported = JSON.parse(fs.readFileSync('imported-entries-on-release-day.json')).reduce(
+			(memo, cur) => Object.assign(memo, { [cur.address]: cur }),
+			{},
+		);
 
-		// begin a tally
-		let entrySumThatArePastVestingDate = ethers.BigNumber.from(0);
-
-		// load their old schedules
-		const flatSchedule = await oldRewardEscrow.checkAccountSchedule(address);
-
-		// and loop over them
-		for (let i = 0; i < flatSchedule.length; i += 2) {
-			const [timestamp, entry] = flatSchedule.slice(i).map(_ => _.toString());
-			if (timestamp === '0' && entry === '0') {
-				// skip 0 entries
-				continue;
-			} else if (+timestamp > +latestBlockTimestamp) {
-				// skip entries that haven't hit their vesting date
-				continue;
-			} else if (timestamp === '0' || entry === '0') {
-				// warn on bad data and skip
-				console.log(
-					red('Warning: address'),
-					yellow(address),
-					red('has'),
-					yellow(timestamp, entry),
-					red('One is 0. Skipping'),
-				);
+		// for all accouts over the threshold
+		for (const { address, balance } of accountsWithOverMigrationThreshold) {
+			if (formatEther(balance) <= 1000) {
 				continue;
 			}
-			// otherwise add to the sum
-			entrySumThatArePastVestingDate = entrySumThatArePastVestingDate.add(flatSchedule[i + 1]);
-		}
+			// const numVestingEntriesAlreadyImported = +(await newRewardEscrow.numVestingEntries(address, {
+			// 	blockTag: 11657440,
+			// }));
 
-		if (entrySumThatArePastVestingDate.gt(0)) {
-			accountsWithFlattenedEntriesPastVestingDate.push({
-				address,
-				amount: entrySumThatArePastVestingDate.toString(),
-			});
+			// // make sure not yet run
+			// if (numVestingEntriesAlreadyImported > 0) {
+			// 	console.log(
+			// 		gray('Address'),
+			// 		yellow(address),
+			// 		gray('already has'),
+			// 		yellow(numVestingEntriesAlreadyImported),
+			// 		gray('entries imported. SKipping'),
+			// 	);
+			// 	continue;
+			// }
+
+			// now check this matches what is pending for their migration
+			const remainingToMigrate = await newRewardEscrow.totalBalancePendingMigration(address);
+			if (remainingToMigrate.toString() === '0') {
+				continue; // then done for this account
+			}
+
+			// begin a tally
+			let entrySumThatArePastVestingDate = ethers.BigNumber.from(0);
+
+			// load their old schedules
+			const flatSchedule = await oldRewardEscrow.checkAccountSchedule(address);
+
+			// and loop over them
+			for (let i = 0; i < flatSchedule.length; i += 2) {
+				const [timestamp, entry] = flatSchedule.slice(i).map(_ => _.toString());
+				if (timestamp === '0' && entry === '0') {
+					// skip 0 entries
+					continue;
+				} else if (+timestamp > +latestBlockTimestamp) {
+					// skip entries that haven't hit their vesting date
+					continue;
+				} else if (timestamp === '0' || entry === '0') {
+					// warn on bad data and skip
+					console.log(
+						red('Warning: address'),
+						yellow(address),
+						red('has'),
+						yellow(timestamp, entry),
+						red('One is 0. Skipping'),
+					);
+					continue;
+				}
+				// otherwise add to the sum
+				entrySumThatArePastVestingDate = entrySumThatArePastVestingDate.add(flatSchedule[i + 1]);
+			}
+
+			if (entrySumThatArePastVestingDate.gt(0)) {
+				// some accounts that have entries now but not before (vesting happened in the time between) need a 0 value here
+				const amountAlreadyImported = alreadyImported[address] ? alreadyImported[address].amount : '0';
+				const amountRemainingForImport = entrySumThatArePastVestingDate.sub(amountAlreadyImported).toString();
+
+				if (+amountRemainingForImport > +remainingToMigrate) {
+					console.log(
+						red('Skipping'),
+						yellow(address),
+						red('as amount we just calculated'),
+						yellow(formatEther(amountRemainingForImport)),
+						red('> pending'),
+						yellow(formatEther(remainingToMigrate)),
+					);
+					continue;
+				}
+				const amountMatchesPending = amountRemainingForImport.toString() === remainingToMigrate.toString();
+				accountsWithFlattenedEntriesPastVestingDate.push({
+					address,
+					amount: amountRemainingForImport,
+					pendingOnV2: remainingToMigrate.toString(),
+					amountMatchesPending,
+				});
+
+				console.log(
+					gray('Found missing!'),
+					yellow(address),
+					gray('with calculated balance remaining'),
+					yellow(formatEther(amountRemainingForImport)),
+					gray('and pending amount of'),
+					yellow(formatEther(remainingToMigrate)),
+					gray('Does this complete the migration?'),
+					amountMatchesPending ? green('true') : red('false'),
+				);
+
+				fs.writeFileSync(importedFilename, JSON.stringify(accountsWithFlattenedEntriesPastVestingDate, null, 2));
+			}
 		}
 	}
+
+	const mismatchCount = accountsWithFlattenedEntriesPastVestingDate.reduce(
+		(memo, { amountMatchesPending }) => memo + (amountMatchesPending ? 0 : 1),
+		0,
+	);
 
 	console.log(
 		gray('There are'),
 		yellow(accountsWithFlattenedEntriesPastVestingDate.length),
-		gray('accounts with vested entries flattened to import'),
+		gray('accounts with vested entries flattened to import. Of these'),
+		yellow(mismatchCount),
+		gray('will still have to self-service migrate after this!'),
 	);
 
-	const importPageSize = 350;
+	console.log(
+		gray('Data payload'),
+		yellow(
+			newRewardEscrow.interface.encodeFunctionData('importVestingSchedule', [
+				accountsWithFlattenedEntriesPastVestingDate.map(({ address }) => address),
+				accountsWithFlattenedEntriesPastVestingDate.map(({ amount }) => amount),
+			]),
+		),
+	);
+
+	process.exit();
+
+	const importPageSize = 50;
 
 	// Do the importVestingSchedule() in large batches
 	for (let i = 0; i < accountsWithFlattenedEntriesPastVestingDate.length; i += importPageSize) {
@@ -266,11 +346,17 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 
 	fs.writeFileSync(`rewards-out-${network}-${latestBlockTimestamp}.json`, JSON.stringify(output, null, 2));
 
-	const newTotalBalance = +(await newRewardEscrow.totalEscrowedBalance());
-	const oldTotalBalance = +(await oldRewardEscrow.totalEscrowedBalance());
+	const newTotalBalance = formatEther(await newRewardEscrow.totalEscrowedBalance({ blockTag: blockAfterFirstImport }));
+	const oldTotalBalance = formatEther(await oldRewardEscrow.totalEscrowedBalance({ blockTag: blockAfterFirstImport }));
 
 	if (newTotalBalance !== oldTotalBalance) {
-		console.log(red('Error: total mismatch'), yellow(newTotalBalance), red('versus older'), yellow(oldTotalBalance));
+		console.log(
+			red('Error: after initial import, total mismatch'),
+			yellow(newTotalBalance),
+			red('versus older'),
+			yellow(oldTotalBalance),
+		);
+		console.log(gray('Diff of'), yellow(Math.abs(+oldTotalBalance - newTotalBalance)));
 	} else {
 		console.log(gray('Totals match'), yellow(formatEther(newTotalBalance)), yellow(formatEther(oldTotalBalance)));
 	}
