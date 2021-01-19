@@ -72,12 +72,20 @@ async function getIssuerBalances({
 	// Read sUSD balance of each account that issued
 	console.log(gray(`2) Reading balance of all accounts that ever issued...`));
 	if (!data.issuers) data.issuers = {};
+	if (!data.total) data.total = '0';
+	let total = ethers.utils.parseEther('0');
 	for (let i = 0; i < issuers.length; i++) {
 		const account = issuers[i];
 
 		// Get balance
 		const balance = await SynthsUSD.balanceOf(account);
-		console.log(gray(`  > Issuer ${i + 1}/${issuers.length} - ${account}: ${ethers.utils.formatEther(balance)} sUSD`));
+
+		// Accum
+		total = total.add(balance);
+		data.total = total.toString();
+
+		// Stdout
+		console.log(gray(`  > Issuer ${i + 1}/${issuers.length} - ${account}: ${ethers.utils.formatEther(balance)} sUSD > Total: ${ethers.utils.formatEther(total)} sUSD`));
 
 		// Store in data file
 		data.issuers[account] = balance.toString();
