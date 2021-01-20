@@ -86,6 +86,10 @@ async function interactiveUi({
 	// Set up inquirer
 	inquirer.registerPrompt('autocomplete', autocomplete);
 
+	// Set up cache
+	const activeContract = {};
+	const recentContracts = [];
+
 	// -----------------
 	// Start interaction
 	// -----------------
@@ -119,7 +123,6 @@ async function interactiveUi({
 			},
 		]);
 
-
 		const target = await getTarget({
 			contract: contractName,
 			network,
@@ -132,7 +135,14 @@ async function interactiveUi({
 			useOvm,
 			deploymentPath,
 		});
-		console.log(red.inverse(`${contractName} => ${target.address}`));
+
+		activeContract.name = contractName;
+		activeContract.address = target.address;
+		if (!recentContracts.some(entry => entry.name === contractName)) {
+			recentContracts.push({ ...activeContract });
+		}
+
+		printCheatsheet({ activeContract, recentContracts, wallet });
 
 		const contract = new ethers.Contract(target.address, source.abi, wallet || provider);
 		if (source.bytecode === '') {
@@ -412,6 +422,17 @@ async function printHeader({ useOvm, providerUrl, network, gasPrice, deploymentF
 
 	console.log(gray('================================================================================'));
 	console.log('\n');
+}
+
+function printCheatsheet({ activeContract, recentContracts, wallet }) {
+	console.log(gray.inverse(`${activeContract.name} => ${activeContract.address}`));
+	console.log(gray(`  * Signer: ${wallet ? `${wallet.address}` : 'Read only'}`));
+
+	console.log(gray(`  * Recent contracts:`));
+	for (let i = 0; i < recentContracts.length; i++) {
+		const contract = recentContracts[i];
+		console.log(gray(`    ${contract.name}: ${contract.address}`));
+	}
 }
 
 program
