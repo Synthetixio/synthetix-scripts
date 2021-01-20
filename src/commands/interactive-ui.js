@@ -55,10 +55,9 @@ async function interactiveUi({
 	// ------------------
 
 	const key = `${network}${useOvm ? '-ovm' : ''}`;
-	console.log(key);
 	const defaults = DEFAULTS[key];
-	providerUrl |= defaults.providerUrl;
-	gasPrice |= defaults.gasPrice;
+	providerUrl = providerUrl || defaults.providerUrl;
+	gasPrice = gasPrice || defaults.gasPrice;
 
 	// ------------------
 	// Setup
@@ -124,7 +123,7 @@ async function interactiveUi({
 	// Start interaction
 	// -----------------
 
-	await printHeader({ useOvm, network, gasPrice, deploymentFilePath });
+	await printHeader({ useOvm, providerUrl, network, gasPrice, deploymentFilePath });
 
 	async function pickContract() {
 		const targets = Object.keys(deploymentData.targets);
