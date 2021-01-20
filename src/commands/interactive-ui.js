@@ -20,6 +20,26 @@ const { setupProvider } = require('../utils/setupProvider');
 const { stageTx, runTx } = require('../utils/runTx');
 const { logReceipt, logError } = require('../utils/prettyLog');
 
+const DEFAULTS = {
+	mainnet: {
+		gasPrice: 40,
+	},
+	'mainnet-ovm': {
+		providerUrl: 'https://mainnet.optimism.io',
+		gasPrice: 0,
+	},
+	kovan: {
+		gasPrice: 1,
+	},
+	'kovan-ovm': {
+		providerUrl: 'https://kovan2.optimism.io',
+		gasPrice: 0,
+	},
+	rinkeby: {
+		gasPrice: 1,
+	},
+};
+
 async function interactiveUi({
 	network,
 	useOvm,
@@ -30,6 +50,16 @@ async function interactiveUi({
 	deploymentPath,
 	privateKey,
 }) {
+	// ------------------
+	// Default values per network
+	// ------------------
+
+	const key = `${network}${useOvm ? '-ovm' : ''}`;
+	console.log(key);
+	const defaults = DEFAULTS[key];
+	providerUrl |= defaults.providerUrl;
+	gasPrice |= defaults.gasPrice;
+
 	// ------------------
 	// Setup
 	// ------------------
@@ -438,7 +468,7 @@ function printCheatsheet({ activeContract, recentContracts, wallet }) {
 program
 	.description('Interact with a deployed Synthetix instance from the command line')
 	.option('-f, --use-fork', 'Use a local fork', false)
-	.option('-g, --gas-price <value>', 'Gas price to set when performing transfers', 1)
+	.option('-g, --gas-price <value>', 'Gas price to set when performing transfers')
 	.option('-k, --private-key <value>', 'Private key to use to sign txs')
 	.option('-l, --gas-limit <value>', 'Max gas to use when signing transactions', 8000000)
 	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
