@@ -30,12 +30,11 @@ async function interactiveUi({
 	deploymentPath,
 	privateKey,
 }) {
-	console.clear();
-
 	// ------------------
 	// Setup
 	// ------------------
 
+	// Wrap Synthetix utils for current network
 	const { getPathToNetwork, getUsers, getTarget, getSource } = synthetix.wrap({
 		network,
 		useOvm,
@@ -43,29 +42,31 @@ async function interactiveUi({
 		path,
 	});
 
+	// Derive target build path and retrieve deployment artifacts
 	const file = synthetix.constants.DEPLOYMENT_FILENAME;
-
 	let deploymentFilePath;
 	if (deploymentPath) {
 		deploymentFilePath = path.join(deploymentPath, file);
 	} else {
 		deploymentFilePath = getPathToNetwork({ network, useOvm, file });
 	}
+	const deploymentData = JSON.parse(fs.readFileSync(deploymentFilePath));
 
+	// Determine private/public keys
 	let publicKey;
-
 	if (useFork) {
-		providerUrl = 'http://localhost:8545';
-
 		if (!privateKey) {
 			publicKey = getUsers({ user: 'owner' }).address;
 		}
 	}
-
 	if (!privateKey && process.env.PRIVATE_KEY) {
 		privateKey = process.env.PRIVATE_KEY;
 	}
 
+	// Determine provider url
+	if (useFork) {
+		providerUrl = 'http://localhost:8545';
+	}
 	if (!providerUrl && process.env.PROVIDER_URL) {
 		const envProviderUrl = process.env.PROVIDER_URL;
 		if (envProviderUrl.includes('infura')) {
@@ -75,77 +76,23 @@ async function interactiveUi({
 		}
 	}
 
+	// Construct provider and signer
 	const { provider, wallet } = setupProvider({
 		providerUrl,
 		privateKey,
 		publicKey,
 	});
 
+	// Set up inquirer
 	inquirer.registerPrompt('autocomplete', autocomplete);
 
-	const deploymentData = JSON.parse(fs.readFileSync(deploymentFilePath));
-
-	// ------------------
-	// Header
-	// ------------------
-
-	async function figprint(msg, font) {
-		return new Promise((resolve, reject) => {
-			figlet.text(msg, { font }, function(err, res) {
-				if (err) {
-					reject(err);
-				}
-				resolve(res);
-			});
-		});
-	}
-	const msg = await figprint(`${useOvm ? '-=* ' : ''}SYNTHETIX-CLI`, 'Slant')
-	const synthetixPath = './node_modules/synthetix';
-	const stats = fs.lstatSync(synthetixPath);
-	console.log(useOvm ? red(msg) : green(msg));
-	console.log(
-		green(`v${package.version}`),
-		green(`(Synthetix v${synthetixPackage.version})`),
-	);
-	if (stats.isSymbolicLink()) {
-		const realPath = fs.realpathSync(synthetixPath);
-		const branch = branchName({ altPath: realPath });
-		console.log(cyan(`LINKED to ${realPath}${branch ? ` on ${branch}` : ''}`));
-	} else {
-		console.log(gray('not linked to a local synthetix project'));
-	}
-
-	// ------------------
-	// Confirmation
-	// ------------------
-
-	console.log('\n');
-	console.log(gray('Please review this information before you interact with the system:'));
-	console.log(gray('================================================================================'));
-	console.log(gray(`> Provider: ${providerUrl ? `${providerUrl.slice(0, 25)}...` : 'Ethers default provider'}`));
-	console.log(gray(`> Network: ${network}`));
-	console.log(gray(`> Gas price: ${gasPrice}`));
-	console.log(gray(`> OVM: ${useOvm}`));
-	console.log(yellow(`> Target deployment: ${path.dirname(deploymentFilePath)}`));
-
-	if (wallet) {
-		console.log(yellow(`> Signer: ${wallet.address || wallet}`));
-	} else {
-		console.log(gray('> Read only'));
-	}
-
-	console.log(gray('================================================================================'));
-	console.log('\n');
-
 	// -----------------
-	// Interaction
+	// Start interaction
 	// -----------------
+
+	await printHeader({ useOvm, network, gasPrice, deploymentFilePath });
 
 	async function pickContract() {
-		// -----------------
-		// Pick a contract
-		// -----------------
-
 		const targets = Object.keys(deploymentData.targets);
 
 		function prioritizeTarget(itemName) {
@@ -172,6 +119,7 @@ async function interactiveUi({
 			},
 		]);
 
+
 		const target = await getTarget({
 			contract: contractName,
 			network,
@@ -184,7 +132,7 @@ async function interactiveUi({
 			useOvm,
 			deploymentPath,
 		});
-		console.log(gray(`  > ${contractName} => ${target.address}`));
+		console.log(red.inverse(`${contractName} => ${target.address}`));
 
 		const contract = new ethers.Contract(target.address, source.abi, wallet || provider);
 		if (source.bytecode === '') {
@@ -197,7 +145,6 @@ async function interactiveUi({
 		// -----------------
 
 		async function pickFunction() {
-
 			function combineNameAndType(items) {
 				const combined = [];
 				if (items && items.length > 0) {
@@ -417,6 +364,54 @@ async function interactiveUi({
 
 	// First contract pick
 	await pickContract();
+}
+
+async function printHeader({ useOvm, providerUrl, network, gasPrice, deploymentFilePath, wallet }) {
+	console.clear();
+
+	async function figprint(msg, font) {
+		return new Promise((resolve, reject) => {
+			figlet.text(msg, { font }, function(err, res) {
+				if (err) {
+					reject(err);
+				}
+				resolve(res);
+			});
+		});
+	}
+	const msg = await figprint(`SYNTHETIX-CLI${useOvm ? ' *L2*' : ''}`, 'Slant')
+	const synthetixPath = './node_modules/synthetix';
+	const stats = fs.lstatSync(synthetixPath);
+	console.log(useOvm ? red(msg) : green(msg));
+	console.log(
+		green(`v${package.version}`),
+		green(`(Synthetix v${synthetixPackage.version})`),
+	);
+	if (stats.isSymbolicLink()) {
+		const realPath = fs.realpathSync(synthetixPath);
+		const branch = branchName({ altPath: realPath });
+		console.log(cyan(`LINKED to ${realPath}${branch ? ` on ${branch}` : ''}`));
+	} else {
+		console.log(gray('not linked to a local synthetix project'));
+	}
+
+	console.log('\n');
+	console.log(gray('Please review this information before you interact with the system:'));
+	console.log(gray('================================================================================'));
+	console.log(gray(`> Provider: ${providerUrl ? `${providerUrl.slice(0, 25)}...` : 'Ethers default provider'}`));
+	console.log(gray(`> Network: ${network}`));
+	console.log(gray(`> Gas price: ${gasPrice}`));
+	console.log(gray(`> OVM: ${useOvm}`));
+	console.log(yellow(`> Target deployment: ${path.dirname(deploymentFilePath)}`));
+
+	if (wallet) {
+		console.log(yellow(`> Signer: ${wallet.address || wallet}`));
+	} else {
+		console.log(gray('> Read only'));
+	}
+
+	console.log(gray('================================================================================'));
+	console.log('\n');
 }
 
 program
