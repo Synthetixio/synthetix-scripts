@@ -193,25 +193,23 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 	// and prepare a list of accounts with entries past vesting date
 	let accountsWithFlattenedEntriesPastVestingDate = [];
 
-	const importedFilename = `imported-entries-pending-left-${network}.json`;
+	const importedFilename = `data/imported-entries-pending-left-${network}.json`;
 
 	if (fs.existsSync(importedFilename)) {
 		accountsWithFlattenedEntriesPastVestingDate = JSON.parse(fs.readFileSync(importedFilename));
 	} else {
 		// open imported list
-		const alreadyImported = JSON.parse(fs.readFileSync('imported-entries-on-release-day.json')).reduce(
-			(memo, cur) => Object.assign(memo, { [cur.address]: cur }),
-			{},
-		);
+		// const alreadyImported = JSON.parse(fs.readFileSync('imported-entries-on-release-day.json')).reduce(
+		// 	(memo, cur) => Object.assign(memo, { [cur.address]: cur }),
+		// 	{},
+		// );
 
 		// for all accouts over the threshold
 		for (const { address, balance } of accountsWithOverMigrationThreshold) {
 			if (formatEther(balance) <= 1000) {
 				continue;
 			}
-			// const numVestingEntriesAlreadyImported = +(await newRewardEscrow.numVestingEntries(address, {
-			// 	blockTag: 11657440,
-			// }));
+			const numVestingEntriesAlreadyImported = +(await newRewardEscrow.numVestingEntries(address));
 
 			// // make sure not yet run
 			// if (numVestingEntriesAlreadyImported > 0) {
