@@ -211,6 +211,19 @@ async function rewardEscrowMigration({ network, providerUrl, accountToInspect })
 					red('> pending'),
 					yellow(formatEther(remainingToMigrate)),
 				);
+				if (accountToInspect) {
+					console.log(
+						gray(
+							'New entries:\n\t',
+							newSchedule
+								.map(({ endTime, escrowAmount, entryID }) =>
+									[endTime.toString(), new Date(+endTime * 1000), formatEther(escrowAmount), entryID].join('\t'),
+								)
+								.sort()
+								.join('\n\t'),
+						),
+					);
+				}
 				continue;
 			}
 			const amountMatchesPending = amountRemainingForImport.toString() === remainingToMigrate.toString();
