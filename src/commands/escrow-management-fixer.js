@@ -12,7 +12,7 @@ const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 const { getPastEvents } = require('../utils/getEvents');
 
-async function rewardEscrowMigration({ network, providerUrl }) {
+async function rewardEscrowMigration({ network, providerUrl, accountToInspect }) {
 	console.log(gray(`Running in network: ${network}`));
 
 	if (!providerUrl && process.env.PROVIDER_URL) {
@@ -26,7 +26,7 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 
 	if (!providerUrl) throw new Error('Cannot set up a provider.');
 
-	const { wallet, provider } = await setupProvider({ providerUrl });
+	const { provider } = await setupProvider({ providerUrl });
 
 	const { number: latestBlock, timestamp: latestBlockTimestamp } = await provider.getBlock(
 		await provider.getBlockNumber(),
@@ -67,31 +67,43 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 		.filter(({ amount }) => +formatEther(amount) > +migrationThreshold)
 		.sort((a, b) => (+a.amount > +b.amount ? -1 : 1));
 
-	console.log(
-		gray('Found'),
-		yellow(migratedAccounts.length),
-		gray('accounts migrated. Of these,'),
-		yellow(migratedAccountsOverThreshold.length),
-		gray('are over the threshold'),
-	);
-
-	const importedAmounts = (
+	if (accountToInspect) {
+		const migratedAccount = migratedAccounts.find(
+			({ account }) => account.toLowerCase() === accountToInspect.toLowerCase(),
+		);
+		if (!migratedAccount) throw new Error('Cannot find account in migrated events!');
+		console.log(
+			gray('Account'),
+			yellow(accountToInspect),
+			gray('had migrated balance'),
+			yellow(formatEther(migratedAccount.amount)),
+		);
+	} else {
+		console.log(
+			gray('Found'),
+			yellow(migratedAccounts.length),
+			gray('accounts migrated. Of these,'),
+			yellow(migratedAccountsOverThreshold.length),
+			gray('are over the threshold'),
+		);
+	}
+	const importedAmountsOriginal = (
 		await getPastEvents({
 			contract: rewardEscrowV2,
 			eventName: 'ImportedVestingSchedule',
 			network,
 			provider,
 		})
-	)
-		.map(({ args: { account, time, escrowAmount } }) => ({
-			account,
-			time: time.toString(),
-			amount: escrowAmount,
-		}))
-		.reduce((memo, { account, amount }) => {
-			memo[account] = memo[account] ? memo[account].add(amount) : amount;
-			return memo;
-		}, {});
+	).map(({ args: { account, time, escrowAmount } }) => ({
+		account,
+		time: time.toString(),
+		amount: escrowAmount,
+	}));
+
+	const importedAmounts = importedAmountsOriginal.reduce((memo, { account, amount }) => {
+		memo[account] = memo[account] ? memo[account].add(amount) : amount;
+		return memo;
+	}, {});
 
 	let alreadyComplete = 0;
 
@@ -100,7 +112,10 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 	const importedFilename = `data/imported-entries-pending-left-${network}-${latestBlock}.json`;
 
 	// for all accouts over the threshold
-	for (const { account, amount } of migratedAccountsOverThreshold) {
+	for (const { account } of migratedAccountsOverThreshold) {
+		if (accountToInspect && account.toLowerCase() !== accountToInspect.toLowerCase()) {
+			continue;
+		}
 		// now check this matches what is pending for their migration
 		const remainingToMigrate = await rewardEscrowV2.totalBalancePendingMigration(account);
 		if (remainingToMigrate.toString() === '0') {
@@ -117,6 +132,9 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 
 		// begin a tally
 		let entrySumThatArePastVestingDate = ethers.BigNumber.from(0);
+
+		// load their new schedule
+		const newSchedule = await rewardEscrowV2.getVestingSchedules(account, '0', '1024'); // limited to 1024 entries (should be more than enough)
 
 		// load their old schedules
 		const flatSchedule = await oldRewardEscrow.checkAccountSchedule(account);
@@ -141,11 +159,45 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 				);
 				continue;
 			}
+
+			// look thru new entries to check dupes
+			const newScheduleEntry = newSchedule.find(
+				({ endTime, escrowAmount }) =>
+					endTime.toString() === timestamp.toString() && escrowAmount.toString() === entry.toString(),
+			);
+
+			if (newScheduleEntry) {
+				if (accountToInspect) {
+					console.log(
+						gray('Found matching entry for'),
+						yellow(formatEther(entry)),
+						gray('at time'),
+						yellow(new Date(+timestamp * 1000)),
+					);
+				}
+				continue;
+			} else if (accountToInspect) {
+				console.log(
+					gray('Found old entry that is vestable before this moment as'),
+					yellow(formatEther(entry)),
+					gray('on date'),
+					yellow(new Date(+timestamp * 1000)),
+				);
+			}
+
 			// otherwise add to the sum
 			entrySumThatArePastVestingDate = entrySumThatArePastVestingDate.add(flatSchedule[i + 1]);
 		}
 
 		if (entrySumThatArePastVestingDate.gt(0)) {
+			if (accountToInspect) {
+				console.log(gray('The following imported events have occurred for this account'));
+				importedAmountsOriginal
+					.filter(({ account }) => account.toLowerCase() === accountToInspect.toLowerCase())
+					.forEach(({ amount, time }) =>
+						console.log(gray('\t- imported'), yellow(formatEther(amount)), gray('on'), yellow(new Date(+time * 1000))),
+					);
+			}
 			// some accounts that have entries now but not before (vesting happened in the time between) need a 0 value here
 			const amountAlreadyImported = importedAmounts[account] ? importedAmounts[account] : '0';
 			const amountRemainingForImport = entrySumThatArePastVestingDate.sub(amountAlreadyImported).toString();
@@ -180,8 +232,14 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 				amountMatchesPending ? green('true') : red('false'),
 			);
 
-			fs.writeFileSync(importedFilename, JSON.stringify(accountsWithFlattenedEntriesPastVestingDate, null, 2));
+			if (!accountToInspect) {
+				fs.writeFileSync(importedFilename, JSON.stringify(accountsWithFlattenedEntriesPastVestingDate, null, 2));
+			}
 		}
+	}
+
+	if (accountToInspect) {
+		return;
 	}
 
 	const accountsToImportNow = accountsWithFlattenedEntriesPastVestingDate.filter(
@@ -209,7 +267,7 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 		gray('Data payload for all accounts with something vested that needs importing'),
 		yellow(
 			rewardEscrowV2.interface.encodeFunctionData('importVestingSchedule', [
-				accountsToImportNow.map(({ address }) => address),
+				accountsToImportNow.map(({ account }) => account),
 				accountsToImportNow.map(({ amount }) => amount),
 			]),
 		),
@@ -218,6 +276,7 @@ async function rewardEscrowMigration({ network, providerUrl }) {
 
 program
 	.description('Reward Escrow Migration')
+	.option('-a, --account-to-inspect <value>', 'An account to filter to')
 	.option('-n, --network <value>', 'The network to run off', x => x.toLowerCase(), 'mainnet')
 	.option('-p, --provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.action(async (...args) => {
