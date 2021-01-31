@@ -324,6 +324,21 @@ async function interactiveUi({
 					error = err;
 				}
 			} else {
+				const txPromise = contract[abiItemName](...inputs, overrides);
+				result = await stageTx({
+					txPromise,
+					provider,
+				});
+				let calldata;
+				if (result.success) {
+					calldata = result.transaction.data;
+				} else {
+					calldata = result.error.transaction.data;
+				}
+				if (calldata) {
+					console.log(gray(`  > calldata: ${calldata}`));
+				}
+
 				const { confirmation } = await inquirer.prompt([
 					{
 						type: 'confirm',
@@ -338,12 +353,6 @@ async function interactiveUi({
 				}
 
 				console.log(gray(`  > Staging transaction... ${new Date()}`));
-				const txPromise = contract[abiItemName](...inputs, overrides);
-
-				result = await stageTx({
-					txPromise,
-					provider,
-				});
 
 				if (result.success) {
 					console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
