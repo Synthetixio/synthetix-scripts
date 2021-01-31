@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
-require('dotenv').config();
-
 const program = require('commander');
 
-const { green, cyan, red, bgRed } = require('chalk');
-const { formatEther, formatBytes32String, toUtf8String } = require('ethers').utils;
+const { gray, red } = require('chalk');
+const { toUtf8String } = require('ethers').utils;
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
 
@@ -49,8 +47,15 @@ async function synthStatus({ network, useOvm, providerUrl, useFork, deploymentPa
 		const currencyKey = currencyKeys[i];
 		const currency = toUtf8String(currencyKey);
 		const status = await SystemStatus.synthSuspension(currencyKey);
+		const suspended = status[0];
+		const reason = status[1];
 
-		console.log(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${status}`);
+		if (!!!suspended) {
+			console.log(gray(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${suspended}`));
+		} else {
+			console.log(red(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${suspended} (${reason})`));
+		}
+
 	}
 }
 
