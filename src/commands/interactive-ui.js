@@ -123,7 +123,7 @@ async function interactiveUi({
 	// Start interaction
 	// -----------------
 
-	await printHeader({ useOvm, providerUrl, network, gasPrice, deploymentFilePath });
+	await printHeader({ useOvm, providerUrl, network, gasPrice, deploymentFilePath, wallet });
 
 	async function pickContract() {
 		const targets = Object.keys(deploymentData.targets);
@@ -207,7 +207,7 @@ async function interactiveUi({
 				return `${inputPart}${outputPart}`;
 			}
 
-			const escItem =  '↩ BACK';
+			const escItem = '↩ BACK';
 
 			async function searchAbi(matches, query = '') {
 				matches;
@@ -297,6 +297,10 @@ async function interactiveUi({
 						} else {
 							processed = synthetix.toBytes32(processed);
 						}
+					} else if (processed === 'true') {
+						processed = 1;
+					} else if (processed === 'false') {
+						processed = 0;
 					}
 					console.log(gray(`  > processed inputs (${isArray ? processed.length : '1'}):`, processed));
 
@@ -331,9 +335,9 @@ async function interactiveUi({
 				});
 				let calldata;
 				if (result.success) {
-					calldata = result.transaction.data;
+					calldata = result.tx.data;
 				} else {
-					calldata = result.error.transaction.data;
+					calldata = result.error.error.data;
 				}
 				if (calldata) {
 					console.log(gray(`  > calldata: ${calldata}`));
@@ -360,7 +364,7 @@ async function interactiveUi({
 					result = await runTx({
 						tx: result.tx,
 						provider,
-					})
+					});
 
 					if (result.success) {
 						result = result.receipt;
@@ -419,7 +423,7 @@ async function printHeader({ useOvm, providerUrl, network, gasPrice, deploymentF
 
 	async function figprint(msg, font) {
 		return new Promise((resolve, reject) => {
-			figlet.text(msg, { font }, function(err, res) {
+			figlet.text(msg, { font }, function (err, res) {
 				if (err) {
 					reject(err);
 				}
@@ -427,14 +431,11 @@ async function printHeader({ useOvm, providerUrl, network, gasPrice, deploymentF
 			});
 		});
 	}
-	const msg = await figprint(`SYNTHETIX-CLI${useOvm ? ' *L2*' : ''}`, 'Slant')
+	const msg = await figprint(`SYNTHETIX-CLI${useOvm ? ' *L2*' : ''}`, 'Slant');
 	const synthetixPath = './node_modules/synthetix';
 	const stats = fs.lstatSync(synthetixPath);
 	console.log(useOvm ? red(msg) : green(msg));
-	console.log(
-		green(`v${package.version}`),
-		green(`(Synthetix v${synthetixPackage.version})`),
-	);
+	console.log(green(`v${package.version}`), green(`(Synthetix v${synthetixPackage.version})`));
 	if (stats.isSymbolicLink()) {
 		const realPath = fs.realpathSync(synthetixPath);
 		const branch = branchName({ altPath: realPath });
@@ -466,7 +467,7 @@ function printCheatsheet({ activeContract, recentContracts, wallet }) {
 	console.log(gray.inverse(`${activeContract.name} => ${activeContract.address}`));
 	console.log(gray(`  * Signer: ${wallet ? `${wallet.address}` : 'Read only'}`));
 
-	console.log(gray(`  * Recent contracts:`));
+	console.log(gray('  * Recent contracts:'));
 	for (let i = 0; i < recentContracts.length; i++) {
 		const contract = recentContracts[i];
 		console.log(gray(`    ${contract.name}: ${contract.address}`));
