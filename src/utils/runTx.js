@@ -1,6 +1,6 @@
 const ethers = require('ethers');
 
-async function stageTx({ txPromise }) {
+async function sendTx({ txPromise }) {
 	try {
 		const tx = await txPromise;
 
@@ -16,7 +16,7 @@ async function stageTx({ txPromise }) {
 	}
 }
 
-async function runTx({ tx, provider }) {
+async function confirmTx({ tx, provider }) {
 	try {
 		const receipt = await tx.wait();
 
@@ -60,6 +60,6 @@ async function runTx({ tx, provider }) {
 }
 
 module.exports = {
-	stageTx,
-	runTx,
+	sendTx,
+	confirmTx,
 };

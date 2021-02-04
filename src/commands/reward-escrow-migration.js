@@ -9,7 +9,7 @@ const ethers = require('ethers');
 const { formatEther, parseUnits } = ethers.utils;
 const { red, gray, yellow, green } = require('chalk');
 const synthetix = require('synthetix');
-const { stageTx, runTx } = require('../utils/runTx');
+const { sendTx, confirmTx } = require('../utils/runTx');
 
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
@@ -81,7 +81,7 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 
 	const executeTxn = async ({ txPromise }) => {
 		console.log(gray(`  > Staging transaction... ${new Date()}`));
-		let result = await stageTx({
+		let result = await sendTx({
 			txPromise,
 			provider,
 		});
@@ -89,7 +89,7 @@ async function rewardEscrowMigration({ accountJson, network, providerUrl, dryRun
 		if (result.success) {
 			console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
 
-			result = await runTx({
+			result = await confirmTx({
 				tx: result.tx,
 				provider,
 			});

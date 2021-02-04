@@ -17,7 +17,7 @@ const { yellow, green, red, cyan, gray } = require('chalk');
 const synthetix = require('synthetix');
 
 const { setupProvider } = require('../utils/setupProvider');
-const { stageTx, runTx } = require('../utils/runTx');
+const { sendTx, confirmTx } = require('../utils/runTx');
 const { logReceipt, logError } = require('../utils/prettyLog');
 
 const DEFAULTS = {
@@ -312,13 +312,9 @@ async function interactiveUi({
 			// Call function
 			// -----------------
 
-			const overrides = {
-				gasPrice: ethers.utils.parseUnits(`${gasPrice}`, 'gwei'),
-				gasLimit,
-			};
-
 			// Call function
 			let result, error;
+			// READ ONLY
 			if (abiItem.stateMutability === 'view') {
 				console.log(gray('  > Querying...'));
 
@@ -327,20 +323,21 @@ async function interactiveUi({
 				} catch (err) {
 					error = err;
 				}
+				// SEND TX
 			} else {
-				const txPromise = contract[abiItemName](...inputs, overrides);
-				result = await stageTx({
-					txPromise,
-					provider,
-				});
-				let calldata;
-				if (result.success) {
-					calldata = result.tx.data;
-				} else {
-					calldata = result.error.error.data;
+				const overrides = {
+					gasPrice: ethers.utils.parseUnits(`${gasPrice}`, 'gwei'),
+					gasLimit,
+				};
+
+				let preview;
+				try {
+					preview = await contract.populateTransaction[abiItemName](...inputs, overrides);
+				} catch(err) {
+					console.log(yellow(`Warning: tx will probably fail!`));
 				}
-				if (calldata) {
-					console.log(gray(`  > calldata: ${calldata}`));
+				if (preview.data) {
+					console.log(gray(`  > calldata: ${preview.data}`));
 				}
 
 				const { confirmation } = await inquirer.prompt([
@@ -357,11 +354,15 @@ async function interactiveUi({
 				}
 
 				console.log(gray(`  > Staging transaction... ${new Date()}`));
+				const txPromise = contract[abiItemName](...inputs, overrides);
+				result = await sendTx({
+					txPromise,
+					provider,
+				});
 
 				if (result.success) {
 					console.log(gray(`  > Sending transaction... ${result.tx.hash}`));
-
-					result = await runTx({
+					result = await confirmTx({
 						tx: result.tx,
 						provider,
 					});

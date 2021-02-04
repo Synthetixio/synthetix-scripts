@@ -10,7 +10,7 @@ const { wrap } = require('synthetix');
 
 const { getContract } = require('../utils/getContract');
 const { setupProvider } = require('../utils/setupProvider');
-const { runTx } = require('../utils/runTx');
+const { confirmTx } = require('../utils/runTx');
 const { wait } = require('../utils/wait');
 
 async function airdrop({
@@ -129,7 +129,7 @@ async function airdrop({
 		if (remaining > 0) {
 			console.log(gray(`  > Transferring ${remaining} SNX to ${staker.address}...`));
 
-			const result = await runTx({
+			const result = await confirmTx({
 				txPromise: Synthetix.transfer(staker.address, parseEther(`${remaining}`), overrides),
 				provider,
 			});
