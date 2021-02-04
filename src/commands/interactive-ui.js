@@ -272,7 +272,7 @@ async function interactiveUi({
 					const isArray = input.type.includes('[]');
 
 					if (requiresBytes32Util) {
-						message = `${message} (uses toBytes32${isArray ? ' - if array, use a,b,c syntax' : ''})`;
+						message = `${message} (uses toBytes32${isArray ? ' - if array, use ["a","b","c"] syntax' : ''})`;
 					}
 
 					const answer = await inquirer.prompt([
@@ -287,20 +287,40 @@ async function interactiveUi({
 					console.log(gray('  > raw inputs:', processed));
 
 					if (isArray) {
-						if (!processed.includes('[')) processed = processed.split(',');
-						else processed = JSON.parse(processed.split(','));
+						try {
+							processed = JSON.parse(processed);
+						} catch(err) {
+							console.log(red(`Error parsing array input. Please use the indicated syntax.`));
+
+							await pickFunction();
+						}
 					}
 
+					function bytes32ify(value) {
+						if (ethers.utils.isHexString(value)) {
+							console.log('isHex');
+							return value;
+						} else {
+							return synthetix.toBytes32(value);
+						}
+					}
 					if (requiresBytes32Util) {
 						if (isArray) {
-							processed = processed.map(item => synthetix.toBytes32(item));
+							processed = processed.map(item => bytes32ify(item));
 						} else {
-							processed = synthetix.toBytes32(processed);
+							processed = bytes32ify(processed);
 						}
-					} else if (processed === 'true') {
-						processed = 1;
-					} else if (processed === 'false') {
-						processed = 0;
+					}
+
+					// Avoid 'false' and '0' being interpreted as bool = true
+					function boolify(value) {
+						if (value === 'false' || value === '0') return 0;
+						return value;
+					}
+					if (isArray) {
+						processed = processed.map(value => boolify(value))
+					} else {
+						processed = boolify(processed);
 					}
 					console.log(gray(`  > processed inputs (${isArray ? processed.length : '1'}):`, processed));
 
@@ -336,7 +356,7 @@ async function interactiveUi({
 				} catch(err) {
 					console.log(yellow(`Warning: tx will probably fail!`));
 				}
-				if (preview.data) {
+				if (preview && preview.data) {
 					console.log(gray(`  > calldata: ${preview.data}`));
 				}
 
