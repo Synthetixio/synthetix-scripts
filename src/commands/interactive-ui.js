@@ -32,7 +32,7 @@ const DEFAULTS = {
 		gasPrice: 1,
 	},
 	'kovan-ovm': {
-		providerUrl: 'https://kovan2.optimism.io',
+		providerUrl: 'https://kovan.optimism.io',
 		gasPrice: 0,
 	},
 	rinkeby: {
