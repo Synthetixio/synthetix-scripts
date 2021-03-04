@@ -20,7 +20,6 @@ async function airdropWETH({
 	wethAddress,
 	gasPrice,
 	yes,
-	dryRun,
 }) {
 	// Validate input parameters
 	if (!network) throw new Error('Please specify a network');
@@ -31,6 +30,9 @@ async function airdropWETH({
 	if (!fs.existsSync(dataFile)) throw new Error(`No file at ${dataFile}`);
 	if (!wethAddress) throw new Error('Please specify the target WETH address');
 	if (!ethers.utils.isAddress(wethAddress)) throw new Error('Invalid WETH address');
+
+	// Parse data
+	const data = JSON.parse(fs.readFileSync(dataFile));
 
 	// Evaluate deployment path
 	const { getPathToNetwork } = wrap({
@@ -52,12 +54,94 @@ async function airdropWETH({
 	const abi = JSON.parse(fs.readFileSync('src/abis/common/ERC20.json', 'utf8'));
 	const WETH = new ethers.Contract(wethAddress, abi, wallet);
 
-	// TODO: Abort if signer will not have enough balance
-	// Verify signer WETH balance
-	const balance = await WETH.balanceOf(signerAddress);
-	console.log('balance', balance);
+	// Get a list of target addresses
+	const accounts = Object.keys(data.depositors);
 
-	// 
+	// Evaluate how much each address will need
+	amountToDrop = ethers.utils.parseEther(amountToDrop);
+	const toAirdrop = {};
+	const zero = ethers.utils.parseEther('0');
+	let totalAccountsToDropTo = 0;
+	let totalWethToDrop = ethers.utils.parseEther('0');
+	console.log(chalk.cyan(`1. Checking WETH balances on ${accounts.length} potential target accounts...`));
+	for (let i = 0; i < accounts.length; i++) {
+		const account = accounts[i];
+		const accountBalance = await WETH.balanceOf(account);
+
+		console.log(chalk.gray(`  * Checking account ${i + 1}/${accounts.length} - ${account} - ${ethers.utils.formatEther(accountBalance)} WETH`));
+
+		let delta = amountToDrop.sub(accountBalance);
+		if (delta.lte(zero)) {
+			console.log(chalk.gray(`    > Account does not need any more WETH`));
+
+			continue;
+		}
+		console.log(chalk.yellow(`    > Account will need ${ethers.utils.formatEther(delta)} WETH`));
+
+		toAirdrop[account] = delta;
+		totalWethToDrop = totalWethToDrop.add(delta);
+		totalAccountsToDropTo++;
+	}
+
+	if (totalAccountsToDropTo === 0) {
+		console.log(chalk.blue.bold('No WETH needs to be airdroped'));
+		process.exit(0);
+	}
+
+	// Verify signer WETH balance
+	const signerBalance = await WETH.balanceOf(signerAddress);
+	if (signerBalance.lt(totalWethToDrop)) {
+		throw new Error(`Signer only has ${ethers.utils.formatEther(signerBalance)} WETH, and it needs ${ethers.utils.formatEther(totalWethToDrop)} WETH.`);
+	}
+
+	// Print data and confirm before continuing
+	console.log('');
+	console.log(chalk.cyan('Please review this information before continuing:'));
+	console.log(chalk.gray('================================================================================'));
+	console.log(chalk.yellow('* network:', network));
+	console.log(chalk.yellow('* provider:', providerUrl));
+	console.log(chalk.yellow('* gas price:', gasPrice));
+	console.log(chalk.yellow('* deployment path:', deploymentPath));
+	console.log(chalk.yellow('* total accounts to drop to:', totalAccountsToDropTo));
+	console.log(chalk.yellow('* target WETH weth balance for each:', ethers.utils.formatEther(amountToDrop)));
+	console.log(chalk.yellow('* total WETH to be dropped:', ethers.utils.formatEther(totalWethToDrop)));
+	console.log(chalk.yellow('* signer:', wallet.address));
+	console.log(chalk.yellow('* signer balance:', ethers.utils.formatEther(signerBalance)));
+	console.log(chalk.gray('================================================================================'));
+	async function confirm() {
+		if (yes) return;
+
+		const { confirmation } = await inquirer.prompt([
+			{
+				type: 'confirm',
+				name: 'confirmation',
+				message: 'Continue?',
+			},
+		]);
+		if (!confirmation) {
+			console.log(chalk.gray('User cancelled'));
+			process.exit(0);
+		}
+	}
+
+	await confirm();
+
+	// Sent WETH to each
+	const targets = Object.keys(toAirdrop);
+	console.log(chalk.cyan(`2. Airdropping WETH to ${targets.length} accounts...`));
+	for (let i = 0; i < targets.length; i++) {
+		const account = targets[i];
+		const amount = toAirdrop[account];
+
+		console.log(chalk.gray(`  > Sending ${ethers.utils.formatEther(amount)} to ${account}...`));
+
+		const tx = await WETH.transfer(account, amount);
+		const receipt = await tx.wait();
+
+		console.log(chalk.green(`  > WETH sent ${i + 1}/${targets.length}`));
+	}
+
+	console.log(chalk.blue.bold('Done.'));
 }
 
 program
@@ -70,7 +154,6 @@ program
 	.option('--weth-address <value>', 'The address of the WETH token in L2')
 	.option('--gas-price <value>', 'Gas price to set when performing transfers', '0')
 	.option('--yes', 'Skip all confirmations', false)
-	.option('--dry-run', 'Avoids sending any transaction', false)
 	.action(async (...args) => {
 		try {
 			await airdropWETH(...args);
