@@ -1,7 +1,7 @@
 {
-  "blockNumebr": 78582,
-  "numMintedSecondaryEvents": 3141,
-  "numDepositors": 2560,
+  "blockNumebr": 78650,
+  "numMintedSecondaryEvents": 3152,
+  "numDepositors": 2571,
   "depositors": {
     "0x5fB49c7E163aF81a117E0a0d26bdF9e8c7969B3F": "10000000000000000000",
     "0xEe34E8298e388FaBaA0deb85B54F0F64e7aEA88C": "1687500352548456403674",
