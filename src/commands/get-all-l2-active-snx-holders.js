@@ -83,6 +83,7 @@ async function getIssuerBalances({
 	if (!data.total) data.total = '0';
 	let total = ethers.utils.parseEther('0');
 	const minimum = ethers.utils.parseEther(minimumBalance);
+	data.totalHolders = 0;
 	for (let i = 0; i < depositors.length; i++) {
 		const account = depositors[i];
 
@@ -91,6 +92,10 @@ async function getIssuerBalances({
 		if (!balance.gt(minimum)) {
 			continue;
 		}
+
+		// Count accounts with more than minimum balance
+		data.totalHolders++;
+		console.log(`  > Holders: `, data.totalHolders);
 
 		// Accum
 		total = total.add(balance);
