@@ -112,7 +112,7 @@ program
 	.option('--data-file <value>', 'The json file where all output will be stored')
 	.option('--provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('--use-ovm', 'Use an Optimism chain', true)
-	.option('--minimum-balance <value>', 'Minimum SNX balance to consider for holding', '1')
+	.option('--minimum-balance <value>', 'Minimum sUSD balance to consider for issuance', '1')
 	.action(async (...args) => {
 		try {
 			await getIssuerBalances(...args);

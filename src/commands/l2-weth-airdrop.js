@@ -52,9 +52,12 @@ async function airdropWETH({
 	const abi = JSON.parse(fs.readFileSync('src/abis/common/ERC20.json', 'utf8'));
 	const WETH = new ethers.Contract(wethAddress, abi, wallet);
 
+	// TODO: Abort if signer will not have enough balance
 	// Verify signer WETH balance
 	const balance = await WETH.balanceOf(signerAddress);
 	console.log('balance', balance);
+
+	// 
 }
 
 program
