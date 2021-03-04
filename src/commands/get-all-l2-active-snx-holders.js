@@ -47,8 +47,7 @@ async function getIssuerBalances({
 		network,
 		useOvm,
 	});
-
-	// Get all minted secondary events
+// Get all minted secondary events
 	console.log(gray(`1) Retrieving all SynthetixBridgeToBase MintedSecondary events...`));
 	const events = await getPastEvents({
 		contract: SynthetixBridgeToBase,
@@ -95,7 +94,7 @@ async function getIssuerBalances({
 
 		// Count accounts with more than minimum balance
 		data.totalHolders++;
-		console.log(`  > Holders: `, data.totalHolders);
+		console.log(gray(`  > Holders: `, data.totalHolders));
 
 		// Accum
 		total = total.add(balance);

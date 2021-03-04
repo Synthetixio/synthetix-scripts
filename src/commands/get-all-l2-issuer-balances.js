@@ -11,11 +11,13 @@ async function getIssuerBalances({
 	providerUrl,
 	dataFile,
 	network,
-	useOvm
+	minimumBalance,
+	useOvm,
 }) {	// Validate input parameters
 	if (!network) throw new Error('Please specify a network');
 	if (!providerUrl) throw new Error('Please specify a provider');
 	if (!dataFile) throw new Error('Please specify a JSON output file');
+	if (isNaN(+minimumBalance)) throw new Error('Please specify a valid minimum balance');
 
 	// Retrieve the output data file
 	// Create the file if it doesn't exist
@@ -74,11 +76,20 @@ async function getIssuerBalances({
 	if (!data.issuers) data.issuers = {};
 	if (!data.total) data.total = '0';
 	let total = ethers.utils.parseEther('0');
+	const minimum = ethers.utils.parseEther(minimumBalance);
+	data.totalIssuers = 0;
 	for (let i = 0; i < issuers.length; i++) {
 		const account = issuers[i];
 
 		// Get balance
 		const balance = await SynthsUSD.balanceOf(account);
+		if (!balance.gt(minimum)) {
+			continue;
+		}
+
+		// Count accounts with more than minimum balance
+		data.totalIssuers++;
+		console.log(gray(`  > Issuers: `, data.totalIssuers));
 
 		// Accum
 		total = total.add(balance);
@@ -101,6 +112,7 @@ program
 	.option('--data-file <value>', 'The json file where all output will be stored')
 	.option('--provider-url <value>', 'The http provider to use for communicating with the blockchain')
 	.option('--use-ovm', 'Use an Optimism chain', true)
+	.option('--minimum-balance <value>', 'Minimum SNX balance to consider for holding', '1')
 	.action(async (...args) => {
 		try {
 			await getIssuerBalances(...args);
