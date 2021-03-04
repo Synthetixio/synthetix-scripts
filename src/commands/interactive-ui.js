@@ -415,14 +415,18 @@ async function interactiveUi({
 				logReceipt(result, contract);
 
 				if (abiItem.stateMutability === 'view' && result !== undefined) {
-					if (abiItem.outputs.length > 1) {
-						for (let i = 0; i < abiItem.outputs.length; i++) {
-							const output = abiItem.outputs[i];
-							console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result[i]));
-						}
+					if (Array.isArray(result) && result.length === 0) {
+						console.log(gray(`  ↪ Call returned no data`));
 					} else {
-						const output = abiItem.outputs[0];
-						console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result));
+						if (abiItem.outputs.length > 1) {
+							for (let i = 0; i < abiItem.outputs.length; i++) {
+								const output = abiItem.outputs[i];
+								console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result[i]));
+							}
+						} else {
+							const output = abiItem.outputs[0];
+							console.log(cyan(`  ↪${output.name}(${output.type}):`), printReturnedValue(result));
+						}
 					}
 				}
 			}
