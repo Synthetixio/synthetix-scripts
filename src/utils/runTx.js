@@ -25,24 +25,8 @@ async function confirmTx({ tx, provider }) {
 			receipt,
 		};
 	} catch (error) {
-		// Try to get the revert reason when none is provided
 		try {
-			let code = await provider.call(tx);
-			code = code.substr(138);
-
-			// Try to parse the revert reason bytes.
-			if (code.length === '64') {
-				error.reason = ethers.utils.parseBytes32String(`0x${code}`);
-			} else {
-				error.reason = '';
-				const chunks = code.match(/.{1,62}/g);
-				chunks.map(chunk => {
-					try {
-						const parsed = ethers.utils.toUtf8String(`0x${chunk}00`);
-						error.reason += parsed;
-					} catch(error) {}
-				});
-			}
+			error.reason = await getRevertReason({ tx, provider });
 
 			return {
 				success: false,
@@ -59,7 +43,36 @@ async function confirmTx({ tx, provider }) {
 	}
 }
 
+function _hexToString(hex) {
+	let str = '';
+
+	const terminator = '**zÛ';
+	for (var i = 0; i < hex.length; i += 2) {
+		str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));
+
+		if (str.includes(terminator)) {
+			break;
+		}
+	}
+
+	return str.substring(0, str.length - 4);
+}
+
+async function getRevertReason({ tx, provider }) {
+	const code = (await provider.call(tx)).substr(138);
+	const hex = `0x${code}`;
+
+	if (code.length === '64') {
+		return ethers.utils.parseBytes32String(hex);
+	} else {
+		return _hexToString(hex);
+	}
+
+	return reason;
+}
+
 module.exports = {
 	sendTx,
 	confirmTx,
+	getRevertReason,
 };
