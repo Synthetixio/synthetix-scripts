@@ -35,6 +35,14 @@ const DEFAULTS = {
 		providerUrl: 'https://kovan.optimism.io',
 		gasPrice: 0,
 	},
+	local: {
+		gasPrice: 1,
+		providerUrl: 'http://localhost:9545',
+	},
+	'local-ovm': {
+		providerUrl: 'http://localhost:8545',
+		gasPrice: 0,
+	},
 	rinkeby: {
 		gasPrice: 1,
 	},
