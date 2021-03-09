@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
 const program = require('commander');
 
 const { gray, red } = require('chalk');
@@ -43,20 +44,21 @@ async function synthStatus({ network, useOvm, providerUrl, useFork, deploymentPa
 		deploymentPath,
 	});
 
-	for (let i = 0; i < currencyKeys.length; i++) {
-		const currencyKey = currencyKeys[i];
+	await Promise.all(currencyKeys.map(async currencyKey => {
 		const currency = toUtf8String(currencyKey);
 		const status = await SystemStatus.synthSuspension(currencyKey);
+		const exchangeStatus = await SystemStatus.synthExchangeSuspension(currencyKey);
 		const suspended = status[0];
 		const reason = status[1];
+		const exchangeSuspended = exchangeStatus[0];
+		const exchangeReason = exchangeStatus[1];
 
-		if (!!!suspended) {
-			console.log(gray(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${suspended}`));
+		if (!!!suspended && !!! exchangeSuspended) {
+			console.log(gray(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${suspended}, Exchange suspended: ${exchangeSuspended}`));
 		} else {
-			console.log(red(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${suspended} (${reason})`));
+			console.log(red(`${currency} ${currencyKey.substr(0, 10)} - Suspended: ${suspended} (${reason}), Exchange suspended: ${exchangeSuspended} (${exchangeReason})`));
 		}
-
-	}
+	}));
 }
 
 program
