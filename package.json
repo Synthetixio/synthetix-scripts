@@ -1,6 +1,6 @@
 {
 	"name": "@synthetixio/cli",
-	"version": "2.38.0",
+	"version": "2.41.0-alpha",
 	"description": "A set of cli utilities for the Synthetix protocol",
 	"main": "src/commands/interactive-ui.js",
 	"bin": {
@@ -37,7 +37,7 @@
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"synthetix": "2.38.0"
+		"synthetix": "2.41.0-alpha"
 	},
 	"devDependencies": {
 		"current-git-branch": "^1.1.0",
