@@ -238,7 +238,7 @@ program
 	.option('-z, --use-ovm', 'Use an Optimism chain', false)
 	.action(async (...args) => {
 		try {
-			await status(...args);
+			await rates(...args);
 		} catch (err) {
 			console.error(red(err));
 			console.log(err.stack);

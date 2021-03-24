@@ -136,21 +136,21 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 	/* ~~~~ SupplySchedule  ~~~~ */
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-	logSection('SupplySchedule');
+	if (!useOvm) {
+		logSection('SupplySchedule');
 
-	const SupplySchedule = getContract({
-		contract: 'SupplySchedule',
-		source: useOvm ? 'FixedSupplySchedule' : 'SupplySchedule',
-		network,
-		useOvm,
-		provider,
-		deploymentPath,
-	});
+		const SupplySchedule = getContract({
+			contract: 'SupplySchedule',
+			source: useOvm ? 'FixedSupplySchedule' : 'SupplySchedule',
+			network,
+			useOvm,
+			provider,
+			deploymentPath,
+		});
 
-	const supply = formatEther(await SupplySchedule.mintableSupply(blockOptions));
-	logItem('SupplySchedule.mintableSupply', supply);
+		const supply = formatEther(await SupplySchedule.mintableSupply(blockOptions));
+		logItem('SupplySchedule.mintableSupply', supply);
 
-	if (useOvm) {
 		logItem(
 			'FixedSupplySchedule.inflationStartDate',
 			new Date((await SupplySchedule.inflationStartDate(blockOptions)).toString() * 1000),
@@ -295,6 +295,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	const ExchangeRates = getContract({
 		contract: 'ExchangeRates',
+		source: useOvm ? 'ExchangeRatesWithoutInvPricing' : 'ExchangeRates',
 		network,
 		useOvm,
 		provider,
@@ -303,6 +304,7 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	const Issuer = getContract({
 		contract: 'Issuer',
+		source: useOvm ? 'IssuerWithoutLiquidations' : 'Issuer',
 		network,
 		useOvm,
 		provider,
