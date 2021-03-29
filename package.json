@@ -1,6 +1,6 @@
 {
 	"name": "@synthetixio/cli",
-	"version": "2.41.0-alpha",
+	"version": "2.41.0",
 	"description": "A set of cli utilities for the Synthetix protocol",
 	"main": "src/commands/interactive-ui.js",
 	"bin": {
@@ -10,7 +10,7 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "eslint .",
 		"lint:fix": "prettier --write '**/*.js' '**/*.md'",
-		"start": "node src/commands/interactive-ui.js --network mainnet"
+		"start": "node src/commands/interactive-ui.js"
 	},
 	"repository": {
 		"type": "git",
@@ -37,7 +37,7 @@
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"synthetix": "2.41.0-alpha"
+		"synthetix": "2.41.0"
 	},
 	"devDependencies": {
 		"current-git-branch": "^1.1.0",
