@@ -41,6 +41,10 @@ async function getReason({
 	const tx = await provider.getTransaction(txHash);
 	console.log(chalk.gray(`Transaction: ${JSON.stringify(tx, null, 2)}`));
 
+	// Retrieve receipt
+	const receipt = await provider.getTransactionReceipt(txHash);
+	console.log(chalk.gray(`Receipt: ${JSON.stringify(receipt, null, 2)}`));
+
 	// Try to retrieve the revert reason
 	let reason;
 	try {
