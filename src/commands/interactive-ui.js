@@ -22,7 +22,7 @@ const { logReceipt, logError } = require('../utils/prettyLog');
 
 const DEFAULTS = {
 	mainnet: {
-		gasPrice: 40,
+		gasPrice: 200,
 	},
 	'mainnet-ovm': {
 		providerUrl: 'https://mainnet.optimism.io',
