@@ -7,105 +7,179 @@ const { gray, red } = require('chalk');
 const { getContract } = require('../utils/getContract');
 const { getPastEvents } = require('../utils/getEvents');
 
-async function getIssuerBalances({
+let _data, _dataFile;
+let _network;
+
+async function getAllActiveSnxHolders({
+	historicalProviderUrls,
 	providerUrl,
 	dataFile,
 	network,
 	useOvm,
-}) {	// Validate input parameters
+	clear,
+}) {
+	// Validate input parameters
 	if (!network) throw new Error('Please specify a network');
 	if (!providerUrl) throw new Error('Please specify a provider');
 	if (!dataFile) throw new Error('Please specify a JSON output file');
 
-	// Retrieve the output data file
-	// Create the file if it doesn't exist
-	let data;
-	if (fs.existsSync(dataFile)) {
-		data = JSON.parse(fs.readFileSync(dataFile));
-	} else {
-		data = {};
+	// Retrieve or create the output data file
+	let data = {
+		accounts: {},
+	};
+	if (!clear) {
+		if (fs.existsSync(dataFile)) {
+			data = JSON.parse(fs.readFileSync(dataFile));
+		}
 	}
 
-	// Setup the provider
-	let provider;
+	// Set globals
+	_network = network;
+	_data = data;
+	_dataFile = dataFile;
+
+	// Get depositors on all providers
+	const allProviders = [providerUrl, ...historicalProviderUrls];
+	for (providerUrl of allProviders) {
+		await _getAllAddressesThatDeposited({ providerUrl });
+	}
+
+	// Read SNX balance for each account
+	await _getSNXBalances({ providerUrl });
+
+	// Read sUSD balance for each account
+	await _getUSDBalances({ providerUrl });
+}
+
+async function _getSNXBalances({ providerUrl }) {
+	const provider = _getProvider({ providerUrl });
+
+	// Connect to Synthetix contract
+	const Synthetix = getContract({
+		contract: 'Synthetix',
+		source: 'MintableSynthetix',
+		provider,
+		network: _network,
+		useOvm: true,
+	});
+
+	// Read SNX balance for each account
+	console.log(gray(`* Getting SNX balances in ${providerUrl}...`));
+	const addresses = Object.keys(_data.accounts);
+	_data.numSNXHolders = 0;
+	for (let i = 0; i < addresses.length; i++) {
+		const address = addresses[i];
+		const account = _data.accounts[address];
+		if (!account.balances) {
+			account.balances = {};
+		}
+
+		// Get balance
+		const balance = await Synthetix.balanceOf(address);
+		account.balances.SNX = balance.toString();
+		console.log(gray(`  > ${i}/${addresses.length} - ${address}: ${ethers.utils.formatEther(balance)} SNX`));
+
+		// Count accounts holding
+		if (balance.gt(ethers.BigNumber.from('0'))) {
+			_data.numSNXHolders++;
+		}
+
+		// Store in data file
+		_data.accounts[address] = account;
+		fs.writeFileSync(_dataFile, JSON.stringify(_data, null, 2));
+	}
+}
+
+async function _getUSDBalances({ providerUrl }) {
+	const provider = _getProvider({ providerUrl });
+
+	// Connect to sUSD contract
+	const SynthsUSD = getContract({
+		contract: 'ProxyERC20sUSD',
+		source: 'Synth',
+		provider,
+		network: _network,
+		useOvm: true,
+	});
+
+	// Read sUSD balance for each account
+	console.log(gray(`* Getting sUSD balances in ${providerUrl}...`));
+	const addresses = Object.keys(_data.accounts);
+	_data.numsUSDHolders = 0;
+	for (let i = 0; i < addresses.length; i++) {
+		const address = addresses[i];
+		const account = _data.accounts[address];
+		if (!account.balances) {
+			account.balances = {};
+		}
+
+		// Get balance
+		const balance = await SynthsUSD.balanceOf(address);
+		account.balances.sUSD = balance.toString();
+		console.log(gray(`  > ${i}/${addresses.length} - ${address}: ${ethers.utils.formatEther(balance)} sUSD`));
+
+		// Count accounts holding
+		if (balance.gt(ethers.BigNumber.from('0'))) {
+			_data.numsUSDHolders++;
+		}
+
+		// Store in data file
+		_data.accounts[address] = account;
+		fs.writeFileSync(_dataFile, JSON.stringify(_data, null, 2));
+	}
+}
+
+function _getProvider({ providerUrl }) {
 	if (providerUrl) {
-		provider = new ethers.providers.JsonRpcProvider(providerUrl);
+		return new ethers.providers.JsonRpcProvider(providerUrl);
 	} else {
-		provider = new ethers.getDefaultProvider();
+		return new ethers.getDefaultProvider();
 	}
+}
 
-	const currentBlock = await provider.getBlock();
-	console.log('Current block:', currentBlock.number);
-	data.blockNumebr = currentBlock.number;
-	fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+async function _getAllAddressesThatDeposited({ providerUrl }) {
+	const provider = _getProvider({ providerUrl });
 
+	// Connect to bridge contract
 	const SynthetixBridgeToBase = getContract({
 		contract: 'SynthetixBridgeToBase',
 		provider,
-		network,
-		useOvm,
+		network: _network,
+		useOvm: true,
 	});
-// Get all minted secondary events
-	console.log(gray(`1) Retrieving all SynthetixBridgeToBase MintedSecondary events...`));
+
+	// Get all MintedSecondary events
+	// These are emitted when a deposit is completed on L2
+	// `event MintedSecondary(address indexed account, uint256 amount)`
+	console.log(gray(`* Retrieving all SynthetixBridgeToBase MintedSecondary events in ${providerUrl}...`));
 	const events = await getPastEvents({
 		contract: SynthetixBridgeToBase,
 		eventName: 'MintedSecondary',
 		provider,
 	});
 	console.log(gray(`  > found ${events.length} events`));
+	const previousNumEvents = _data.numMintedSecondaryEvents || 0;
+	_data.numMintedSecondaryEvents = previousNumEvents + events.length;
+	fs.writeFileSync(_dataFile, JSON.stringify(_data, null, 2));
 
-	data.numMintedSecondaryEvents = events.length;
-	fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+	// Create entries for all addresses that completed a deposit
+	for (event of events) {
+		const account = event.args.account;
+		const amount = event.args.amount;
 
-	// Retrieve all addresses that deposited
-	const depositors = events
-		.map(event => event.args.account)
-		.filter((address, idx, self) => self.indexOf(address) === idx);
-	console.log(gray(`  > found ${depositors.length} unique addresses in the events`));
+		// Retrieve or create entry for this account
+		let entry = _data.accounts[account] || {
+			totalDeposited: '0',
+			numDeposits: '0',
+		};
 
-	data.numDepositors = depositors.length;
-	fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+		// Update entry
+		entry.totalDeposited = ethers.BigNumber.from(entry.totalDeposited).add(amount).toString();
+		entry.numDeposits = ethers.BigNumber.from(entry.numDeposits).add(ethers.BigNumber.from('1')).toString();
 
-	const Synthetix = getContract({
-		contract: 'Synthetix',
-		source: 'MintableSynthetix',
-		provider,
-		network,
-		useOvm,
-	});
-
-	// Read sUSD balance of each account that issued
-	console.log(gray(`2) Reading balance of all accounts that ever deposited, and storing accounts with a balance greater than zero SNX...`));
-	if (!data.depositors) data.depositors = {};
-	if (!data.total) data.total = '0';
-	let total = ethers.utils.parseEther('0');
-	data.totalHolders = 0;
-	const minimum = ethers.utils.parseEther('0');
-	for (let i = 0; i < depositors.length; i++) {
-		const account = depositors[i];
-
-		// Get balance
-		const balance = await Synthetix.balanceOf(account);
-		if (!balance.gt(minimum)) {
-			continue;
-		}
-
-		// Count accounts with more than minimum balance
-		data.totalHolders++;
-		console.log(gray(`  > Holders: `, data.totalHolders));
-
-		// Accum
-		total = total.add(balance);
-		data.total = total.toString();
-
-		// Stdout
-		console.log(gray(`  > Depositor ${i + 1}/${depositors.length} - ${account}: ${ethers.utils.formatEther(balance)} SNX > Total: ${ethers.utils.formatEther(total)} SNX`));
-
-		// Store in data file
-		data.depositors[account] = balance.toString();
-
-		// Store the data immediately
-		fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+		// Update data file
+		_data.accounts[account] = entry;
+		fs.writeFileSync(_dataFile, JSON.stringify(_data, null, 2));
 	}
 }
 
@@ -114,10 +188,12 @@ program
 	.option('--network <value>', 'The network to read events from')
 	.option('--data-file <value>', 'The json file where all output will be stored')
 	.option('--provider-url <value>', 'The http provider to use for communicating with the blockchain')
+	.option('--historical-provider-urls <values...>', 'Additional providers with archived history')
 	.option('--use-ovm', 'Use an Optimism chain', true)
+	.option('--clear', 'Delete previously existing data', false)
 	.action(async (...args) => {
 		try {
-			await getIssuerBalances(...args);
+			await getAllActiveSnxHolders(...args);
 		} catch (err) {
 			console.error(red(err));
 			console.log(err.stack);
