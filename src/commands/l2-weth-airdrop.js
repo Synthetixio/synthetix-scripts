@@ -55,7 +55,17 @@ async function airdropWETH({
 	const WETH = new ethers.Contract(wethAddress, abi, wallet);
 
 	// Get a list of target addresses
-	const accounts = Object.keys(data.depositors);
+	let accounts = Object.keys(data.accounts);
+	console.log(`All accounts: ${accounts.length}`)
+
+	// Filter accounts
+	// More than 1 SNX
+	accounts = accounts.filter(address => {
+		const account = data.accounts[address];
+
+		return ethers.BigNumber.from(account.balances.SNX).gt(ethers.utils.parseEther('1'))
+	});
+	console.log(`Filtered accounts: ${accounts.length}`)
 
 	// Evaluate how much each address will need
 	amountToDrop = ethers.utils.parseEther(amountToDrop);
