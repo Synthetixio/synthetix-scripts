@@ -65,6 +65,12 @@ async function airdropWETH({
 
 		return ethers.BigNumber.from(account.balances.SNX).gt(ethers.utils.parseEther('1'))
 	});
+	// Has deposited
+	accounts = accounts.filter(address => {
+		const account = data.accounts[address];
+
+		return ethers.BigNumber.from(account.totalDeposited).gt(ethers.utils.parseEther('0'))
+	});
 	console.log(`Filtered accounts: ${accounts.length}`)
 
 	// Evaluate how much each address will need
