@@ -151,26 +151,8 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 		const supply = formatEther(await SupplySchedule.mintableSupply(blockOptions));
 		logItem('SupplySchedule.mintableSupply', supply);
 
-		logItem(
-			'FixedSupplySchedule.inflationStartDate',
-			new Date((await SupplySchedule.inflationStartDate(blockOptions)).toString() * 1000),
-		);
-
 		const lastMint = (await SupplySchedule.lastMintEvent(blockOptions)).toNumber();
-		logItem('FixedSupplySchedule.lastMintEvent', lastMint);
-		const mintPeriod = (await SupplySchedule.mintPeriodDuration(blockOptions)).toNumber();
-		logItem('FixedSupplySchedule.mintPeriodDuration', mintPeriod);
-
-		const now = Math.floor(new Date().getTime() / 1000);
-
-		const remainingHours = (lastMint + mintPeriod - now) / (60 * 60);
-		logItem('Remaining hours until period ends', remainingHours);
-
-		logItem('FixedSupplySchedule.mintBuffer', (await SupplySchedule.mintBuffer(blockOptions)).toString());
-		logItem(
-			'FixedSupplySchedule.periodsSinceLastIssuance',
-			(await SupplySchedule.periodsSinceLastIssuance(blockOptions)).toString(),
-		);
+		logItem('FixedSupplySchedule.lastMintEvent', `${lastMint} ${new Date(+lastMint * 1000)}`);
 	}
 
 	/* ~~~~~~~~~~~~~~~~~ */
