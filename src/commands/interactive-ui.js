@@ -343,7 +343,7 @@ async function interactiveUi({
 			// Call function
 			let result, error;
 			// READ ONLY
-			if (abiItem.stateMutability === 'view') {
+			if (abiItem.stateMutability === 'view' || abiItem.stateMutability === 'pure') {
 				console.log(gray('  > Querying...'));
 
 				try {
@@ -351,7 +351,7 @@ async function interactiveUi({
 				} catch (err) {
 					error = err;
 				}
-				// SEND TX
+		  // SEND TX
 			} else {
 				const overrides = {
 					gasPrice: ethers.utils.parseUnits(`${gasPrice}`, 'gwei'),
@@ -422,7 +422,7 @@ async function interactiveUi({
 			} else {
 				logReceipt(result, contract);
 
-				if (abiItem.stateMutability === 'view' && result !== undefined) {
+				if ((abiItem.stateMutability === 'view' || abiItem.stateMutability === 'pure') && result !== undefined) {
 					if (Array.isArray(result) && result.length === 0) {
 						console.log(gray(`  ↪ Call returned no data`));
 					} else {
