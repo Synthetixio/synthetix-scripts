@@ -46,6 +46,9 @@ const DEFAULTS = {
 	rinkeby: {
 		gasPrice: 1,
 	},
+	ropsten: {
+		gasPrice: 1,
+	},
 };
 
 async function interactiveUi({
@@ -297,7 +300,7 @@ async function interactiveUi({
 					if (isArray) {
 						try {
 							processed = JSON.parse(processed);
-						} catch(err) {
+						} catch (err) {
 							console.log(red(`Error parsing array input. Please use the indicated syntax.`));
 
 							await pickFunction();
@@ -326,7 +329,7 @@ async function interactiveUi({
 						return value;
 					}
 					if (isArray) {
-						processed = processed.map(value => boolify(value))
+						processed = processed.map(value => boolify(value));
 					} else {
 						processed = boolify(processed);
 					}
@@ -361,7 +364,7 @@ async function interactiveUi({
 				let preview;
 				try {
 					preview = await contract.populateTransaction[abiItemName](...inputs, overrides);
-				} catch(err) {
+				} catch (err) {
 					console.log(yellow(`Warning: tx will probably fail!`));
 				}
 				if (preview && preview.data) {
