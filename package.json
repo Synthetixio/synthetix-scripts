@@ -40,7 +40,7 @@
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"@snapshot-labs/snapshot.js": "0.1.4",
+		"@snapshot-labs/snapshot.js": "0.1.10",
 		"synthetix": "2.45.2"
 	},
 	"devDependencies": {

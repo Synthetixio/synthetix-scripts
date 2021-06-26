@@ -36,7 +36,7 @@ async function logElection({ electionHash, providerUrl, network }) {
 		providerUrl = process.env.PROVIDER_URL.replace('network', network);
 	}
 
-	const archiveNode = new ethers.providers.InfuraProvider('mainnet', process.env.INFURA_ARCHIVE_KEY);
+	// const archiveNode = new ethers.providers.InfuraProvider('mainnet', process.env.INFURA_ARCHIVE_KEY);
 
 	const privateKey = process.env.PRIVATE_KEY;
 
@@ -54,20 +54,16 @@ async function logElection({ electionHash, providerUrl, network }) {
 		axios.get(SPACE),
 	]);
 
-	const block = proposal.msg.payload.snapshot;
-
-	const currentBlock = await provider.getBlockNumber();
-
-	const blockTag = block > currentBlock ? 'latest' : parseInt(block);
+	const block = parseInt(proposal.msg.payload.snapshot);
 
 	const scores = await Promise.resolve(
 		snapshot.utils.getScores(
 			spaceKey,
 			space.data.strategies,
 			space.data.network,
-			archiveNode,
+			provider,
 			Object.keys(votes.data),
-			blockTag,
+			block,
 		),
 	);
 
@@ -98,10 +94,12 @@ async function logElection({ electionHash, providerUrl, network }) {
 	for (let i = 0; i < results.choices.length; i++) {
 		const option = results.choices[i];
 
+		const summedScore = results.totalScores[i].reduce((a, b) => a + b);
+
 		const item = {
 			member: option,
 			choiceKey: i,
-			score: results.totalScores[i][0],
+			score: summedScore,
 		};
 
 		mappedNomineesToScore.push(item);
@@ -163,10 +161,10 @@ async function logElection({ electionHash, providerUrl, network }) {
 
 	const nominatedCouncilMembers = winners.map(e => e.member);
 
-	// console.log(nominatedCouncilMembers);
-	// console.log(votersBatch);
-	// console.log(nomineesVotedForBatch);
-	// console.log(assignedVoteWeightsBatch);
+	console.log(nominatedCouncilMembers);
+	console.log(votersBatch);
+	console.log(nomineesVotedForBatch);
+	console.log(assignedVoteWeightsBatch);
 
 	const latestNonce = await provider.getTransactionCount(wallet.address, 'latest');
 
