@@ -9,8 +9,7 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"lint": "eslint .",
-		"lint:fix": "prettier --write '**/*.js' '**/*.md'",
-		"start": "node src/commands/interactive-ui.js"
+		"lint:fix": "prettier --write '**/*.js' '**/*.md'"
 	},
 	"repository": {
 		"type": "git",
