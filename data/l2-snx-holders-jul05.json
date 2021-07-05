@@ -1,0 +1,46 @@
+{
+  "accounts": {
+    "0xfcb761bacf1d4a8f3a3fcd5f94d5edfeab2e58f7": {
+      "balances": {
+        "SNX": "0.000000000000000009",
+        "sUSD": "0.000000000000000001"
+      }
+    },
+    "0xae7dcaf0302bd2db47d683fff7540970a979e640": {
+      "balances": {
+        "SNX": "0.504686195655458596",
+        "sUSD": "0.0"
+      }
+    },
+    "0x5fb49c7e163af81a117e0a0d26bdf9e8c7969b3f": {
+      "balances": {
+        "SNX": "10.0",
+        "sUSD": "0.0"
+      }
+    },
+    "0xee34e8298e388fabaa0deb85b54f0f64e7aea88c": {
+      "balances": {
+        "SNX": "1687.500352548456403674",
+        "sUSD": "1354.39930283426006832"
+      }
+    },
+    "0x3c59f65c27d1cf9ae857be5ecd5623f3f5ad7bba": {
+      "balances": {
+        "SNX": "0.0",
+        "sUSD": "0.0"
+      }
+    },
+    "0xac3fd2570903b6528f2077a2d88ef2f172e5cc7d": {
+      "balances": {
+        "SNX": "14.461097579207518575",
+        "sUSD": "0.0"
+      }
+    },
+    "0x4a51182454f744c4341ad9d766dc2d1344bb1843": {
+      "balances": {
+        "SNX": "0.0",
+        "sUSD": "15.230544906706381322"
+      }
+    }
+  }
+}
