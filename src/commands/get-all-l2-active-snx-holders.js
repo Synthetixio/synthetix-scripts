@@ -28,6 +28,11 @@ async function getAllActiveSnxHolders({
 	// Retrieve or create the output data file
 	let data = {
 		accounts: {},
+		depositors: 0,
+		holders: {
+			SNX: 0,
+			sUSD: 0,
+		},
 	};
 	if (!clear) {
 		if (fs.existsSync(dataFile)) {
@@ -35,7 +40,7 @@ async function getAllActiveSnxHolders({
 		}
 	}
 
-	const addressesThatDeposited = await _getAllAddressesThatDepositedOnL1({ network, providerUrl: providerUrlL1 });
+	const addressesThatDeposited = await _getAllAddressesThatDepositedOnL1({ network, data, dataFile, providerUrl: providerUrlL1 });
   await _getBalancesOnL2({ network, data, dataFile, candidates: addressesThatDeposited, providerUrl: providerUrlL2 });
 }
 
@@ -74,6 +79,9 @@ async function _getBalancesOnL2({ data, dataFile, network, candidates, providerU
 		const balancesUSD = ethers.utils.formatEther(await SynthsUSD.balanceOf(address));
 		console.log(chalk.gray(`  > ${address} ${i}/${candidates.length} holds ${balanceSNX} SNX and ${balancesUSD} sUSD on L2`));
 
+		data.holders.SNX++;
+		data.holders.sUSD++;
+
 		// Store in data file
 		account.balances.SNX = balanceSNX;
 		account.balances.sUSD = balancesUSD;
@@ -93,7 +101,7 @@ function _getProvider({ providerUrl }) {
 	}
 }
 
-async function _getAllAddressesThatDepositedOnL1({ network, providerUrl }) {
+async function _getAllAddressesThatDepositedOnL1({ network, data, dataFile, providerUrl }) {
 	console.log(chalk.blue(`> Getting all L1 Deposit events in provider ${providerUrl}`));
 
 	const provider = _getProvider({ providerUrl });
@@ -204,6 +212,9 @@ async function _getAllAddressesThatDepositedOnL1({ network, providerUrl }) {
 		}
 	}
 	console.log(chalk.gray(`  * Found ${addresses.length} unique addresses that deposited on L1`));
+
+	data.depositors = addresses.length;
+	fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
 
 	return addresses;
 }
