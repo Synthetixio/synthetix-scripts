@@ -93,12 +93,6 @@ async function airdropWETH({
 	amountToDrop = ethers.utils.parseEther(amountToDrop);
 	const totalWethToDrop = amountToDrop.mul(accounts.length);
 
-	// Verify signer WETH balance
-	const signerBalance = await WETH.balanceOf(signerAddress);
-	if (signerBalance.lt(totalWethToDrop)) {
-		throw new Error(`Signer only has ${ethers.utils.formatEther(signerBalance)} WETH, and it needs ${ethers.utils.formatEther(totalWethToDrop)} WETH.`);
-	}
-
 	// Print data and confirm before continuing
 	console.log('');
 	console.log(chalk.cyan('Please review this information before continuing:'));
@@ -107,11 +101,11 @@ async function airdropWETH({
 	console.log(chalk.yellow('* provider:', providerUrl));
 	console.log(chalk.yellow('* gas price:', gasPrice, ' gwei'));
 	console.log(chalk.yellow('* deployment path:', deploymentPath));
-	console.log(chalk.yellow('* total accounts to drop to:', totalAccountsToDropTo));
+	console.log(chalk.yellow('* total accounts to drop to:', accounts.length));
 	console.log(chalk.yellow('* target WETH weth balance for each:', ethers.utils.formatEther(amountToDrop)));
 	console.log(chalk.yellow('* total WETH to be dropped:', ethers.utils.formatEther(totalWethToDrop)));
 	console.log(chalk.yellow('* signer:', wallet.address));
-	console.log(chalk.yellow('* signer balance:', ethers.utils.formatEther(signerBalance)));
+	console.log(chalk.yellow('* signer balance:', ethers.utils.formatEther(await WETH.balanceOf(wallet.address))));
 	console.log(chalk.gray('================================================================================'));
 	async function confirm() {
 		if (yes) return;
@@ -131,6 +125,12 @@ async function airdropWETH({
 
 	await confirm();
 
+	// Verify signer WETH balance
+	const signerBalance = await WETH.balanceOf(signerAddress);
+	if (signerBalance.lt(totalWethToDrop)) {
+		throw new Error(`Signer only has ${ethers.utils.formatEther(signerBalance)} WETH, and it needs ${ethers.utils.formatEther(totalWethToDrop)} WETH.`);
+	}
+
 	// Sent WETH to each
 	const overrides = {
 		gasPrice: ethers.utils.parseUnits(gasPrice, 'gwei'),
@@ -141,8 +141,8 @@ async function airdropWETH({
 
 		console.log(chalk.gray(`  > Sending ${ethers.utils.formatEther(amountToDrop)} to ${account}...`));
 
-		const tx = await WETH.transfer(account, amountToDrop, overrides);
-		const receipt = await tx.wait();
+		// const tx = await WETH.transfer(account, amountToDrop, overrides);
+		// const receipt = await tx.wait();
 
 		account.sent = true;
 		fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
