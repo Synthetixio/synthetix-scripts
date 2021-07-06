@@ -21,14 +21,14 @@ async function airdropWETH({
 	yes,
 	minSUSD,
 	minSNX,
+	gasPrice,
 }) {
-	const gasPrice = '0.015';
-
 	// Validate input parameters
 	if (!network) throw new Error('Please specify a network');
 	if (!providerUrl) throw new Error('Please specify a provider');
 	if (!amountToDrop) throw new Error('Please specify the amount to airdrop to each account');
 	if (isNaN(amountToDrop)) throw new Error('Invalid amount to drop');
+	if (isNaN(gasPrice)) throw new Error('Invalid gas price');
 	if (!dataFile) throw new Error('Please specify a JSON input file');
 	if (!fs.existsSync(dataFile)) throw new Error(`No file at ${dataFile}`);
 	if (!wethAddress) throw new Error('Please specify the target WETH address');
@@ -178,6 +178,7 @@ program
 	.option('--weth-address <value>', 'The address of the WETH token in L2', '0x4200000000000000000000000000000000000006')
 	.option('--min-SNX <value>', 'The minimum amount of SNX on L2 for airdrop eligibility', '1')
 	.option('--min-sUSD <value>', 'The minimum amount of sUSD on L2 for airdrop eligibility', '1')
+	.option('--gas-price <value>', 'The gas price to use on all transfers', '0')
 	.option('--yes', 'Skip all confirmations', false)
 	.action(async (...args) => {
 		try {
