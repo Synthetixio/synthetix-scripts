@@ -226,7 +226,7 @@ program
 	.option('--data-file <value>', 'The json file where all output will be stored')
 	.option('--provider-url-l1 <value>', 'The L1 provider to use')
 	.option('--provider-url-l2 <value>', 'The L2 provider to use')
-	.option('--to-block', 'Final block to include in the scan', 'latest')
+	.option('--to-block <value>', 'Final block to include in the scan', 'latest')
 	.option('--clear', 'Delete previously existing data', false)
 	.action(async (...args) => {
 		try {
