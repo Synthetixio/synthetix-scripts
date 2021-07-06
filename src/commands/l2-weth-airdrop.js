@@ -76,38 +76,22 @@ async function airdropWETH({
 			return ethers.utils.parseEther(account.balances.sUSD).gte(ethers.utils.parseEther(minSUSD))
 		});
 	}
+
+	// Check how many accounts still need to be sent ETH
+	accounts = accounts.filter(address => {
+		const account = data.accounts[address];
+		return !account.sent;
+	});
 	console.log(`Filtered accounts: ${accounts.length}`)
 
-	// Evaluate how much each address will need
-	amountToDrop = ethers.utils.parseEther(amountToDrop);
-	const toAirdrop = {};
-	const zero = ethers.utils.parseEther('0');
-	let totalAccountsToDropTo = 0;
-	let totalWethToDrop = ethers.utils.parseEther('0');
-	console.log(chalk.cyan(`1. Checking WETH balances on ${accounts.length} potential target accounts...`));
-	for (let i = 0; i < accounts.length; i++) {
-		const account = accounts[i];
-		const accountBalance = await WETH.balanceOf(account);
-
-		console.log(chalk.gray(`  * Checking account ${i + 1}/${accounts.length} - ${account} - ${ethers.utils.formatEther(accountBalance)} WETH`));
-
-		let delta = amountToDrop.sub(accountBalance);
-		if (delta.lte(zero)) {
-			console.log(chalk.gray(`    > Account does not need any more WETH`));
-
-			continue;
-		}
-		console.log(chalk.yellow(`    > Account will need ${ethers.utils.formatEther(delta)} WETH`));
-
-		toAirdrop[account] = delta;
-		totalWethToDrop = totalWethToDrop.add(delta);
-		totalAccountsToDropTo++;
-	}
-
-	if (totalAccountsToDropTo === 0) {
+	if (accounts.length === 0) {
 		console.log(chalk.blue.bold('No WETH needs to be airdroped'));
 		process.exit(0);
 	}
+
+	// Evaluate how much each address will need
+	amountToDrop = ethers.utils.parseEther(amountToDrop);
+	const totalWethToDrop = amountToDrop.mul(accounts.length);
 
 	// Verify signer WETH balance
 	const signerBalance = await WETH.balanceOf(signerAddress);
@@ -151,16 +135,17 @@ async function airdropWETH({
 	const overrides = {
 		gasPrice: ethers.utils.parseUnits(gasPrice, 'gwei'),
 	};
-	const targets = Object.keys(toAirdrop);
-	console.log(chalk.cyan(`2. Airdropping WETH to ${targets.length} accounts...`));
-	for (let i = 0; i < targets.length; i++) {
-		const account = targets[i];
-		const amount = toAirdrop[account];
+	console.log(chalk.cyan(`2. Airdropping WETH to ${accounts.length} accounts...`));
+	for (let i = 0; i < accounts.length; i++) {
+		const account = accounts[i];
 
-		console.log(chalk.gray(`  > Sending ${ethers.utils.formatEther(amount)} to ${account}...`));
+		console.log(chalk.gray(`  > Sending ${ethers.utils.formatEther(amountToDrop)} to ${account}...`));
 
-		const tx = await WETH.transfer(account, amount, overrides);
+		const tx = await WETH.transfer(account, amountToDrop, overrides);
 		const receipt = await tx.wait();
+
+		account.sent = true;
+		fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
 
 		console.log(chalk.green(`  > WETH sent ${i + 1}/${targets.length}`));
 	}
