@@ -194,8 +194,8 @@ async function _getAllAddressesThatDepositedOnL1({ network, toBlock, data, dataF
 		// Build filter to look for logs
 		const filter = contract.filters[eventName]();
 		filter.fromBlock = fromBlock;
-		filter.toBlock = toBlock;
-		console.log(chalk.yellow.bold(`>>> Looking for events until block: ${toBlock} <<<`));
+		filter.toBlock = +toBlock;
+		console.log(chalk.yellow.bold(`>>> Looking for events from block ${filter.fromBlock} to block ${filter.toBlock} <<<`));
 
 		// Find logs
 		const logs = await provider.getLogs(filter);
