@@ -13,6 +13,7 @@ async function getAllActiveSnxHolders({
 	providerUrlL1,
 	providerUrlL2,
 	dataFile,
+	toBlock,
 	clear,
 }) {
 	const network = 'mainnet';
@@ -40,7 +41,7 @@ async function getAllActiveSnxHolders({
 		}
 	}
 
-	const addressesThatDeposited = await _getAllAddressesThatDepositedOnL1({ network, data, dataFile, providerUrl: providerUrlL1 });
+	const addressesThatDeposited = await _getAllAddressesThatDepositedOnL1({ network, data, toBlock, dataFile, providerUrl: providerUrlL1 });
   await _getBalancesOnL2({ network, data, dataFile, candidates: addressesThatDeposited, providerUrl: providerUrlL2 });
 }
 
@@ -101,7 +102,7 @@ function _getProvider({ providerUrl }) {
 	}
 }
 
-async function _getAllAddressesThatDepositedOnL1({ network, data, dataFile, providerUrl }) {
+async function _getAllAddressesThatDepositedOnL1({ network, toBlock, data, dataFile, providerUrl }) {
 	console.log(chalk.blue(`> Getting all L1 Deposit events in provider ${providerUrl}`));
 
 	const provider = _getProvider({ providerUrl });
@@ -193,7 +194,8 @@ async function _getAllAddressesThatDepositedOnL1({ network, data, dataFile, prov
 		// Build filter to look for logs
 		const filter = contract.filters[eventName]();
 		filter.fromBlock = fromBlock;
-		filter.toBlock = 'latest';
+		filter.toBlock = toBlock;
+		console.log(chalk.yellow.bold(`>>> Looking for events until block: ${toBlock} <<<`));
 
 		// Find logs
 		const logs = await provider.getLogs(filter);
@@ -224,6 +226,7 @@ program
 	.option('--data-file <value>', 'The json file where all output will be stored')
 	.option('--provider-url-l1 <value>', 'The L1 provider to use')
 	.option('--provider-url-l2 <value>', 'The L2 provider to use')
+	.option('--to-block', 'Final block to include in the scan', 'latest')
 	.option('--clear', 'Delete previously existing data', false)
 	.action(async (...args) => {
 		try {

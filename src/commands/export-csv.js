@@ -21,23 +21,17 @@ async function exportCSV({
 	// Parse everything onto this string
 	let str = '';
 
-	// Parse root level info
-	const keys = Object.keys(data).filter(key => key !== 'accounts');
-	str += `${keys.join(',')}\n`;
-	str += `${keys.map(key => data[key]).join(',')}\n`;
-
 	// Parse accounts
 	str += '\n';
-	str += 'account,totalDeposited,SNX,sUSD\n';
+	str += 'account,SNX,sUSD\n';
 	const addresses = Object.keys(data.accounts);
 	for (let address of addresses) {
 		const account = data.accounts[address];
 
-		const deposited = ethers.utils.formatEther(account.totalDeposited);
-		const SNX = ethers.utils.formatEther(account.balances.SNX);
-		const sUSD = ethers.utils.formatEther(account.balances.sUSD);
+		const SNX = account.balances.SNX;
+		const sUSD = account.balances.sUSD;
 
-		str += `${address},${deposited},${SNX},${sUSD}\n`;
+		str += `${address},${SNX},${sUSD}\n`;
 	}
 
 	// Retrieve output data file
