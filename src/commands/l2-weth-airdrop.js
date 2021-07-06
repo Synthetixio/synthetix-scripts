@@ -144,10 +144,11 @@ async function airdropWETH({
 		// const tx = await WETH.transfer(account, amountToDrop, overrides);
 		// const receipt = await tx.wait();
 
-		account.sent = true;
+		const entry = data.accounts[account];
+		entry.sent = true;
 		fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
 
-		console.log(chalk.green(`  > WETH sent ${i + 1}/${targets.length}`));
+		console.log(chalk.green(`  > WETH sent ${i + 1}/${accounts.length}`));
 	}
 
 	console.log(chalk.blue.bold('Done.'));
