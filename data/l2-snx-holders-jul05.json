@@ -23,11 +23,23 @@
         "SNX": "1687.500352548456403674",
         "sUSD": "1354.39930283426006832"
       }
+    },
+    "0x3c59f65c27d1cf9ae857be5ecd5623f3f5ad7bba": {
+      "balances": {
+        "SNX": "0.0099",
+        "sUSD": "0.0"
+      }
+    },
+    "0xac3fd2570903b6528f2077a2d88ef2f172e5cc7d": {
+      "balances": {
+        "SNX": "14.461097579207518575",
+        "sUSD": "0.0"
+      }
     }
   },
-  "depositors": 4575,
+  "depositors": 4586,
   "holders": {
-    "SNX": 4,
-    "sUSD": 4
+    "SNX": 795,
+    "sUSD": 795
   }
 }
