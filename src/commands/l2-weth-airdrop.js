@@ -141,8 +141,8 @@ async function airdropWETH({
 
 		console.log(chalk.gray(`  > Sending ${ethers.utils.formatEther(amountToDrop)} to ${account}...`));
 
-		// const tx = await WETH.transfer(account, amountToDrop, overrides);
-		// const receipt = await tx.wait();
+		const tx = await WETH.transfer(account, amountToDrop, overrides);
+		const receipt = await tx.wait();
 
 		const entry = data.accounts[account];
 		entry.sent = true;
