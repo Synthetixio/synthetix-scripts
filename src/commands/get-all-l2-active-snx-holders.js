@@ -314,7 +314,7 @@ async function _getBalancesOnL2({ data, dataFile, candidates, providerUrl }) {
 		// Get balances
 		const balanceSNX = ethers.utils.formatEther(await Synthetix.balanceOf(address));
 		const balancesUSD = ethers.utils.formatEther(await SynthsUSD.balanceOf(address));
-		console.log(chalk.gray(`  > ${address} ${i}/${candidates.length} holds ${balanceSNX} SNX and ${balancesUSD} sUSD on L2`));
+		console.log(chalk.gray(`  > ${address} ${i + 1}/${candidates.length} holds ${balanceSNX} SNX and ${balancesUSD} sUSD on L2`));
 
 		data.holders.SNX++;
 		data.holders.sUSD++;
