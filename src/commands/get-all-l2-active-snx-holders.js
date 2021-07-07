@@ -190,7 +190,7 @@ async function getAllActiveSnxHolders({
 }
 
 async function _getAllAddressesThatDepositedOrMigratedEscrowOnL1({ toBlock, data, dataFile, providerUrl }) {
-	console.log(chalk.blue(`> Getting all addresses that triggered Deposit or DepositInitiated events in L1 with provider ${providerUrl}`));
+	console.log(chalk.blue(`> Getting all addresses that triggered Deposit, DepositInitiated, or ExportedVestingEntries events in L1 with provider ${providerUrl}`));
 
 	const provider = _getProvider({ providerUrl });
 
