@@ -2,3908 +2,3734 @@
   "accounts": {
     "0xaa3802438a2546cee38207a14e6afc789a9102d4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x59c47cec65ad592f6c83abd020bfd8ff0172d77d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6ace11183633d0fe361c3b5b0e342685311637dc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa0f0310a8eaa057cd48401c397585b8374509f99": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x64916cd4b15045fd156bc2a6460cd3207638e289": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xd91b09e134aef316742ee56817514ac896dd9b92": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "39.952714439335862449",
+        "sUSD": "0.0"
       }
     },
     "0xd4c80637f45a55b5e1afa9cd0c935395063d4523": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.186901765811479525",
+        "sUSD": "0.0"
       }
     },
     "0x43963e218dcdb78d8c23f74824f1298f2d748395": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xd6f04cdbb1a2f78e2ae6ef42aeda817ad701322a": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x03c322db3f0d92ccdf6f8b6effd4031c94bed1ab": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdaedaa6e5e51d84804be6468cd89918b808abc61": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x717f4308208827bc51982df8f8fb28e49cd6d540": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.142818717016204793",
+        "sUSD": "4.427023008042923184"
       }
     },
     "0x810858f00f41f99873e97a5018d83cab22843c9f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xd18001f022154654149ed45888c9c29def6d3ce6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x12690cdba85ce9f5200110bdf391567e8635d759": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc0afef712a1341ca78da145b2afad346e8c3574f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "5.269006381337330226"
       }
     },
     "0x10074c3c861cec3799e699ad4fbff4158924720b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "85.878529986946014952",
+        "sUSD": "0.0"
       }
     },
     "0xa7d4e98fddef381f1dd80e39ad4ba0916ce362bd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x140297e2a62241359d740ca84ce5e434419628f0": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "429.470908541822264633",
+        "sUSD": "317.698260159215086369"
       }
     },
     "0x97cdd8176084b24ae8a385d4ea9177c31ba0022b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "4.07932025197609834"
       }
     },
     "0xb5b07ab0cd4b0b9957b566a0d22eb291b56fa1c3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "8.839053338315702082",
+        "sUSD": "0.0"
       }
     },
     "0xabcd465c2dbb7846b374e9acffe1e7744229452e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc77dfd3e4d24f73f651a7651bc25819e6a812ba0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "120.985413927406273659",
+        "sUSD": "0.0"
       }
     },
     "0x7ccf173012bfe53f16f4d6a2a4aea32abafcd04c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "283.131467235887466755",
+        "sUSD": "342.267736226870637623"
       }
     },
     "0x1925e832c22522e0d9947ee4677120b2f28e4cd4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x135c5bd214ea648462079dd7eab722be3b529a13": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x37380ccc6e6771dc135b0b83d0929c82f9ad5b45": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x088873f2bf4490e7676536c261d96f47c78df56b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "90.135325030406697628"
       }
     },
     "0xf23bc2d6e33840d61c9673a611a9bdcccd53bfd3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x76b9fb7ab0f42ae4b4500a0e26ba095b407f0f89": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x0f0ef926de6871d12233d1345dd84762b6bced09": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x72fb15f502af58765015972a85f2c58551ef3fa1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.008587678059423898",
+        "sUSD": "0.271372488865401309"
       }
     },
     "0xd06a1fc4764ea965905b8c5e08770bb911a50e9d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x3224a28d565ccd730e815affd83772ece93e1760": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1a05579346efaf112b053baf62ff28875d0f24d0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "11.291042778393244611",
+        "sUSD": "0.0"
       }
     },
     "0x900b9ee01a1840a024f9624b304d9fe7d816cc72": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.322445866722718514",
+        "sUSD": "0.0"
       }
     },
     "0x1b23e9bb4d241f41bbe539463bdee713eba410ae": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.001322786557925909",
+        "sUSD": "0.0"
       }
     },
     "0x2e96ed2281c3069c6abeae5d9560f30f716d44b5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "38.789082990975800047",
+        "sUSD": "31.409041678113777164"
       }
     },
     "0x67922a9561423548a9ccfd67ad80d6c637c26bfe": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "84.477191904814731441",
+        "sUSD": "158.122225468906754895"
       }
     },
     "0x193f0ee42a199a0cecd479a9f09ba293eb1ca357": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "62.493726311184955127",
+        "sUSD": "37.712594574780458802"
       }
     },
     "0x7eafe3fbd6b784861e700c34df3a1249ea8ccf6e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1c97f3191c3b4bb48d03d672c03da254ce23cfd1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb0ca67f625630b7cfe20b6797d59b47e25441d8f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa7906d63432ef329e6e68be60ead655bf724108f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdb4726a0939379425fd99377f37f0549cd28a1ef": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.188192015027120513",
+        "sUSD": "0.0"
       }
     },
     "0x0d732b5d56be4402608c70f7701cce42d5f4cc80": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "45.660724468068125363",
+        "sUSD": "0.0"
       }
     },
     "0x734a5422eaff72a38b91dd6ac4c0142bf593cc31": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xcd85346a0913cce237123b634c48853220ed1363": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3e1b1fe45cb2040b97cdb3191d4933ad1ff0928d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "21.54275955189481417"
       }
     },
     "0x2b073e7c96f38eb798a12fe850d3670451cbc56a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4850201540fda859acde50016c5d023806df7203": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x00695c7fcd8ee1517adb85c24547fc792613a5c5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb61642cdef7f494c603acdb94e2617fbf8a1c5f3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.666158560148755008",
+        "sUSD": "1.697927143392485049"
       }
     },
     "0x4a0f8323a112944d54c4630e10eb77c198fa9e4c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "21.610088668381048793",
+        "sUSD": "0.0"
       }
     },
     "0x4c53d5ed8276b8df74b87db2090732028f6f111b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5d89478d473049d89620ed5b8891887268349572": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "11.221401349313200266",
+        "sUSD": "27.158035545607807283"
       }
     },
     "0x564b31fe75510a1adb311aece4faa63346ed142c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xcb0a0535060a1fc5f93795e84bee3e58543eb980": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xf989cc97b3976465fc518a12163a89960735c45f": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "172.7427263245441491",
+        "sUSD": "0.0"
       }
     },
     "0x3f3e7467bfd5ee7b242a2187dcfbc007ce33d34b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2bab814da5c1618815998f3e929ed11c24d7da38": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.503816983558029862",
+        "sUSD": "13.013779173990927234"
       }
     },
     "0x3e55c1c091e3a15cda8b0526438659974bff9fcd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc2b82e7db33d926ebfc1d92f45a9b234e531b67b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x929648fa0dfc3637d55226ce5e3f75cae1566fce": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "21.74182628048955192",
+        "sUSD": "0.0"
       }
     },
     "0x64c40df0f9e45f128ce2186c864a70f8e676f1b7": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9d25f1314ec91bc57fe69e2fd1c08a43e41f41aa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "82.040510613837926708",
+        "sUSD": "62.912318897299643111"
       }
     },
     "0xf46c234d27ba68062c765f4823dcf36535f91a4f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8e5d30f161ba3ebb09dc3c1f06515656af34baa1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.536066685221376448",
+        "sUSD": "5.0"
       }
     },
     "0xdebc61576f3b1b3a6f4f56adeddbfea49737d0f0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "15.536928691345048249",
+        "sUSD": "55.721595039911556387"
       }
     },
     "0x2442b2575ef2902af5d3281fed512f76543a341e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xadd63d802266deecfbca2cccced565995c4f69db": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x6273540b8160b2d923652552fade0da98bb10dc5": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x44ad996f091e911923cd23c65c22c2eb74a71416": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.422767252377729594",
+        "sUSD": "0.0"
       }
     },
     "0xa51fa51788de0bc5b534ab4cba23f0329ec5512c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "251.25983582337603134",
+        "sUSD": "217.564500814567548282"
       }
     },
     "0xc877fcc358da9eb76f53aeebfbbdb6eefa0b313d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "269.075866656436763445",
+        "sUSD": "0.0"
       }
     },
     "0xf01e07ae42369175a986bb13fb3e097d0724f74a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x17c356fc6b70f9f5ca99652c8360e3657334ddf2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x61859c56fde601ff6dd2bbf77357c545a3907606": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xff16d64179a02d6a56a1183a28f1d6293646e2dd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "504.672020148188885851",
+        "sUSD": "569.840352907984811208"
       }
     },
     "0x70ef09d3c3776e5d0ae415081e093d96e234e4e3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb1ef7441fdee4ce790e421511b0cae1604683637": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x37927d658aea75d0267fe4122ecda895804c8a59": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb752d7a4e7ebd7b7a7b4deefd086571e5e7f5bb8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb7ae6069b68eef3f8148c71824864de8be5b6691": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x341c79d55b2d932610b362ac8419173aba444c82": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x19faea4faab9de9dc175625828ef0a1317295556": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa479ff23cbc4e9d1fa2ae4fbb36645de2ba36764": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "22.861480901016025344",
+        "sUSD": "0.0"
       }
     },
     "0xb215cfebb90d91b1d2f499843800d3105b1366fc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "7.590820737052322083",
+        "sUSD": "0.0"
       }
     },
     "0x261e5109cdf22f46a7d0acb1b0df04bd47e897a8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.813080726149293124",
+        "sUSD": "0.0"
       }
     },
     "0x1ae3a0366c8f540c9f31cfc18a23b7e4ac9d4d8d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.200263672234245257",
+        "sUSD": "0.0"
       }
     },
     "0x60b3c2478c0ae1a7913d0f5a8b0f0d861245b077": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "138.605374583874579902",
+        "sUSD": "88.260477493553982416"
       }
     },
     "0x679a5f7626d27d140a273759c4ebc13b6719eaf9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "28.234996973132073461",
+        "sUSD": "25.434085273397371773"
       }
     },
     "0x7b36c434223b00ac272cf1f40f1acbb15683d392": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "15.220007982935130185",
+        "sUSD": "10.766314640317316723"
       }
     },
     "0x22b660f6e6a007acea649acd028a8d057c15620c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1fa196e2f89f31b2bd561709de4c8bc6eca1f5f2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "74.067412699420105091",
+        "sUSD": "129.513029489766166664"
       }
     },
     "0x2400b380d4d9b23ed327561769165385f65a8319": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "14.931259638684116657",
+        "sUSD": "46.0"
       }
     },
     "0x13295163a7dc6f6a35b078db2aa164c24173c843": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "162.462882860669277032",
+        "sUSD": "118.952112187654099253"
       }
     },
     "0xdceb0bb3311342e3ce9e49f57affce9deac40ba1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.887879525482721626",
+        "sUSD": "0.0"
       }
     },
     "0xc73d2fd3c7fb2103860ae0ab09a168ff653f3172": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.266026499232102517",
+        "sUSD": "5.722472252727469533"
       }
     },
     "0x79ff327e635675b58a3c5d4d0ab2e738911c94f6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.702593027049212093",
+        "sUSD": "0.0"
       }
     },
     "0x3b528d4ab08ef019972e6bd7f40d55ab35c0846b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x40e234f653ac53e94b1f097a6f67756a164cdb2d": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.485016404960651117"
       }
     },
     "0x16f7d76352c3a2d197a8a98933a3dc00065a1561": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.174454172496056119",
+        "sUSD": "0.0"
       }
     },
     "0xcb59db511a5922303cc867e2853d5cad72698deb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x04f5c67be870758e6d5200a15f7722b471ebb821": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.001807799268931772",
+        "sUSD": "0.001389108818931126"
       }
     },
     "0x0b98c377b62702748898c5c4c9ccc2e2f35f084d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "683.403177160790547424",
+        "sUSD": "517.932663651844468064"
       }
     },
     "0x214f7b85a0f0aa067bcc2ea6263dd4b0ede8957c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "118.003695532213532178",
+        "sUSD": "147.048633021651649829"
       }
     },
     "0x6b8cc11d53aa3e8180cf2d41e9074d8c431d51c5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "41.970096630428249946",
+        "sUSD": "45.252702867983338837"
       }
     },
     "0xac211fc5e6fee8a23477bca32d9b9b7fe21669a5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x930a6c71c9b0974c02e9db0688617ef3491df7a3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.927498283356731733",
+        "sUSD": "0.0"
       }
     },
     "0x52082beb92563dd95872f34f6091fcc5bd0a2164": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4b1e0388233b41b1225380e291cca33f38c7a49b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.121423938396419896",
+        "sUSD": "0.0"
       }
     },
     "0xeb29596e0765097c07372ea19f544749c07c9b1e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb4e8bdc64f102989c21c131988ce588492bbda2d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xbd6f5bdc401ab1ca811e40755f4a2ddad75ce2cc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x440b3db150fb2a086bac996d4d861776f6418a79": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.441946808626171895",
+        "sUSD": "0.0"
       }
     },
     "0x72046e83d45211ac89c5bbada9d2e0442a5f5a1c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.057683852293688159",
+        "sUSD": "4.597399144636564512"
       }
     },
     "0x4d91146723053ca2a68b4fa35d658e5424e9b1c2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xbac241e35c68f1d73562792c2ae3f6de99bf584c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6e2cca86d27714ca6d9b272c7ff08e307574001d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xcd62f1779d9ff27e396707899ed1e0a7f7dfa2ed": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "6.359013588160722261",
+        "sUSD": "0.0"
       }
     },
     "0x2c8bdcc872a6eb889d8a58a3f97f3d7a8d2b2142": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc24d8266c47f957a4a4115bd39d7fe1b0366a067": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x720bffb0ca0738eabf3bc31206b44d29d71ab256": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.319403590222971708",
+        "sUSD": "0.0"
       }
     },
     "0x05b6a86faab79cda829722aa5cbf191e888cd0cd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.769081741886990577",
+        "sUSD": "0.0"
       }
     },
     "0xb49a2904933aed7e8ef66a2bfb3d3fd8babe70b9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.346844607148454525",
+        "sUSD": "0.0"
       }
     },
     "0x19200c712302c7c8421ca893d95bd985c8586007": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "29.615428993416147963",
+        "sUSD": "0.0"
       }
     },
     "0xb6c9e6a2415ab8d26335498beac8eebed4bb2259": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "776.061648284947558407",
+        "sUSD": "1097.121826060452961561"
       }
     },
     "0x464fbeb7d6a5d459f58251ed135d00a824e5b4f8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "424.485119163813455591",
+        "sUSD": "349.714304452907245966"
       }
     },
     "0xfafa987c525b7aacef0a0d09a2403baac954432c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xbff3bdc458d94c9ca36230be24838e778305a954": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x2e1493555dbdb58bb61589fbee718286d7e690ba": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb512e8c3686ea7b9683d80d865bde63131a8f477": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "266.122899114366566478",
+        "sUSD": "0.0"
       }
     },
     "0x5579440bdd2b6a69288626a94303e55862853851": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x013ed40c0de8e1c6d1ba697c785b36d43e19dbc1": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5860f2af40c8a4af47ed1b88de9fe8103fd5f892": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x31719f21313dfa7b78692dfb00fbed68874c2529": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc36549c2c5c33a0947829bc9de305acae41be3d8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "564.69136802812169853",
+        "sUSD": "564.689424872176093455"
       }
     },
     "0x1908b1a7159ae43fe0a2750539514c98d1a970e8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "50.774153703755270747",
+        "sUSD": "32.136165478443654889"
       }
     },
     "0xac6d5c44c7a089101c53735211b12f5f722c7688": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.770323360658658158",
+        "sUSD": "0.0"
       }
     },
     "0x280bf69d522bbcfb3aeb138c59d85a16e449057c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "153.128486607489046007",
+        "sUSD": "114.881214719709881781"
       }
     },
     "0xd7ccdf5d758280995dc0f37bc8668c36bc490554": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "60.370944081811493293",
+        "sUSD": "128.46530075029434585"
       }
     },
     "0x21d5e578dc101a132b1457f8a696e8eeff97a4b1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.13233733910784865",
+        "sUSD": "2.363676894565578438"
       }
     },
     "0x340d6f6f684aa1fc73a9476a3ac85ff8408e9496": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x74f8744020f5900a2c3a3289c6c2182f56a6901f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "60.688953674200814392",
+        "sUSD": "84.381903705248336207"
       }
     },
     "0xb14cc49e60ef7b30afabaddaf5fe3665ee5e1c5d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa5cb0648383b871de9d8c8a2f31bb985ec160187": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x865d7eb5db37cc02ec209dd778f4e3851a421a20": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.283605808106892154",
+        "sUSD": "0.169516149381094865"
       }
     },
     "0x1051c5405e104932dead3d04e1d1c740fc89f6b1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xde7d61f2dc34f6cc3e012b11fb3dbd537e73df16": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "43.830126661079633009",
+        "sUSD": "51.276848857603108599"
       }
     },
     "0x6850997ad65122c121c06fe41bf51f07f3c0d5d2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x84177cfc0e8bdae812ac9978f23d1eb5ac22caa0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc26efa8199105d317ad00a2e90bc5ea445a3cf5f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc2fadfc3da92bf5c3f14a6c7bf670fd9791ddcfd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "40.871594834734357152",
+        "sUSD": "102.14492742447361384"
       }
     },
     "0x83a73767538e8d000b21320ee37ceac6d1b89a2a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe6855c393d481ba53e974728c416ba9c67d04a43": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6aa2f8efd7c48deed11353a4910e41b6e6e2cf27": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "261.018985441353038318",
+        "sUSD": "0.0"
       }
     },
     "0xf9a32d297a41a1e1ac276c06f8e4b6cb72a34577": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x65f570384d6cc157a15eac9bfd9da88364d59b7f": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x08c2bf6e96badbeac05df0bbf72cef4b57737dbb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xab85a4cdd5f16b5c02b7a2dab3f464e17dddb833": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "65.256275856754153412"
       }
     },
     "0xcc7db065f61e14a892b94725ae1d7fe203179929": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x120107165b53e653f5e76049447a1af3ecda980c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "25.289466436189290138"
       }
     },
     "0x52ba64ec2632fece3b5bf3cc8d9e8fe3b275ca9a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5ad24f12c0cd93ce5dcc5530aecbe376f2e6aa07": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4c0c59f3e1e8727c60ed7bdddbb454ce4814458d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "98.569591967071032094",
+        "sUSD": "82.147351315624236549"
       }
     },
     "0xb1e2fec6eb5f05a0456b6d17b9a52adb288a7c52": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x32349c94082a8cfd9cac7031f4ec980f8d94cbfd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xff0bd4cb75016029397a697d204eae41c7aa1f55": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "17.267918323824884673",
+        "sUSD": "22.04285179348409768"
       }
     },
     "0xdbc605b9edd0b5fd3b58e75e975cba62385a7e4a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "550.696171561964818318",
+        "sUSD": "686.149259515435083085"
       }
     },
     "0xeef87e7048153769cad07c584125de69dc1fc024": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x42eed6182e4f3e37d3ae08a0d2a04c258ee0ae87": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.939854279689031563",
+        "sUSD": "8.479029718336448499"
       }
     },
     "0x4d73046393c255fd09bc70039e6e0da3db8c9233": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "505.652116908954204383",
+        "sUSD": "704.039581853152795181"
       }
     },
     "0x52947c69feecde472a54789c9cf726e7d65e94a3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe9883b15b321f3f381e9fafd1277a98e1e5d86f7": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "388.844713537105557578",
+        "sUSD": "507.112394869461800615"
       }
     },
     "0x4f8bb28187cc89ddad0f35aa76a4693a54595c24": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "3.601677615699111709"
       }
     },
     "0xde263470fb52bf15aa816d27a9ecfb1cd2c42997": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.970372535433258104",
+        "sUSD": "0.0"
       }
     },
     "0x80bb0d87dce1a94329586ce9c7d39692bbf44af6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "589.476918312952079383",
+        "sUSD": "361.157192975022657582"
       }
     },
     "0x3238b53a910b69f5dbdb31786613ce944536ba19": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xd785a0b9393f8280e1da72c81b8e6d18eda81db6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "401.524813655254796147",
+        "sUSD": "293.453038318108637662"
       }
     },
     "0x20e96532d2ed197e712e1173ffb53c23f522742b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "8.752493194397547304"
       }
     },
     "0x6a8ff90e596e037b2ded3881c19ab4fd1727a0c8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "454.678499037259475515",
+        "sUSD": "315.143234300422170751"
       }
     },
     "0xa15b5d913a8e1d490589b0103c809c8d868a9298": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "45.177902889162344721",
+        "sUSD": "33.035272919046996658"
       }
     },
     "0x513e9e47572863e70266f39562b209f06b335a79": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x444c996b74631763ce0c406fcbe9aa13d35f395e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x902686ea170c5b808ebf69b253e67e622da09784": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "512.891899616477528473",
+        "sUSD": "1216.786264647230775406"
       }
     },
     "0xf2d398ae836e9cc9b6d17b79def0626e5bcabacd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5d47e871f81f84d3154aec772bcce14973112c69": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x98f186ccb6b0e8372fa81e6889564f5a81476531": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6d296b56760ef6aaf5de3a4c1a3216d01706a12d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "17.627728113802520965",
+        "sUSD": "32.938793834528215262"
       }
     },
     "0x98143cdfea147b1f63638c5b9f0712283f6a39ec": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "206.564865678203107757",
+        "sUSD": "139.250149865035120283"
       }
     },
     "0x7c0264f26c356eb647341f3f184c31833bede4be": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "71.874308803416421532"
       }
     },
     "0xe38e707ccf5e0ce883a7902f0345be0b89a0e731": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.684605008406094567",
+        "sUSD": "1.740037729698823684"
       }
     },
     "0xf413474c863de741cf99943e44e5e45ccacabd3f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "52.170246444364164007",
+        "sUSD": "145.450502697005729632"
       }
     },
     "0x0871e6872f0cdeb32eb013648a76575b4d2dba80": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "189.866676822794523959",
+        "sUSD": "185.509325946901400084"
       }
     },
     "0xc64e3659463a278677892cced595ce88f914c8c8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.000059268962303752",
+        "sUSD": "0.0"
       }
     },
     "0x7dcf87df7b6b9626c705927bf15fa83dc9bf54be": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "55.221062473948209576",
+        "sUSD": "0.0"
       }
     },
     "0x588031347beaa0d43978bc8c0094138a67d1a071": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "206.216709054452839238",
+        "sUSD": "0.0"
       }
     },
     "0xc55f8db15883413ea5ad9173e4cf104199b3445a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5c92463ad419c1a1d832391fd285604f529c2670": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.123305746817792687",
+        "sUSD": "0.0"
       }
     },
     "0xaae697f9bfea16b2010cdcd06e1fb7d46d6b8986": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "136.417865515132340069",
+        "sUSD": "190.998024580506718292"
       }
     },
     "0x1082725e9d32eccec4a12014afd127f172d9cdeb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "188.945810444025210541",
+        "sUSD": "192.875519050582437375"
       }
     },
     "0xaab23584754dbd5dd63b169781c4b4e8258c5ad2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xaabd5fbcb8ad62d4fbbb02a2e9769a9f2ee7e883": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "342.180992338277673293",
+        "sUSD": "264.756263188848085867"
       }
     },
     "0x383c88957e2346d23892a6427869c2630b046f48": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.000591834154995648",
+        "sUSD": "0.0"
       }
     },
     "0x80fb5880f38185661962e475ac1557817dc9faea": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "435.924052330209446619",
+        "sUSD": "402.304706256010810913"
       }
     },
     "0x86f6e74730a472ec0135e8b76345635a7e2de6ef": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa942141e68013ef85e0ab54a448611dc6d8bc1f3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "395.195772439121792641",
+        "sUSD": "0.0"
       }
     },
     "0x2d72a1a080dee2cf74062c1583e0ba9e220ebe81": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.534982467708234508",
+        "sUSD": "0.0"
       }
     },
     "0x092fac9f89195e6f63aa74604c1a9e4c1b4b6acf": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x57913a725195d2a7cd7c76a0d663d3066ad7cf50": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.693593157439754578",
+        "sUSD": "0.0"
       }
     },
     "0x0752adfe7c42d89bf2fb3c22ffa18b7d0871c807": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "72.273373493607165068"
       }
     },
     "0x8391e2472ab71c71cf2d9028a870655aa804c143": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x58d8727635d948684050f57054006f8cc5b3ba44": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdfb9bc53b37b3bd28836917ef6abfab01f974421": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "373.171316663578536592",
+        "sUSD": "442.747113565663594726"
       }
     },
     "0x1d82c486cc5f243f379f52b5ea7a205d091dc7c5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb0e37fca4864ae1083ab7202b891451264fd2605": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa5e65bf39c35dc7bc11f049be9a62f3c96944921": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9c1363e8a8dac64147c3e5e6533dacf269471247": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "169.010759794321659185",
+        "sUSD": "144.884764110873053216"
       }
     },
     "0x24435205eaf97df22b6f2a2463ba039497596ba4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa4c600b0dcf7faad46d984164afa7a83bdd34319": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x05ebf7b089a859af295b4f4d96673edcb5ef6621": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "235.647294006888602351",
+        "sUSD": "137.330679127797340287"
       }
     },
     "0xbfcdbe9c738d101d4cb2d184e65558b53231afab": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "142.828935451131414564",
+        "sUSD": "0.0"
       }
     },
     "0xd8fcfcdc37ac8f381c46f491732be4b31dc5d0e3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.29297309119235757",
+        "sUSD": "0.0"
       }
     },
     "0x2bd15e1131700db61a4c418e01146b95d4e397fa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "48.55783197485091722",
+        "sUSD": "70.71159106684380844"
       }
     },
     "0xde708decb61d06ee30a95051dd203f43e0d44c70": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "44.699085955437269733",
+        "sUSD": "49.950161790190690771"
       }
     },
     "0x22fc33e991d97703e0f882f444b0e22c762412d8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x21a8700a79767bd89d736c502ecab7bf9e1b3a1c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "47.190687395882760068",
+        "sUSD": "88.218179872186717093"
       }
     },
     "0x40d175ca198474bbdf8258dd9f512ec40d083772": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "611.593969575274342987",
+        "sUSD": "456.370761287652840994"
       }
     },
     "0x809a602ee575bd11f94e6f0f61c967f858e2cc78": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "9.173938356721505718",
+        "sUSD": "23.021998306192618507"
       }
     },
     "0x764cc3ced132f1a7cf4fb06a49df1b846a585a4d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x29a4dc01372f56de5e1a3c4f81f9e05974e0df23": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x12cd4302eb0911220f9f36e0ba4f467117f55790": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1c190aea1409ac9036ed45e829de2018002ac3d7": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4cae5bed586f6e73ae54ebd40a4ac4ed2c477c34": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "470.492451688578362656",
+        "sUSD": "592.801588638986976057"
       }
     },
     "0x268cb4c8b97da9d146702d84501a64f597a3aa14": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x34e15635a4de3d82da31a4baeb7b9d465017dc63": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4920a95670b6282951813a94d9066a730d315df3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2934ad40d86424172570b01f188039fce309f42a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.423358851788612199",
+        "sUSD": "0.0"
       }
     },
     "0xbbe384014f8da9b0838c0b637ced9d12d5501022": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa1c0534ee785a30455fcd45bbdee3a6b6227632d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "639.827923993959711024",
+        "sUSD": "495.628065313146253582"
       }
     },
     "0xd77668f490468d11e799206242d977ad67f734b0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "42.6658964366184669",
+        "sUSD": "30.89246908093857276"
       }
     },
     "0x53797a73169c9cec4b573db7139703152fe9e41d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3b6b628930e56136cf95dd44e4b8ae98c89dbd6e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "17.959912647911357408",
+        "sUSD": "28.208835780056411591"
       }
     },
     "0xdb7ba467276de76b863710cfa1116af48ea80672": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "11.562429670233363577",
+        "sUSD": "0.0"
       }
     },
     "0x1ba3dd51472f9db1e0b7ff1ad96e04b400317976": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x7595d380272fae1d072e1fb71087f9211e9bf0f9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "12.69712106277241225",
+        "sUSD": "10.162671293267165116"
       }
     },
     "0xbd1c10d1451a084c00adb7b6052c81d0bdaa67aa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "6.34612248714926858",
+        "sUSD": "17.266741600451968192"
       }
     },
     "0xde8f8849579f06a30c0dd3ae3d5408ebdaaabcf7": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x137862a41bb97512fed1ed1ef3608820ab14cc0b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xba3a6b9c43e74de388550e9bcc73a81a01d48cf7": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "5.996353855487726271",
+        "sUSD": "8.323343829280584555"
       }
     },
     "0xf9303877f107f5cd2cb0654b6d7a6d749fa03856": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "672.096592020611558911",
+        "sUSD": "657.655569018215745219"
       }
     },
     "0xe26eb64db2fd138b5067ccfaf1e94107f85f58a3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa311ab5780aa036b71aac2b71163fd03ec0df59e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb539059e52ac208f815a487ed1d6bd0ab4acc514": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x49fc3c2fa75e685405af21745b6ba63a6b6c2f51": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4f3a36c91c392781536348c03dfb8f6e265c277d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "10.609773143950426932"
       }
     },
     "0x5b153591dfe2584eda95f11dee10359fafe6d712": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "61.928590626959942273",
+        "sUSD": "200.87897813526826"
       }
     },
     "0xb241b6998154a05f9fde8e7cf0d3383577623f71": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "226.788538045301632231",
+        "sUSD": "0.0"
       }
     },
     "0xdde32079946ff44ccf03ca52066c00986f35f957": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "27.859171384800024788",
+        "sUSD": "0.0"
       }
     },
     "0xa9f044aa47af8d652b2416337687aea62b76c83c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "132.282872660169830565",
+        "sUSD": "95.07210601167186187"
       }
     },
     "0x8b5042072ba68b15b0b94b814ef15bf75d58288a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xfa6c97f0effab1ce8d7cd80eb96ddf2ac6bf0e38": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "124.279091072915252748",
+        "sUSD": "133.514049708592619511"
       }
     },
     "0x83aef2a3bda741114ec8cef95245b19ba595a645": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6289071a919d25e5ae90754e851e6f8507108245": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "27.683542335154200429",
+        "sUSD": "27.150192829505033341"
       }
     },
     "0x541f8634c728bc2513bbef20fd74bc81aae6ea99": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.61758710403752557",
+        "sUSD": "0.0"
       }
     },
     "0xf7eab72ee14dad3dfef597420f669c25b39f938c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x61aa45459b8ffe9f7cb53e5ec54eaf18864128c2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "88.298809210324697355",
+        "sUSD": "0.0"
       }
     },
     "0xa6756d91a2700660d436375552f0ec14aba7cc1b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.356658126512660255",
+        "sUSD": "0.0"
       }
     },
     "0xa433105e7396070a5e1fdd7e2b2338f1bfa0de68": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.917120896746840658",
+        "sUSD": "0.0"
       }
     },
     "0x4c5de64a271476dfd7c5166334392ef3811d34fc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.183424179349368132",
+        "sUSD": "0.0"
       }
     },
     "0x2cd29b2e668f2fa85b80d35fe829654cd3c76a98": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.469027304414894097",
+        "sUSD": "0.0"
       }
     },
     "0xc3f88315d52649c88d053919ef71545c74b96364": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.301801162998435459",
+        "sUSD": "0.0"
       }
     },
     "0xa2a305d12b4d1f6dd01db62492dc8d85724869b1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.642302756375952809",
+        "sUSD": "0.0"
       }
     },
     "0x67c352fe12704d68c9b44dbffffc9c85e91ac195": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.577765036568095249",
+        "sUSD": "0.0"
       }
     },
     "0x30fb3d62265d06714e36823d78e18e871f931669": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "29.037050324513049165",
+        "sUSD": "0.0"
       }
     },
     "0xddc60d163015cf5ca1369d557a2ca1cc2de1f1e3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "180.09881587542765549",
+        "sUSD": "345.874611355024552093"
       }
     },
     "0x8482a0f31050416ad4344c98bcdb938e9cd3dea2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "658.045433496765750145",
+        "sUSD": "490.874509685500150355"
       }
     },
     "0xa9a72436e7997d65a82d48ad9ccf5a3296e1dabc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "50.842708680458434498",
+        "sUSD": "241.508429446264176719"
       }
     },
     "0x4b3897e40749587ffbfb2732008d026db2c8d588": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "159.787446935982860193",
+        "sUSD": "297.858681476357894188"
       }
     },
     "0x311da6d80cc8994193168ba51b074649606cf6d2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "111.267079418977971233",
+        "sUSD": "0.0"
       }
     },
     "0xf8da8ecee025444ad8dcf065ae09cffcd55c6116": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x80fd52c87c2b83184cec2a771eaa0eba8dd06c93": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.024695594408836113",
+        "sUSD": "0.0"
       }
     },
     "0x1b8c30e8e38a6a159d7930e50a8949e46fe92086": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xad2352c7e53dbacebff9578a863ccc1fddef2fa4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xfa7c6feb9c138a9cc60d80acf66cfa3c2fdbc047": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe5a8654631b3729f73ca3503ba09a5d3e11b46da": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "20.496419686824903966",
+        "sUSD": "0.0"
       }
     },
     "0xa409cc03d35be650f07cbbbe7290c8a1f96170db": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9f5ea6af1ce2e330c369b67bf31bdccc1e9a1123": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3b8731a7899747633d89b199f2e9f2f1099677b9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "26.070153241488106109",
+        "sUSD": "19.153740555953002927"
       }
     },
     "0xd37cc0cb12a05f021a6eb1837419d9e62c41e6ff": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa2daa4eed9bd8b2a23edb163e6c31241368dcc43": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1a1fed4157f0eaecdcd1dc4749c74765754a6594": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "84.571454543937462967",
+        "sUSD": "106.710131082224100286"
       }
     },
     "0x6fb34dc6febadd5cfcec48afdfdc44449debec48": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "572.430919554835425075",
+        "sUSD": "703.286753813076493724"
       }
     },
     "0x0045fa93dedb0af02956f7d7c306b34263688872": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb082ddfd74748b763f52f04558e5f814a56de67a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "208.312258714930677172",
+        "sUSD": "555.768586657022206918"
       }
     },
     "0x628b42cf8f4b2457b5c8f87607a8ff11570fd4e5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "6.128715747704736991",
+        "sUSD": "6.313376056839629132"
       }
     },
     "0xb65ea6688c9e26aaeb76412f621ddcc026d11720": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "53.841943155572209957",
+        "sUSD": "201.584235174462353272"
       }
     },
     "0xad31f17b5cf5c4f10268476ea1e04bc309e754a4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x7771bc48e9e1ebc7df672fd82525dcbadf985dec": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xd21cef64c08564c9b3175b59accf0e8158551f52": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.430438815621833101",
+        "sUSD": "0.0"
       }
     },
     "0x639bab23b480b4ab49cb522947750ed3d310e823": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.403510079498730291",
+        "sUSD": "0.0"
       }
     },
     "0x0e2e4ff0dcd154a9ab2dad034675841f937773f2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.000000000000275346",
+        "sUSD": "0.000000000000059524"
       }
     },
     "0xe016b7eedfbdfc2e45972236cac7f5230f959677": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x595799e89dcfb6b7df7a64a1b4fcc8f5ba8729b9": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8e0087a72e73dc55efae7059f101cf0142488ccc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "111.513596652337327668",
+        "sUSD": "142.972474402208003592"
       }
     },
     "0x59fe8ddfd894f0d8b041f18c49848d861005013f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x05282b9c5034cdfc8af432659c868815a959a847": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.380188471346906679",
+        "sUSD": "0.0"
       }
     },
     "0x61633b5cb5415908223f2e856d349a8aa3d63de6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.658052071360498717",
+        "sUSD": "0.0"
       }
     },
     "0xdf43178bd20763344d491cc37d3ea49641930b01": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x90b50ee9aeb83001fbeaf61541fc666341f36400": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "14.928283656932410852"
       }
     },
     "0x71044b815005add2377edd8e365f3d463a2c523c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdf5e61e7b0ed5e489263a182ce12c1aaf54cc89a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa09e7838e188814640c01d2d135be2c919f451fa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.112921222141472152",
+        "sUSD": "0.0"
       }
     },
     "0xad6deb5c47eee094ae108c5ea4c458af7d35214e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "10.731462219946286628",
+        "sUSD": "0.0"
       }
     },
     "0xa83f43678616516fac1ca53910b32bb4d595bf54": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.547326983272327128",
+        "sUSD": "10.0"
       }
     },
     "0x41847aec46d0a86a7e6c460cb0feb3c6b6287ba9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "8.655066094895018522",
+        "sUSD": "8.263140700764943714"
       }
     },
     "0x774b7a6f4d993cad77ba809c5920400109fbd3eb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x58f7f1447f5cbac809e8870333754455243c8760": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa21fa4fa5e8a51165b77f24d21fbe2bc0fbf97f6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x952c23f8f067a5e7e165ff0e42491f51d87dbc95": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa24e86eb28ad18b41964201bf7cf6385fcff2634": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x55fd225bae6ecbf71f085a6c8cb2b75ce807cea5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x8fc548b6b071bf0f2fe64ad1aa6032a6d2037366": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "134.579945148615036997",
+        "sUSD": "163.083560176378342091"
       }
     },
     "0x154b0b91d55759936f8189205c821a63a9433d58": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "628.445257306189737714",
+        "sUSD": "638.628199149073358265"
       }
     },
     "0x4fc5a19e45de02592a4d0241869f969f68255e9c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1c274796cc49a866301e676c0875ca859ddc3c7b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe5e058f75ea95316831bab969734c32c93977b61": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa64c1afe585e435709fe83c3b1c1a100d3a9ea0c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "234.944785191781726634",
+        "sUSD": "184.048971298881754319"
       }
     },
     "0xffedcdac8ba51be3101607fab1b44462c3015fb0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "12.989206879872483903",
+        "sUSD": "18.093837666619350833"
       }
     },
     "0x8be615d0e060b4539929d3e3f01e498ba55ae6d6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x94b0c6945a34487fb096756c9ae259d8f4e265f0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x63ddb0d7750aa11251330fea651e2a7fa1db53df": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xea2765e6e0d3e27f7d7ebe52b1fd3e9f6c5be8c1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x0f3fd5d797eecaefb9e21c63038091b7e60fa031": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "202.483020709022373492",
+        "sUSD": "189.518632687376605925"
       }
     },
     "0x79222e91c150511d5738a55a31e55501e9b6c1f0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe75103858b0b02b76dd78250442de26e5ac331d9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x46dce2e61770e8aee4b30ca8c963a094aa06ffe4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb4b2201ae242d15e0711e37fca5bf928b14c8d03": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "233.361179211318284259",
+        "sUSD": "174.648771168586008989"
       }
     },
     "0xcb46bfe209ca5c85d216ebe9306b64aea7e3e643": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "9.288637948258770726",
+        "sUSD": "6.551079134843780288"
       }
     },
     "0x9f0cf614f2766e34a65b938e1f63a7b0496462b4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x50ba55bf41580f0ba7df31d9d20b129e6d2df6ae": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xec5f9994ebe1bdeaa009cb0a3e984c5c55bf3fdd": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x071ef7f7b9dbaba85fd6dc9f9a9b10e71f00a69b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "287.185201356156651833",
+        "sUSD": "0.0"
       }
     },
     "0x0cfdee4ff376137125cb1f79e7944a756bfd8eaa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xbb39cd5db415783db640e66b257d75454603bb9d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9f0a3d96670dd651be222321f9d62dfdfe68ce9e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "47.284699268307283325",
+        "sUSD": "0.0"
       }
     },
     "0x8aac9ee07b522cf7e84df0407d6d5cae53a73174": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x7c60ce42ab6071121d422337820c89a0b89bd083": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "37.575131976874089024",
+        "sUSD": "36.434828155000111748"
       }
     },
     "0x276292b77c30df7d6da80852b9b75be965a2aafd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.042740077629167791",
+        "sUSD": "0.0"
       }
     },
     "0xcfb464585241eab3ecb392011648a8e829b951ed": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "3.197937894000125635"
       }
     },
     "0x7d54cc64ba1ddc6db7e939d493fe672472477aa1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9f50183812bf7dad0967e6cb42aa041919c13026": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "22.175223571857458882",
+        "sUSD": "30.161567534484207277"
       }
     },
     "0x659992dfec52a34171d49eaada633a2e178fdb08": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "71.082332753692032816",
+        "sUSD": "59.661077714480829913"
       }
     },
     "0xc4da615f0e5362352778f8b020bc83c09de432bb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xa1758d337343856036858ac32216d7c72be580cc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "32.386112164900654178"
       }
     },
     "0x10bbb2a8917a529028b10cf250af467d54c0d3df": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x685b5623db05e2298ad745124e425e5c8c687edb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "565.987336546254011431",
+        "sUSD": "539.028645937216021232"
       }
     },
     "0xccd9443fadb0323912afd872e3d64c56b95491eb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.677725203386868601",
+        "sUSD": "13.220353757236928175"
       }
     },
     "0x7edb5638d33035469e6a2127ba75d2669f71cdb4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x600f15504c67ba9489371bbc23e43d026de64f32": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "91.557434458189074002",
+        "sUSD": "125.85271812784857446"
       }
     },
     "0x4986c1f2c8a2f71c84825be29c622a3071be47a2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "2.715780225929051523"
       }
     },
     "0x59d47146617c8038d257173f6825987192d62dbc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xf4239e180938b54eb99a822275a4c55581721964": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe9978b094d33831ec49bbc1d133132b8edb423c5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4fa62a34a22b10eb7fbee82f734fba0804d3926e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "13.217532798748476653",
+        "sUSD": "23.657124259678431493"
       }
     },
     "0xbcb4c8386c097589e7825aaeb9e7c6295835f1d6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x6c342f25d50854c857bed31dce2bbe0d02e39768": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "203.45724302711081685",
+        "sUSD": "222.326594738522493435"
       }
     },
     "0xf383c62daa5b8faf07cf4bce80fce70d78a301c0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x73eb7a4756ef34b903d8f0d320138fa4f2e4ec5b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.673471034016187474",
+        "sUSD": "6.38868731996231332"
       }
     },
     "0x18ab7899258ad0394a57b53a98442af73f2841e4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x55a3df57b7aaec16a162fd5316f35bec082821cf": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9df208d44ba3e0eee8f8131322ae957cbea47856": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "64.318339362212883615",
+        "sUSD": "0.0"
       }
     },
     "0xb9ae2cbcbfe06cf89b86a688a91ae53b5aa974d3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2e5322477109090287096f9bcff78829a40cd7f1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "87.151551184572095762",
+        "sUSD": "0.0"
       }
     },
     "0x4e2f73102dc06c8e32b3a3318d18fa64cf42ca69": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x077777f53544c2b2ef753c19e8fc048049c5ff95": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "186.017184207584920071",
+        "sUSD": "0.0"
       }
     },
     "0x04aee20be071c84050649cfe0b1a754cc4555d92": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "282.987034383446794231",
+        "sUSD": "0.0"
       }
     },
     "0x3dd546e60456cc06d51687dad722a734b73c0bee": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "125.383528058941427147",
+        "sUSD": "0.0"
       }
     },
     "0x39be2cd052d15e3707723335b95338649897a0dd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xae69116e4aa49645f78c1fc9f28f677aede0d153": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3b58120f12df5b89a08125de024fe778918d5a2b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x4299d864bbda0fe3272da750f8f7e8757a8ef534": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "271.59801763886024338",
+        "sUSD": "0.0"
       }
     },
     "0x723aadf9329a770c8a77f205eaacc879b6e83f55": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "6.484440041629357279"
       }
     },
     "0xbce3bd1e1cc867d6be17924e4d53ae1cc147dc7b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5b8ef6b5b2417a1c3d57e2823b854e0f7c6c5898": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "74.198283370137493669",
+        "sUSD": "0.0"
       }
     },
     "0x2ff8867658a598017a8af884bfdfe65564d67c34": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9c4d592042f959254485d443bbc337d29572264f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "280.363122115934749303",
+        "sUSD": "189.134378150158968931"
       }
     },
     "0x34388d3a1fa47663a0a6076bba0427782ff6d143": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xeca882093a6d319c8dae679cd7610196a26e4777": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "10.10141248827399463",
+        "sUSD": "22.963190142049793303"
       }
     },
     "0xda66e70fe764b6662535a1c19b245d854d0b3502": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x04d0b1c1bd2773ac9b93eb6e50c37bbfbab9b97c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xaf28cec7854e9a070f4cd31f18ba005f874d9f50": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "21.203945961408374977",
+        "sUSD": "0.0"
       }
     },
     "0x610ee7ad4e8a72095debd5cc8e276b5df8946643": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "66.879951929836274003",
+        "sUSD": "0.0"
       }
     },
     "0xc97db12bacaf9c724d08b570d3e5c65eb3f73799": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.581766965326672292",
+        "sUSD": "0.0"
       }
     },
     "0xcf39ea1ccb1e43a3899519859677cf8d301e603e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "226.698567050075284688",
+        "sUSD": "176.764375458557477359"
       }
     },
     "0xe79e19286e6c146f4e8d0ef11b67940177a1f240": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdf4be75f9c675ef83357b18d2dd8d0d69cb1e91c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x844bb11117212a36db61e6cbed05e6558407c273": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6803d123aa157b643d7efbe96570b0f95e2b4e62": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "268.43049678136933646",
+        "sUSD": "197.772814492919953832"
       }
     },
     "0x708370bfbbb8426eb440b11840030732dd4ef19a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.4202673441612177",
+        "sUSD": "0.388128940370178793"
       }
     },
     "0x70e703ba15c43aa6d043b8c29e60927e3b01df73": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x82fea6f0493a17954e794baefb623db110a37730": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "197.742805945218506932",
+        "sUSD": "0.0"
       }
     },
     "0x54e4640bcbe21c21ea8e8841ea0483b34e8e8f94": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x39d94ed8102740e8fad63e55473a466aa20e0983": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x358a906ca407a35de33b930aa7cf49a301a4def1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc6a0d93a696b3cb60a3d1adc7852bb3131639671": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "27.393763949552463617",
+        "sUSD": "33.834037854092247813"
       }
     },
     "0x44da9392802f9aa90db1dea5cb11a1983322d80f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1cdb54ab57753051be5502c8376e77e74b5e2d50": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb7ec8904f6105cf6943dee7b1aa04b9a33708c76": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x4a41b48314c0bda6c1954ac1b1670f62feb7ae9b": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xaf07490c0d1c22298dd47523fe88724d1b0e01ac": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6db381c873754eadc54bdefa0d957d3ace88f1d3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.754673407902525988",
+        "sUSD": "0.0"
       }
     },
     "0x9e364bbd8fbe61b4b9ea24c46494877a22bf7381": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb25fd264b135c31150ac255c26d2b1caccb04ca9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "10.595008141338129056",
+        "sUSD": "37.870090766522919137"
       }
     },
     "0xece081a5b95f387ba0597d158c330a2564585481": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x82a2f965d95f8476d3f833673b02e92436238d18": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "91.031597303638452087",
+        "sUSD": "61.652362577452611847"
       }
     },
     "0xe94bc3c9813519afd3e512a1f48ad7cac17f6e8b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8b7354f6c2748667da007aa2889045b0fce47e35": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.256158064386192018",
+        "sUSD": "0.0"
       }
     },
     "0x0b1e5cf0cd18c2b6a4819d434759546d90bdafb3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdf631777df4debcbcd647e85bdcb868b43663ba0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.000779546376796232",
+        "sUSD": "0.0"
       }
     },
     "0x7e44d33287bd03fa8c323f32cb63e6ab28c79187": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.556088170338337323",
+        "sUSD": "2.553626915119960031"
       }
     },
     "0x78ff52d4c56135099a6504af9312f2de2b81026d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x7ff0f1919424f0d2b6a109e3139ae0f1d836d468": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x003c52a71c887461087154eccced08cb1c5384a5": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb1004c803f739b6fffcf19135655a19532e50e45": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x64a9eb1b7b8601ed4bbc5f68934469ffda7ef543": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x06895f17282d7257b43ff520bfcde2b998011779": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "42.52136338049858156",
+        "sUSD": "34.159581985193606474"
       }
     },
     "0xf8fff4959b9cdeaeb0ff03199d7e51cb438e92c6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe84eb5f8ac725a2efd9018fe9bfb50b34a27e3ed": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9a50c5482d4fe3d941fbbc6884e6df76a66897ab": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "143.25550816318399396",
+        "sUSD": "356.324200637892986217"
       }
     },
     "0x6ad82b6c8d9e3e5be02df5e5578f70d8f89439c6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4fd06e4b573ddb0caf7f595fa61d2be4c3a1ada5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.968745394964465576",
+        "sUSD": "0.0"
       }
     },
     "0xbafdfb61284f2ae0846d878e5461d63e4463daf4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8b7aae97721621974b4995fa8f780a71224ceb63": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "153.037925375375044256",
+        "sUSD": "0.0"
       }
     },
     "0xbc23ed4eeb2a0c6a00c7e9bb3d5b35c749fb81b8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x61c1c0fcf49fc75ea9c3f272cafeac7d3abf4eeb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6bb48ee6dc739db470e29e3dcf0c3b34e94277db": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "8.464402656428040856",
+        "sUSD": "0.0"
       }
     },
     "0x06ab7b6155f5fe588d02aa18fcf8d6fa11e71b2b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x55a9c5180dcafc98d99d3f3e4b248e9156b12ac1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4dbc6ec9f3b96e9b0c86f45cb0fed45666254f01": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "256.796673785307873514",
+        "sUSD": "307.591934956451989664"
       }
     },
     "0x57a3e7088651b237cd363d7025554a63d47fc21f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.325707735738508853",
+        "sUSD": "0.0"
       }
     },
     "0x1ecac792fc0121facda808783840492d5614c843": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xcaba436f4e5386e008a1351252c946c2014c47a1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.000621817766911561",
+        "sUSD": "0.0"
       }
     },
     "0xacaa0ab7fdbc52a971c66d00ade4372e57108bc3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x141f59a0283303a6b882b4d6973e418f8d75f9b3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "21.414408064786170234",
+        "sUSD": "20.11602127019085894"
       }
     },
     "0xbacb58a5bd0e2df0b3d3e82a1c75ad565a417cd6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xebe54cb0c0fbbc5573e3f4d030f4a6884366aa89": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x26de224cbe06fd4321ce5747a176cbbd24773beb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xbd9f5745ca98a864013becb152ebab291bde7906": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "326.837056190567164949",
+        "sUSD": "463.961003391196640644"
       }
     },
     "0x7221e37fec261309bf4bd4e95dc129f1372f8082": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8e1b7e5eaced1544e5fa0860cf25015702512339": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xaa7a9d80971e58641442774c373c94aafee87d66": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.936196946322997956",
+        "sUSD": "0.0"
       }
     },
     "0xc30562eb24039fac689ee79c16c5f51c42a0e4c9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x44a495dea48454b130129fa2cdaf2cf69f5e686f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "606.166685617891226287",
+        "sUSD": "1500.565630247089730673"
       }
     },
     "0x29ef0ca00be75728247549880ee9c51ddbe39801": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x6a6425d90dc5199e4be8cc310409bbb3a1b87492": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xca4a4e011bdeb6e5cbc229b882ee20ad3231096a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.835954248037292712",
+        "sUSD": "0.0"
       }
     },
     "0x20036a6e9f13de7a96c72fd7adeef2cf74724c9c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe0b9fcef10f1fc7e156276bf0ce6ce152887dde7": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "36.720521393299035818",
+        "sUSD": "0.0"
       }
     },
     "0x2a0bc682cf0a70e4489089e550383dc9f28af34b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2548d5e8aeadd45367f010b3d013272221908d71": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "86.844720974090393825",
+        "sUSD": "208.032617989916594527"
       }
     },
     "0x38722aba0f448df84c5882ba24554886d808073f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdc3594961c5f49200ca76851960e57928046eccb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "102.935307773244541316",
+        "sUSD": "79.480007735188045434"
       }
     },
     "0x517b692d3a07215aea8be7a13a00af1d38158211": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x02970c31a80f7c4b022cd30c6f9e6c1c5b6e5ef4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "53.311863941176861401",
+        "sUSD": "46.14057664231347688"
       }
     },
     "0xe345849f3f9e352348c77903f9c6e68fc0355e1b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x29468615c2fe8e3845c7dc81172cb7eab9fe1b31": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6bdfa6257e032e5cef97ab1a02a4757b01589e71": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x93705139d0e89660d3edb1956d21f354511da54e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x4952f5dde00a0677365e42d33bcc5a8abd4e2b43": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x822cd8c02c182dfeb34d6f3e29000b834426b79d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "333.882658990856959856",
+        "sUSD": "419.375623014985494534"
       }
     },
     "0x202f0241efd14ec8d82f1165f217ab6cc29fad23": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2ab7249404146652fbd5baec337b66bcf8070ce3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "105.811930627787802417",
+        "sUSD": "78.915774789115385152"
       }
     },
     "0x5a0090de44408fb529aaeaec6567c681fd8eaa10": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x63bca938dc34d48811c04c79c283e7239b00278b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3ecef5d603aa214f8d9ebe95bab64dbb8dc1f3a6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4c9447296a38f56dcbced69a3baa74bc4ce35816": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe9b80b4cf85d7709583dff27c1f51b289cd1e152": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xd66dcff7d207dd5c5d7323d99cc57d00fa92d4ea": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb72ca7ee0aa8ad85a4ffd2873baca90bbf85c1c4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe2573707c99ddaf187226ee4a3d337629581b471": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.977475711242923073",
+        "sUSD": "4.860858309906416516"
       }
     },
     "0xb91bbde050f65b0334aad44ff05898f30daa3875": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x76dc4de779852962ea8c7913b8a65fc8693dea21": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.086616807441294282"
       }
     },
     "0x3d1d397acd3b0989d9e633d6dbf7e6f8f5c03a2d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.650384990632677172",
+        "sUSD": "0.0"
       }
     },
     "0x81012b8bc892a77e79151a2f79875537ef5e0ac2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "47.389698140066022574",
+        "sUSD": "0.0"
       }
     },
     "0x34045c937742c8ad6222a10eb21c7cfff8bf870e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "52.072718123833371364",
+        "sUSD": "34.175941108101286553"
       }
     },
     "0x4e69de146f9515a4aa836d9501406c4feb318e30": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x539f65200085cc471a878c9600ff6a045743ae43": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xcc0960243d099bcae96c0d1aeacdda01434d2ebc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xde09e48ec3e1ef54861b824cd3a2067111b601a7": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x685338533f290b537d8eeb08d04c4f048e4e2f7f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x432102f721384505ea71238dd15dd5dbf1c01fb2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x47930c76790c865217472f2ddb4d14c640ee450a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe8b8114305b6cd00671292a536347b728b68d00b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.056283361865818924"
       }
     },
     "0x8083d9cd44e739adb923ab803aedf638cf6c92b0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "290.91021681078089315",
+        "sUSD": "541.760504522450420594"
       }
     },
     "0x39a2c4596c4db13e22e089b66d722cb57acc8560": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.087053263106492899",
+        "sUSD": "0.0"
       }
     },
     "0x9b3e2221b9717052acfe0ca3b513afa4bc0c4aa8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.56058454700944248",
+        "sUSD": "0.997361647370688149"
       }
     },
     "0xa0a9fba984aa750c2531c47c446cc04a5f242cc3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x85ccf9a60a49942cb6178a985a28bbb3f7d496bb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8ebed0ff2b0232b0aedbfe6e9c0f72ac72577869": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.229840047533272526",
+        "sUSD": "3.147061452460950982"
       }
     },
     "0x94cffb35a4187d93840e13d735ca5784ba074bcf": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x502e31fb699f1a0b547dc65f2f0c7ab36f3010e2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9503f753692df9affa5b15efe56977c7186738f5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x22410dea392f1353c316a0f21ef0f36463100589": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4d121d2eba5b12e5b91670c741232a28a3e3392b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x193997d4459380b09a060ba087b2f59b1d928119": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x08a39ae0b0da06fe824a65fa0a73c3126a82a0ba": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "5.853464551698309154",
+        "sUSD": "0.0"
       }
     },
     "0xbf4a8ae15e787b92e7c6d1de6f73c1e47fc6292c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xad9c22b131aafbaef76f05be5d3ed923c12a8526": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.030086376400199136",
+        "sUSD": "0.0"
       }
     },
     "0xdc1f0c07202629be59e1f5396e7d78803423650e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.563233234666801435",
+        "sUSD": "0.0"
       }
     },
     "0x54c4849e1d25da384b8b30bc2fa9e03267d317f6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "54.924328361660955405",
+        "sUSD": "10.0"
       }
     },
     "0x5c10a93babcc5d8cbd867fa5161a66112dd7c449": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x63156a054d82033530ef343e194805379172cdaa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "239.943497094904437759",
+        "sUSD": "0.0"
       }
     },
     "0x5f024dba3bcbbfe6dece556dbb59c5776aec5903": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "796.739011488370708918",
+        "sUSD": "1027.327076968546799001"
       }
     },
     "0xf81b676fe9097f51472545588403f6adadb2e62e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb207f0f8f241941937489825cb994a4589db65b9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x10331a940a60e698b4cc9e580ef1a9237b354bb4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe9ca86b78686a5af0ac39cc3be976c95395b5b06": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "67.383833562623515957",
+        "sUSD": "0.0"
       }
     },
     "0x6885863e1aaa726346e9ea88b7273fe779075e8a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x81810a7453024a45c1040628b4981dfa3112da04": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "61.300684413226846007",
+        "sUSD": "48.908816097384558773"
       }
     },
     "0x0bd1454fa01dd11bf6646bf8bc17a3e48fda3734": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "7.211576381276542994",
+        "sUSD": "21.34075349362417569"
       }
     },
     "0x92d756e696243ef6c96db4a8418653f9f1982ab2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2633a30db7cddefd0f7e434380a525d9e0efd992": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xba944abd6ad261b220dcc8ba6b53410cb024fcb1": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x7da252e0b4a3ed36f300f864855ebfcea477aaa3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "46.564222451744404316",
+        "sUSD": "0.0"
       }
     },
     "0xc8a8de25a446c3a6e96bb327c916b125ed151d4a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3e0b2a332c8c252eadbc039d27e3a53e89e85b23": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "34.00764662947328545",
+        "sUSD": "0.0"
       }
     },
     "0xf7922380f4bdd2fe677d4e0ecf7da97d86267f1b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xc9cbb5b3ea986375e28dd0e8e129179f643b8d7b": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe66f0383cd0d00cde9b04b5bbc562c05aede3e85": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "10.026700153309160368",
+        "sUSD": "36.789481859097044222"
       }
     },
     "0xffe17b93d5b44c67c6e3616dd3e95be1bf390efc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x484ede38b707eac426f33896859b37a06129578e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.30721603527744789",
+        "sUSD": "0.0"
       }
     },
     "0x6365ca7eeac872310727dacebfd5c31fe9ebacea": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x6ea7f4ae1d88e6be27a600fc161d883f5461f2a9": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.052440294307674353",
+        "sUSD": "0.0"
       }
     },
     "0x0f4927495c8a660d7d7c6b541a182ff736d1ad69": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x92a8f4c470e2c243e48c14709dda9009be4d5310": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3ecefb0f5f6889b901e3dbdd104d3758792a7bb2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9a095023b9b5325fa56b8a78bb6d331443b58c35": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "85.173325920221967668",
+        "sUSD": "0.0"
       }
     },
     "0x29a28c39d98e4445281a60a7735c6cc06f685032": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xfec562264a6fc93bace058353cb166863e099156": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4b2c289a9a475554ed8791844b2e0d03924f8358": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8955cd4ba95dfaf0e759ca0b573b42013ea0e697": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x53202dbce40e7e3c441f67c2eadc0ec26b955079": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x35599c9372df40d7ee0667488566b39d35f6527c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x276f6e63a60a794866f13fd86c748972f83a2e2f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xdd8b9fcb3a8c619f3aa688443a095467967cb58d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.000905209114287008",
+        "sUSD": "0.0"
       }
     },
     "0xe65b845d994b7eaa59456c36f590907afd896628": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x666132cd7fc8c2611225163f85e7b45d7c9ddbdd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4064c2c7cb7432e8f269bd88db778a0e7465559a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x562574af66836b1d30e69815bdf0740a7bd7c437": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x024f36b02608a5129c61f8df54dc7286f9113dee": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2d40e6cff578871980a7377885dcdc9f8e534d59": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xe1859624be443eb2e81c93c693131ebe82ae2fe5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "554.753040454604849104",
+        "sUSD": "393.679810641973639753"
       }
     },
     "0x5c1d76ae1f1b81bf3f4994d4aadf2bc0b10348df": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x24eab9b366527556f8da10176e274cec0353a8b8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "10.214324318205465436",
+        "sUSD": "28.154082595746997784"
       }
     },
     "0x99a3cee993ca4f72c760927fc51e644279c7ae4c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "6.906788433232902799",
+        "sUSD": "0.0"
       }
     },
     "0xef10b5d491cb7d1d5561554a0b4748c3a1c0ce97": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.005115359376359069",
+        "sUSD": "0.0"
       }
     },
     "0xdc82cf5b6cf274f040ec0a530d046ca7018f6e6c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "21.074278308957230217",
+        "sUSD": "0.0"
       }
     },
     "0x91202fec708b1f6b88a798cf422a9e2eb4bf3d62": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xda248cc10b477c1144219183ec87b0621dac37b3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xf469edf62477a96e2f34f1073368c1438af3eba8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "30.551424308932330389",
+        "sUSD": "0.0"
       }
     },
     "0x3d234627e4848e6c7caca4f2697d4ad90ea772b4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "262.856090184927565308",
+        "sUSD": "0.0"
       }
     },
     "0xfcace1f2763371786ac1e63e3cf600f039b45836": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x40d80168b6663700b6ae55d71a8c2cf61d0c1225": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "56.501401635803060963",
+        "sUSD": "234.887139265109400521"
       }
     },
     "0x71614d3b3ffaf418ddd36c2a7a3dfe9f1c75852a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x91615b4b8d558449a27ee5fec878a34a3cfbf4a2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "1.721146869402909626",
+        "sUSD": "0.0"
       }
     },
     "0x851c0d62be4635d4777e8035e37e4ba8517c6132": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x48aceaf27c7ac4f0d83a536cbc4333a8cb621bca": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xbc6b63891df00569b662cd1a945478b989e0c9ef": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2911c55725bc15226d69a1799b6d45f18844834a": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "24.209609537150434541",
+        "sUSD": "0.0"
       }
     },
     "0x9d7c09a7aae3e4567e339698bed4eb89402a18a2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "5.313941964910143366",
+        "sUSD": "0.0"
       }
     },
     "0xb2ab92049645d0395d17b1d0b8152de9a7032945": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "8.08990693122752673",
+        "sUSD": "6.234265201358434364"
       }
     },
     "0xbd33caaedf06e436932522a9284d8312f325cae8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5bc124b3f28c301f497d3d44eb5c3225651143cb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5929d94eb4c41d91955154465a58a531ad4cf7b8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xcdecd8e2d264354db73eef8eaf564c531d041b09": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xfd0101d908bf7e4a03168b6e90aa7f1e70606225": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x75d94e950e93dab58e02f300bb2039fac72459c8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.012223819792801149",
+        "sUSD": "0.0"
       }
     },
     "0x76e6e2e9ca0ee9a2bb4148566791fd6f2feeac32": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3f3e305c4ad49271ebda489dd43d2c8f027d2d41": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.836560187448646434",
+        "sUSD": "0.0"
       }
     },
     "0x6d96d7c5083b7e62274af095df87cc29115a4249": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb0e30f47e7665b1f3b26e308e2a1529f31794451": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.207312980970894129",
+        "sUSD": "0.0"
       }
     },
     "0xe2ca7390e76c5a992749bb622087310d2e63ca29": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x302e7ea58bcb5f13c0eaf7ce3675b4fa5c7cb1bc": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.740206611407604411",
+        "sUSD": "9.537526859089391209"
       }
     },
     "0xa6d2e363d3b34686dbcf158f6c2f67c41139b69d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x94a9b2c7bb1cf0ef9aa1c1b4ec8768b303c0e3fd": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8e927b630e81ffeb8469001e6dabeddd05c13e32": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "102.839509957288308494",
+        "sUSD": "0.0"
       }
     },
     "0x7855664e8bec5d6675d2a2a0514f97b1788d3c79": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.970840448761225364",
+        "sUSD": "0.0"
       }
     },
     "0xdaf7988057d2cc9aaee3e12079ea85beab128281": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9c649cb19f8dd6f8c338a3e8253d64efd04b5842": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x994666ff21ee3aa0ee89ce9313f7b9aade4bca95": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.021050356248838637",
+        "sUSD": "0.0"
       }
     },
     "0x6c8a91070a88fd3e5907210c8d2e8c9e7ee3a2d4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3a09c46f03269a960275b7aab0d90dcd778b1972": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1bb7951ba30eda67bf3e5d851fe5e0e6a01a14b5": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3ec44a823e07555b5f889d8d954eec736eb5865b": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2cd5eaa04df2f620a3e60dd5ef142ba77246cee6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x132db8234171cc9d8a65853cf03d5c0f46c8867e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x94a468fcb53a043bf5cd95ef21892e02c71134be": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.078484202138964893",
+        "sUSD": "0.0"
       }
     },
     "0xd22886236f453e9407f54cc2706b2e9c87789702": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xb263e97547b3bedc9aa3214c0bc49c5985df26d2": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xaf7d21d40e688eb4eb791943e46d35a14edca471": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x00c0c72a1d45bb3704a9358282eec06746447778": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x843cfe444bac3002c5f22ea188e58ffb034c20a6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "7.359467260855348252",
+        "sUSD": "0.0"
       }
     },
     "0x19ba331d6adfc46e829ea33fa2a24ee87d7a676d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xb8e97b41afedbec492a8f965b0783754473f9ae2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x55e906de444e0215dd6882acb42250f7b67f2c16": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x9773696710e8dd19f5dc883303a6668b33e9e999": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0x866b3c4994e1416b7c738b9818b31dc246b95eee": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x171c1cf42c8e11589381f5e4846ffe4e2c7f6d95": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.382590895041942213",
+        "sUSD": "5.631413862684577784"
       }
     },
     "0x1e8ee48d0621289297693fc98914da2efdce1477": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "3.15454142313200617",
+        "sUSD": "0.0"
       }
     },
     "0xe81a1dc876ec6e7c520a7cc3126f0ea368070e92": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xede092f0804949a2cc715366b205b1d750ae4218": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x568f71fd4642e6eeb52127c6911e2116c9bad1ac": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5eb5da801b329c132ec2e8f5a01bac86cd52a47e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc44f621fd412714606c793d96dd31ee9275adbc4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xea3beff40a94ba49a1da4b765636bf14a5892b42": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x3acdfd4fa0238d44ce0ecaeeab515cd2796f24c6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x80039dc3d5bb48ec4bd822c4e8828574fdcc51a6": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x554a857fd7fc140601706194a3687f6a1b2f9eb2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "39.340964943897832944",
+        "sUSD": "0.0"
       }
     },
     "0x73455df7d5469302f4e58418a8dd13b0c6ad3bb3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xef08c3d5b02cf6240cf71908d5dbd497e361584f": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x14d703168da74f0b3ae0bb364fc5cbc731faf711": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x71a1df0d820d29c784c04865904492ac38801a04": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1bbbc030dbb5246f19bb40831377ea6f47c4466d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x170fcdc1adf439604abff4fe62ca360adb5de974": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x60b36a8f90990704e15cadbc5211b38495bee56e": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x212ed0fadf06aa480d09fc1737b2912213ef6ab4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x5b9ab52584fc629f0f9ad6948731c80e15b3d1f0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.241519561063640998",
+        "sUSD": "4.103658574683654063"
       }
     },
     "0x883e5bef307b99fba45335a612a40bc3d5a8b9c3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "2.099949891387213695",
+        "sUSD": "5.631315115316426189"
       }
     },
     "0xb646c5599d7d0399d1b83ce1b0e809b646f46d41": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x7780ec7034d55e546196e578e646a209a3c95edb": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "24.360611223713594187",
+        "sUSD": "0.0"
       }
     },
     "0xbead141003598e8e441289c518a2b7fea3d206a2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x0b432f998af4e5c1ccbe71f408d376387f668e50": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "50.373742546800783775",
+        "sUSD": "37.881246555740335249"
       }
     },
     "0xe68fe2ef5c3a546433b8aee8b4db7f831d7b34c4": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x0cecdbd342e3ad4ce0480998c1d489413076c33d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "4.264283087201055458",
+        "sUSD": "13.3"
       }
     },
     "0x8e1de9cf5107b1686d2370574421b7de8bba4628": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xae3bce4a8cdb3eb511ef06e8373e0989d7c5ba2c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x311b1979a524ed3847438d76641763e5c638d199": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4259667850ac23c27cc12c569450ff2b356091fa": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0xc1c0cbd21a22f5b169739c9f3b1f908acb7c4eb3": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x1d7f4ba2997d644d21195aada3f2f85f24330e6d": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x58c7146cdb30e90b89520af038355e360d87df03": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2aefafa691982dd8431b03e584988b80c5c0b977": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
-      }
-    },
-    "0xa0c9ab7cb590c01d9f36d0f1eb960a544c31467e": {
-      "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x2b053ae11104925fee42db51843875a9712236a0": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x8aabfffcb2798ebd0d305cbccce4b36b9205c3c2": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.294836057813927164",
+        "sUSD": "0.0"
       }
     },
     "0x4906e4f95ad546ce865916f65c825e00630bffa8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.774828642282184521",
+        "sUSD": "0.0"
       }
     },
     "0x958569d856e9affbc379615339cab25d42229393": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x4839c3d305516b6c56647b27b6b70254f0e89cb8": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     },
     "0x89d3e7f71e23e584a2984e57fbf8b34fac421e3c": {
       "balances": {
-        "SNX": "",
-        "sUSD": ""
+        "SNX": "0.0",
+        "sUSD": "0.0"
       }
     }
   }
