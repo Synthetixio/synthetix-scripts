@@ -3,15 +3,16 @@
 const fs = require('fs');
 const program = require('commander');
 const ethers = require('ethers');
-const chalk = require('chalk');
 
 async function compare({
 	wethDataFile,
 	snxDataFile,
+	outputDataFile,
 }) {
 	// Validate input parameters
-	if (!wethDataFile) throw new Error('Please specify a weth data file');
-	if (!snxDataFile) throw new Error('Please specify an snx data file');
+	if (!wethDataFile) throw new Error('Please specify a weth input data file');
+	if (!snxDataFile) throw new Error('Please specify an snx input data file');
+	if (!outputDataFile) throw new Error('Please specify an output data file');
 
 	// Retrieve the data files
 	const wethData = _getData({ dataFile: wethDataFile });
@@ -23,7 +24,17 @@ async function compare({
 
 	// Get a list of accounts that are in the snx list, but not in the weth list
 	const missedAccounts = snxAccounts.filter(s => !wethAccounts.includes(s));
-	console.log(missedAccounts.length);
+	console.log(`> Found ${missedAccounts.length} accounts that got the first SNX airdrop, but didn't get the WETH airdrop`);
+
+	// Write data file.
+	const data = { accounts: {} };
+	missedAccounts.map(a => data.accounts[a] = {
+		balances: {
+			SNX: '',
+			sUSD: '',
+		}
+	});
+	fs.writeFileSync(outputDataFile, JSON.stringify(data, null, 2));
 }
 
 function _getData({ dataFile }) {
@@ -38,6 +49,7 @@ program
 	.description('Compares addresses who got the first SNX airdrop with the addresses that got the first WETH airdrop')
 	.option('--weth-data-file <value>', 'The json containing the weth airdrop targets')
 	.option('--snx-data-file <value>', 'The json containing the snx airdrop targets')
+	.option('--output-data-file <value>', 'The json file where all output will be stored')
 	.action(async (...args) => {
 		try {
 			await compare(...args);
