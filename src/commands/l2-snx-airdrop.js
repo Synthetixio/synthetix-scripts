@@ -53,6 +53,9 @@ async function airdrop({
 	});
 	console.log(`Synthetix: ${Synthetix.address}`);
 
+	const walletBalance = await Synthetix.balanceOf(wallet.address);
+	console.log(`Wallet address: ${ethers.utils.formatEther(walletBalance)}`);
+
 	const overrides = {
 		gasPrice,
 	};
@@ -81,17 +84,16 @@ async function airdrop({
 		const amountParsed = ethers.utils.parseEther(`${amount}`);
 		console.log(`    * Amount in wei: ${amountParsed}`);
 
-		const balance = await Synthetix.balanceOf(address);
-		console.log(`    * Account balance: ${ethers.utils.formatEther(balance)}`);
+		// const balance = await Synthetix.balanceOf(address);
+		// console.log(`    * Account balance: ${ethers.utils.formatEther(balance)}`);
 
 		if (!dryRun) {
 			// const tx = await Synthetix.transfer(address, amountParsed, overrides);
 			// const receipt = await tx.wait();
-
-			console.log(`    * Sent ${receipt.transactionHash}`);
+			// console.log(`    * Sent ${receipt.transactionHash}`);
 
 			account.sent = true;
-			fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+			fs.writeFileSync(dataFile, JSON.stringify(accounts, null, 2));
 		}
 	}
 
@@ -129,7 +131,7 @@ program
 	.option('--provider-url <value>', 'The http provider to use for communicating with the blockchain', 'https://mainnet.optimism.io')
 	.option('--data-file <value>', 'The json file where target accounts are enumerated')
 	.option('--gas-price <value>', 'The gas price in gwei to use on all transfers', '0.015')
-	.option('--dry-run', 'Do not send any actual transfers', true)
+	.option('--dry-run', 'Do not send any actual transfers', false)
 	.action(async (...args) => {
 		try {
 			await airdrop(...args);
