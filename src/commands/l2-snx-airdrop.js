@@ -57,7 +57,7 @@ async function airdrop({
 	console.log(`Wallet address: ${ethers.utils.formatEther(walletBalance)}`);
 
 	const overrides = {
-		gasPrice,
+		gasPrice: ethers.utils.parseUnits(gasPrice, 'gwei'),
 	};
 
 	await _confirm();
@@ -90,7 +90,7 @@ async function airdrop({
 		if (!dryRun) {
 			// const tx = await Synthetix.transfer(address, amountParsed, overrides);
 			// const receipt = await tx.wait();
-			// console.log(`    * Sent ${receipt.transactionHash}`);
+			console.log(`    * Sent ${receipt.transactionHash}`);
 
 			account.sent = true;
 			fs.writeFileSync(dataFile, JSON.stringify(accounts, null, 2));
