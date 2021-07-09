@@ -88,8 +88,8 @@ async function airdrop({
 		// console.log(`    * Account balance: ${ethers.utils.formatEther(balance)}`);
 
 		if (!dryRun) {
-			// const tx = await Synthetix.transfer(address, amountParsed, overrides);
-			// const receipt = await tx.wait();
+			const tx = await Synthetix.transfer(address, amountParsed, overrides);
+			const receipt = await tx.wait();
 			console.log(`    * Sent ${receipt.transactionHash}`);
 
 			account.sent = true;
