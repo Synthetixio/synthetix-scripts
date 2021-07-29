@@ -107,9 +107,9 @@ async function status({ network, useOvm, providerUrl, addresses, block, useFork,
 
 	const info = await DebtCache.cacheInfo();
 
-	logItem('DebgCache.info.isInvalid', info.isInvalid, 1, info.isInvalid ? bgRed : undefined);
+	logItem('DebtCache.info.isInvalid', info.isInvalid, 1, info.isInvalid ? bgRed : undefined);
 
-	logItem('DebgCache.info.isStale', info.isStale, 1, info.isStale ? bgRed : undefined);
+	logItem('DebtCache.info.isStale', info.isStale, 1, info.isStale ? bgRed : undefined);
 
 	/* ~~~~~~~~~~~~~~~~~~~~~~~~ */
 	/* ~~~~ SynthetixState ~~~~ */
