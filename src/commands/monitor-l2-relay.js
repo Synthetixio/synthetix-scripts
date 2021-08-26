@@ -10,7 +10,7 @@ const { getPastEvents } = require('../utils/getEvents');
 const { BigNumber, utils } = require('ethers');
 
 const BLOCKS_PER_WEEK_L1 = 45000 // Average 6500 blocks a day ~ 45000 a week
-const BLOCKS_PER_WEEK_L2 = 120000 // Average 150 blocks a day ~ 1050 a week
+const BLOCKS_PER_WEEK_L2 = 10000 // Average 150 blocks a day ~ 1050 a week // 120000 but limited to 10000
 
 const stringify = (object) => Object.keys(object).reduce(
 	(acc,key) => ({
