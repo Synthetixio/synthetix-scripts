@@ -177,7 +177,7 @@ async function fixInflationRate({
 		? inflationAmount.add(weeklyInflationCorrection)
 		: inflationAmount.sub(weeklyInflationCorrection);
 
-	const l2Distribution = weeklyInflation.mul(30).div(100);
+	const l2Distribution = weeklyInflation.mul(40).div(100);
 
 	console.log(gray('Total Supply'), yellow(formatEther(bnTotalSupply), 'SNX'));
 	console.log(gray('Staked in L1'), yellow(stakedL1.toString(), 'SNX'));
