@@ -5,8 +5,9 @@ const ethers = require('ethers');
 const program = require('commander');
 const createQueue = require('fastq');
 const sortKeys = require('sort-keys');
+const snx = require('synthetix');
 
-const SynthetixDebtShareAbi = require('../abis/common/SynthetixDebtShare.json');
+const { SynthetixDebtShare } = snx.getSource();
 
 function read(filename) {
 	return JSON.parse(fs.readFileSync(filename));
@@ -75,7 +76,7 @@ async function downloadDebts({ filename, address, deployedBlock, latestBlock }) 
 	console.log(`      Latest block: ${lastBlock}`);
 	console.log(`              File: ${filename}`);
 
-	const Contract = new ethers.Contract(address, SynthetixDebtShareAbi, provider);
+	const Contract = new ethers.Contract(address, SynthetixDebtShare.abi, provider);
 
 	let addresses = await getAccounts(Contract, deployedBlock, lastBlock);
 
@@ -119,7 +120,7 @@ program
 	.option('--deployed-block <value>', 'Block in which the contract was deployed', 14169250)
 	.option('--latest-block <value>', 'Block until which to fetch data')
 	.action(async ({ address, deployedBlock, latestBlock }) => {
-		const filename = path.resolve(__dirname, '..', '..', 'data', `${deployedBlock}-users-debts.json`);
+		const filename = path.resolve(__dirname, '..', '..', 'data', `${latestBlock}-users-debts.json`);
 
 		try {
 			await downloadDebts({
