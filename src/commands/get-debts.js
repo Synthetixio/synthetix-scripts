@@ -18,8 +18,9 @@ function writeDebt(filename, key, value) {
 	fs.writeFileSync(filename, JSON.stringify(sortKeys(data), null, 2));
 }
 
-async function getAccounts(Contract, deployedBlock) {
-	const events = await Contract.queryFilter(Contract.filters.Transfer(null, null, null), deployedBlock);
+async function getAccounts(Contract, fromBlock, toBlock) {
+	const filter = Contract.filters.Transfer(null, null, null);
+	const events = await Contract.queryFilter(filter, fromBlock, toBlock);
 
 	// Use a Set to have implicitily unique values
 	const addresses = new Set();
@@ -66,7 +67,7 @@ async function getDebts({ Contract, blockTag, addresses, filename }) {
 
 async function downloadDebts({ filename, address, deployedBlock, latestBlock }) {
 	const provider = new ethers.providers.JsonRpcProvider(process.env.PROVIDER_URL);
-	const lastBlock = latestBlock || (await provider.getBlockNumber()) - 10;
+	const lastBlock = latestBlock || (await provider.getBlockNumber());
 
 	console.log(`      Provider URL: ${process.env.PROVIDER_URL}`);
 	console.log(`  Deployed Address: ${address}`);
@@ -76,7 +77,7 @@ async function downloadDebts({ filename, address, deployedBlock, latestBlock }) 
 
 	const Contract = new ethers.Contract(address, SynthetixDebtShareAbi, provider);
 
-	let addresses = await getAccounts(Contract, deployedBlock);
+	let addresses = await getAccounts(Contract, deployedBlock, lastBlock);
 
 	console.log(`  Collected ${addresses.length} addresses`);
 
@@ -121,7 +122,12 @@ program
 		const filename = path.resolve(__dirname, '..', '..', 'data', `${deployedBlock}-users-debts.json`);
 
 		try {
-			await downloadDebts({ filename, address, deployedBlock, latestBlock });
+			await downloadDebts({
+				filename,
+				address,
+				deployedBlock: Number(deployedBlock),
+				latestBlock: Number(latestBlock),
+			});
 		} catch (err) {
 			console.error(err);
 			process.exitCode = 1;
