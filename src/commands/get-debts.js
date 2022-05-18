@@ -66,9 +66,10 @@ async function getDebts({ Contract, blockTag, addresses, filename }) {
 	return debts;
 }
 
-async function downloadDebts({ filename, address, deployedBlock, latestBlock }) {
+async function downloadDebts({ address, deployedBlock, latestBlock }) {
 	const provider = new ethers.providers.JsonRpcProvider(process.env.PROVIDER_URL);
 	const lastBlock = latestBlock || (await provider.getBlockNumber());
+	const filename = path.resolve(__dirname, '..', '..', 'data', `${lastBlock}-users-debts.json`);
 
 	console.log(`      Provider URL: ${process.env.PROVIDER_URL}`);
 	console.log(`  Deployed Address: ${address}`);
@@ -116,15 +117,16 @@ async function downloadDebts({ filename, address, deployedBlock, latestBlock }) 
 
 program
 	.description('Get all the addresses with their debts querying to the SynthetixDebtShare contract')
-	.option('--address <value>', 'Contract address', '0x89FCb32F29e509cc42d0C8b6f058C993013A843F')
+	.option(
+		'--address <value>',
+		'Contract address',
+		snx.getTarget({ network: 'mainnet', contract: 'SynthetixDebtShare' }).address,
+	)
 	.option('--deployed-block <value>', 'Block in which the contract was deployed', 14169250)
 	.option('--latest-block <value>', 'Block until which to fetch data')
 	.action(async ({ address, deployedBlock, latestBlock }) => {
-		const filename = path.resolve(__dirname, '..', '..', 'data', `${latestBlock}-users-debts.json`);
-
 		try {
 			await downloadDebts({
-				filename,
 				address,
 				deployedBlock: Number(deployedBlock),
 				latestBlock: Number(latestBlock),
