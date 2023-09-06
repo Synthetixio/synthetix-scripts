@@ -36,7 +36,7 @@
 		"ethers": "^5.0.17",
 		"inquirer": "^7.3.3",
 		"inquirer-list-search-prompt": "^1.0.2",
-		"synthetix": "2.93.1"
+		"synthetix": "2.94.0-alpha"
 	},
 	"devDependencies": {
 		"current-git-branch": "^1.1.0",
