@@ -1,6 +1,6 @@
 {
 	"name": "@synthetixio/cli",
-	"version": "2.98.2",
+	"version": "2.98.3",
 	"description": "A set of cli utilities for the Synthetix protocol",
 	"main": "src/commands/interactive-ui.js",
 	"bin": {
