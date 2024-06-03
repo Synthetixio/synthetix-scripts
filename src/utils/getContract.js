@@ -8,7 +8,7 @@ const { gray } = require('chalk');
 
 function getContract({
 	contract,
-	source = contract,
+	source,
 	network = 'mainnet',
 	useOvm = false,
 	deploymentPath = undefined,
@@ -20,7 +20,7 @@ function getContract({
 	const target = getTarget({  contract, network, useOvm, deploymentPath });
 
 	const sourceData = getSource({
-		contract: source,
+		contract: source || target.source,
 		network,
 		useOvm,
 		deploymentPath,
